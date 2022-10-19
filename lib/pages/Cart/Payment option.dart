@@ -234,7 +234,7 @@ class _PaymentoptionState extends State<Paymentoption> {
                                 width: 3.3.h,
                                 decoration: BoxDecoration(
                                   color: selectedindex == index
-                                      ? color.greenbutton
+                                      ? color.green
                                       : Colors.transparent,
                                   borderRadius: BorderRadius.circular(50),
                                 ),
@@ -260,7 +260,7 @@ class _PaymentoptionState extends State<Paymentoption> {
             }
             return Center(
               child: CircularProgressIndicator(
-                color: color.redbutton,
+                color: color.primarycolor,
               ),
             );
           },
@@ -407,7 +407,7 @@ class _PaymentoptionState extends State<Paymentoption> {
                 }
               }
             },
-            style: TextButton.styleFrom(backgroundColor: color.redbutton),
+            style: TextButton.styleFrom(backgroundColor: color.primarycolor),
             child: Text(
               LocaleKeys.Place_Order.tr(),
               style: TextStyle(

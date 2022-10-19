@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.excellentia.user"
+    package="com.singlerestaurant.user"
     xmlns:tools="http://schemas.android.com/tools"
     >
    

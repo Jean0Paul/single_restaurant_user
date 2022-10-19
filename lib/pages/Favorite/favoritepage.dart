@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, unrelated_type_equality_checks, use_build_context_synchronously, non_constant_identifier_names, unused_local_variable, prefer_is_empty
+// ignore_for_file: prefer_const_constructors,   unrelated_type_equality_checks, use_build_context_synchronously, non_constant_identifier_names, unused_local_variable, prefer_is_empty
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,6 +17,7 @@ import 'package:singlerestaurant/config/API/API.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:singlerestaurant/pages/Favorite/showvariation.dart';
 import 'package:singlerestaurant/pages/Home/Homepage.dart';
+import 'package:singlerestaurant/pages/Home/product.dart';
 import 'package:singlerestaurant/translation/locale_keys.g.dart';
 import 'package:sizer/sizer.dart';
 
@@ -47,9 +48,7 @@ class _FavoriteState extends State<Favorite> {
 
       var response =
           await Dio().post(DefaultApi.appUrl + PostAPI.Favoritelist, data: map);
-      print(response);
       favoritedata = favoritelistmodel.fromJson(response.data);
-      print(favoritedata!.data!.length);
 
       if (favoritedata!.status == 1) {
         return favoritedata;
@@ -57,7 +56,7 @@ class _FavoriteState extends State<Favorite> {
         loader.showErroDialog(description: favoritedata!.message);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -95,10 +94,8 @@ class _FavoriteState extends State<Favorite> {
       } else {
         loader.showErroDialog(description: addtocartdata!.message);
       }
-
-      print(map);
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -128,7 +125,7 @@ class _FavoriteState extends State<Favorite> {
         "addons_total_price": numberFormat.format(double.parse("0")),
       };
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -149,7 +146,7 @@ class _FavoriteState extends State<Favorite> {
         loader.showErroDialog(description: finaldata.message);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -186,7 +183,6 @@ class _FavoriteState extends State<Favorite> {
                   }
                   return StatefulBuilder(
                       builder: (context, setState) => ListView.builder(
-                            physics: BouncingScrollPhysics(),
                             itemCount: favoritedata!.data!.length,
                             itemBuilder: (context, index) => Container(
                               margin: EdgeInsets.only(
@@ -202,347 +198,364 @@ class _FavoriteState extends State<Favorite> {
                                     color: Colors.grey,
                                     width: 0.8.sp,
                                   )),
-                              child: Row(children: [
-                                Stack(
-                                  children: [
-                                    SizedBox(
-                                      width: 28.w,
-                                      height: 15.5.h,
-                                      child: ClipRRect(
-                                          child: Image(
-                                        image: NetworkImage(
-                                          favoritedata!.data![index].imageUrl
-                                              .toString(),
-                                        ),
-                                        fit: BoxFit.fill,
-                                      )),
+                              child: InkWell(
+                                onTap: () {
+                                  Get.to(
+                                    () => Product(
+                                      favoritedata!.data![index].id,
                                     ),
-                                    Positioned(
-                                        child: InkWell(
-                                      onTap: () {
-                                        removefavarite(
-                                            favoritedata!.data![index].id);
-                                      },
-                                      child: Container(
-                                          height: 5.h,
-                                          width: 8.w,
-                                          padding: EdgeInsets.all(2.5.sp),
-                                          margin: EdgeInsets.only(
-                                              left: 1.w,
-                                              right: 1.w,
-                                              top: 0.5.h),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            color: Colors.black26,
-                                          ),
-                                          child: SvgPicture.asset(
-                                            'Assets/Icons/Favoritedark.svg',
-                                            color: Colors.white,
-                                          )),
-                                    )),
-                                  ],
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  );
+                                },
+                                child: Row(children: [
+                                  Stack(
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          top: 1.h,
-                                          left: 2.2.w,
-                                          right: 2.2.w,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            if (favoritedata!
-                                                    .data![index].itemType ==
-                                                "1") ...[
-                                              SizedBox(
-                                                height: 2.h,
-                                                // color: Colors.black,
-                                                child: Image.asset(
-                                                  Defaulticon.vegicon,
-                                                ),
+                                      SizedBox(
+                                        width: 28.w,
+                                        height: 15.5.h,
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            child: Image(
+                                              image: NetworkImage(
+                                                favoritedata!
+                                                    .data![index].imageUrl
+                                                    .toString(),
                                               ),
-                                            ] else if (favoritedata!
-                                                    .data![index].itemType ==
-                                                "2") ...[
-                                              SizedBox(
-                                                height: 2.h,
-                                                // color: Colors.black,
-                                                child: Image.asset(
-                                                  Defaulticon.nonvegicon,
+                                              fit: BoxFit.fill,
+                                            )),
+                                      ),
+                                      Positioned(
+                                          child: InkWell(
+                                        onTap: () {
+                                          removefavarite(
+                                              favoritedata!.data![index].id);
+                                        },
+                                        child: Container(
+                                            height: 4.h,
+                                            width: 9.w,
+                                            padding: EdgeInsets.all(2.5.sp),
+                                            margin: EdgeInsets.only(
+                                                left: 1.w,
+                                                right: 1.w,
+                                                top: 0.5.h),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                              color: Colors.black26,
+                                            ),
+                                            child: SvgPicture.asset(
+                                              'Assets/Icons/Favoritedark.svg',
+                                              color: Colors.white,
+                                            )),
+                                      )),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 1.h,
+                                            left: 2.2.w,
+                                            right: 2.2.w,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              if (favoritedata!
+                                                      .data![index].itemType ==
+                                                  "1") ...[
+                                                SizedBox(
+                                                  height: 2.h,
+                                                  // color: Colors.black,
+                                                  child: Image.asset(
+                                                    Defaulticon.vegicon,
+                                                  ),
                                                 ),
-                                              ),
+                                              ] else if (favoritedata!
+                                                      .data![index].itemType ==
+                                                  "2") ...[
+                                                SizedBox(
+                                                  height: 2.h,
+                                                  // color: Colors.black,
+                                                  child: Image.asset(
+                                                    Defaulticon.nonvegicon,
+                                                  ),
+                                                ),
+                                              ],
+                                              Flexible(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                    left: 2.2.w,
+                                                    right: 2.2.w,
+                                                  ),
+                                                  child: Text(
+                                                    favoritedata!
+                                                        .data![index].itemName!,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                      fontSize: 11.5.sp,
+                                                      fontFamily:
+                                                          'Poppins_medium',
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
                                             ],
-                                            Flexible(
-                                              child: Container(
-                                                margin: EdgeInsets.only(
-                                                  left: 2.2.w,
-                                                  right: 2.2.w,
-                                                ),
-                                                child: Text(
-                                                  favoritedata!
-                                                      .data![index].itemName!,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                            left: 2.2.w,
+                                            right: 2.2.w,
+                                          ),
+                                          child: Text(
+                                            favoritedata!.data![index]
+                                                .categoryInfo!.categoryName!,
+                                            style: TextStyle(
+                                              fontSize: 7.5.sp,
+                                              fontFamily: 'Poppins',
+                                              color: color.green,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 2.2.w,
+                                              right: 2.2.w,
+                                              bottom: 0.8.h),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              if (favoritedata!.data![index]
+                                                      .hasVariation ==
+                                                  "1") ...[
+                                                Text(
+                                                  currency_position == "1"
+                                                      ? "$currency${numberFormat.format(
+                                                          double.parse(
+                                                              favoritedata!
+                                                                  .data![index]
+                                                                  .variation![0]
+                                                                  .productPrice
+                                                                  .toString()),
+                                                        )}"
+                                                      : "${numberFormat.format(
+                                                          double.parse(
+                                                              favoritedata!
+                                                                  .data![index]
+                                                                  .variation![0]
+                                                                  .productPrice
+                                                                  .toString()),
+                                                        )}$currency",
                                                   style: TextStyle(
-                                                    fontSize: 11.5.sp,
+                                                    fontSize: 12.sp,
                                                     fontFamily:
                                                         'Poppins_semibold',
                                                   ),
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          left: 2.2.w,
-                                          right: 2.2.w,
-                                        ),
-                                        child: Text(
-                                          favoritedata!.data![index]
-                                              .categoryInfo!.categoryName!,
-                                          style: TextStyle(
-                                            fontSize: 7.5.sp,
-                                            fontFamily: 'Poppins',
-                                            color: color.greenbutton,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 2.2.w,
-                                            right: 2.2.w,
-                                            bottom: 0.8.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            if (favoritedata!.data![index]
-                                                    .hasVariation ==
-                                                "1") ...[
-                                              Text(
-                                                currency_position == "1"
-                                                    ? "$currency${numberFormat.format(
-                                                        double.parse(
-                                                            favoritedata!
+                                                )
+                                              ] else if (favoritedata!
+                                                      .data![index]
+                                                      .hasVariation ==
+                                                  "2") ...[
+                                                Text(
+                                                  currency_position == "1"
+                                                      ? "$currency${numberFormat.format(
+                                                          double.parse(
+                                                              favoritedata!
+                                                                  .data![index]
+                                                                  .price!),
+                                                        )}"
+                                                      : "${numberFormat.format(
+                                                          double.parse(
+                                                              favoritedata!
+                                                                  .data![index]
+                                                                  .price!),
+                                                        )}$currency",
+                                                  style: TextStyle(
+                                                    fontSize: 12.sp,
+                                                    fontFamily:
+                                                        'Poppins_semibold',
+                                                  ),
+                                                )
+                                              ],
+                                              Spacer(),
+                                              if (favoritedata!
+                                                      .data![index].isCart ==
+                                                  "0") ...[
+                                                InkWell(
+                                                  onTap: () async {
+                                                    if (favoritedata!
                                                                 .data![index]
-                                                                .variation![0]
-                                                                .productPrice
-                                                                .toString()),
-                                                      )}"
-                                                    : "${numberFormat.format(
-                                                        double.parse(
-                                                            favoritedata!
-                                                                .data![index]
-                                                                .variation![0]
-                                                                .productPrice
-                                                                .toString()),
-                                                      )}$currency",
-                                                style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  fontFamily:
-                                                      'Poppins_semibold',
-                                                ),
-                                              )
-                                            ] else if (favoritedata!
-                                                    .data![index]
-                                                    .hasVariation ==
-                                                "2") ...[
-                                              Text(
-                                                currency_position == "1"
-                                                    ? "$currency${numberFormat.format(
-                                                        int.parse(favoritedata!
-                                                            .data![index]
-                                                            .price!),
-                                                      )}"
-                                                    : "${numberFormat.format(
-                                                        int.parse(favoritedata!
-                                                            .data![index]
-                                                            .price!),
-                                                      )}$currency",
-                                                style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  fontFamily:
-                                                      'Poppins_semibold',
-                                                ),
-                                              )
-                                            ],
-                                            Spacer(),
-                                            if (favoritedata!
-                                                    .data![index].isCart ==
-                                                "0") ...[
-                                              InkWell(
-                                                onTap: () async {
-                                                  if (favoritedata!.data![index]
-                                                              .hasVariation ==
-                                                          "1" ||
-                                                      favoritedata!.data![index]
-                                                          .addons!.isNotEmpty) {
-                                                    cart = await Get.to(() =>
-                                                        showvariation(
-                                                            favoritedata!
-                                                                .data![index]));
-
-                                                    if (cart == 1) {
-                                                      _scaffoldKey
-                                                          .currentContext
-                                                          .reactive;
-                                                      setState(() {
+                                                                .hasVariation ==
+                                                            "1" ||
                                                         favoritedata!
                                                             .data![index]
-                                                            .isCart = "1";
-
-                                                        favoritedata!
-                                                            .data![index]
-                                                            .itemQty = int.parse(
-                                                                favoritedata!
-                                                                    .data![
-                                                                        index]
-                                                                    .itemQty
-                                                                    .toString()) +
-                                                            1;
-                                                      });
-                                                      print(favoritedata!
-                                                          .data![index]
-                                                          .itemQty);
-                                                    }
-                                                  } else {
-                                                    addtocart(index);
-                                                  }
-                                                },
-                                                child: Container(
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(4),
-                                                        border: Border.all(
-                                                            color:
-                                                                Colors.grey)),
-                                                    height: 3.5.h,
-                                                    width: 17.w,
-                                                    child: Center(
-                                                      child: Text(
-                                                        LocaleKeys.ADD.tr(),
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                            fontSize: 9.5.sp,
-                                                            color: color
-                                                                .greenbutton),
-                                                      ),
-                                                    )),
-                                              ),
-                                            ] else if (favoritedata!
-                                                    .data![index].isCart ==
-                                                "1") ...[
-                                              Container(
-                                                height: 3.6.h,
-                                                width: 22.w,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.grey),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceAround,
-                                                  children: [
-                                                    InkWell(
-                                                        onTap: () {
-                                                          loader.showErroDialog(
-                                                            description: LocaleKeys
-                                                                    .The_item_has_multtiple_customizations_added_Go_to_cart__to_remove_item
-                                                                .tr(),
-                                                          );
-                                                        },
-                                                        child: Icon(
-                                                          Icons.remove,
-                                                          color:
-                                                              color.greenbutton,
-                                                          size: 16,
-                                                        )),
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(3),
-                                                      ),
-                                                      child: Text(
-                                                        favoritedata!
-                                                            .data![index]
-                                                            .itemQty!
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 10.sp),
-                                                      ),
-                                                    ),
-                                                    InkWell(
-                                                        onTap: () async {
-                                                          if (favoritedata!
-                                                                      .data![
-                                                                          index]
-                                                                      .hasVariation ==
-                                                                  "1" ||
+                                                            .addons!
+                                                            .isNotEmpty) {
+                                                      cart = await Get.to(() =>
+                                                          showvariation(
                                                               favoritedata!
                                                                       .data![
+                                                                  index]));
+
+                                                      if (cart == 1) {
+                                                        _scaffoldKey
+                                                            .currentContext
+                                                            .reactive;
+                                                        setState(() {
+                                                          favoritedata!
+                                                              .data![index]
+                                                              .isCart = "1";
+
+                                                          favoritedata!
+                                                              .data![index]
+                                                              .itemQty = int.parse(
+                                                                  favoritedata!
+                                                                      .data![
                                                                           index]
-                                                                      .addons!
-                                                                      .length >
-                                                                  0) {
-                                                            cart = await Get.to(
-                                                                () => showvariation(
-                                                                    favoritedata!
-                                                                            .data![
-                                                                        index]));
-                                                            if (cart == 1) {
-                                                              setState(() {
-                                                                favoritedata!
-                                                                    .data![
-                                                                        index]
-                                                                    .itemQty = int.parse(favoritedata!
+                                                                      .itemQty
+                                                                      .toString()) +
+                                                              1;
+                                                        });
+                                                      }
+                                                    } else {
+                                                      addtocart(index);
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.grey)),
+                                                      height: 3.5.h,
+                                                      width: 17.w,
+                                                      child: Center(
+                                                        child: Text(
+                                                          LocaleKeys.ADD.tr(),
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins',
+                                                              fontSize: 9.5.sp,
+                                                              color:
+                                                                  color.green),
+                                                        ),
+                                                      )),
+                                                ),
+                                              ] else if (favoritedata!
+                                                      .data![index].isCart ==
+                                                  "1") ...[
+                                                Container(
+                                                  height: 3.6.h,
+                                                  width: 22.w,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.grey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      InkWell(
+                                                          onTap: () {
+                                                            loader
+                                                                .showErroDialog(
+                                                              description:
+                                                                  LocaleKeys
+                                                                          .The_item_has_multtiple_customizations_added_Go_to_cart__to_remove_item
+                                                                      .tr(),
+                                                            );
+                                                          },
+                                                          child: Icon(
+                                                            Icons.remove,
+                                                            color: color.green,
+                                                            size: 16,
+                                                          )),
+                                                      Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(3),
+                                                        ),
+                                                        child: Text(
+                                                          favoritedata!
+                                                              .data![index]
+                                                              .itemQty!
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 10.sp),
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                          onTap: () async {
+                                                            if (favoritedata!
                                                                         .data![
                                                                             index]
-                                                                        .itemQty
-                                                                        .toString()) +
-                                                                    1;
-                                                              });
+                                                                        .hasVariation ==
+                                                                    "1" ||
+                                                                favoritedata!
+                                                                        .data![
+                                                                            index]
+                                                                        .addons!
+                                                                        .length >
+                                                                    0) {
+                                                              cart = await Get.to(() =>
+                                                                  showvariation(
+                                                                      favoritedata!
+                                                                              .data![
+                                                                          index]));
+                                                              if (cart == 1) {
+                                                                setState(() {
+                                                                  favoritedata!
+                                                                      .data![
+                                                                          index]
+                                                                      .itemQty = int.parse(favoritedata!
+                                                                          .data![
+                                                                              index]
+                                                                          .itemQty
+                                                                          .toString()) +
+                                                                      1;
+                                                                });
+                                                              }
+                                                            } else {
+                                                              addtocart(index);
                                                             }
-                                                          } else {
-                                                            addtocart(index);
-                                                          }
-                                                        },
-                                                        child: Icon(
-                                                          Icons.add,
-                                                          color:
-                                                              color.greenbutton,
-                                                          size: 16,
-                                                        )),
-                                                  ],
+                                                          },
+                                                          child: Icon(
+                                                            Icons.add,
+                                                            color: color.green,
+                                                            size: 16,
+                                                          )),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
+                                              ],
                                             ],
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ]),
+                                      ],
+                                    ),
+                                  )
+                                ]),
+                              ),
                             ),
                           ));
                 }
                 return Center(
-                  child: CircularProgressIndicator(color: color.redbutton),
+                  child: CircularProgressIndicator(color: color.primarycolor),
                 );
               },
             )));

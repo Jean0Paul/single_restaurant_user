@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, camel_case_types, non_constant_identifier_names, use_key_in_widget_constructors, avoid_print, use_build_context_synchronously, prefer_const_constructors
+// ignore_for_file: must_be_immutable, camel_case_types, non_constant_identifier_names, use_key_in_widget_constructors,   use_build_context_synchronously, prefer_const_constructors
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +93,6 @@ class _orderstripeState extends State<orderstripe> {
       "card_exp_year": YYYY.value.text.toString(),
       "card_cvc": CVV.value.text.toString(),
     };
-    print(map);
     var response =
         await Dio().post(DefaultApi.appUrl + PostAPI.Order, data: map);
     orderplaceMODEL placedorederdata = orderplaceMODEL.fromJson(response.data);
@@ -272,7 +271,7 @@ class _orderstripeState extends State<orderstripe> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      color: color.blackbutton),
+                      color: color.black),
                   margin: EdgeInsets.only(
                     top: 2.h,
                     bottom: 2.h,

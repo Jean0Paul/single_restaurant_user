@@ -60,16 +60,12 @@ class _Transaction_historyState extends State<Transaction_history> {
               },
               icon: const Icon(
                 Icons.arrow_back_ios_outlined,
-                color: Colors.black,
                 size: 20,
               )),
           title: Text(
             LocaleKeys.Transaction_History.tr(),
             textAlign: TextAlign.center,
-            style: TextStyle(
-                fontFamily: 'Poppins_semibold',
-                color: Colors.black,
-                fontSize: 16),
+            style: TextStyle(fontFamily: 'Poppins_semibold', fontSize: 16),
           ),
           centerTitle: true,
         ),
@@ -77,6 +73,17 @@ class _Transaction_historyState extends State<Transaction_history> {
             future: transactionAPI(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                if (transactiondata!.transactions!.isEmpty) {
+                  return Center(
+                    child: Text(
+                      LocaleKeys.No_data_found.tr(),
+                      style: TextStyle(
+                        fontFamily: 'Poppins_medium',
+                        fontSize: 16,
+                      ),
+                    ),
+                  );
+                }
                 return ListView.separated(
                   itemCount: transactiondata!.transactions!.length,
                   itemBuilder: (context, index) => Container(
@@ -96,10 +103,10 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
-                                      color: color.redbutton.withOpacity(0.2)),
+                                      color: color.red.withOpacity(0.2)),
                                   child: Icon(
                                     Icons.arrow_upward,
-                                    color: color.redbutton,
+                                    color: color.red,
                                     size: 25,
                                   ),
                                 )
@@ -110,11 +117,12 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   height: 7.5.h,
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Color(0xffD9E7CC)),
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: color.lightgreen.withOpacity(0.3),
+                                  ),
                                   child: Icon(
                                     Icons.arrow_downward,
-                                    color: Color(0xff82B457),
+                                    color: color.lightgreen,
                                     size: 25,
                                   ),
                                 )
@@ -125,11 +133,12 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   height: 7.5.h,
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Color(0xffD9E7CC)),
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: color.lightgreen.withOpacity(0.3),
+                                  ),
                                   child: Icon(
                                     Icons.arrow_downward,
-                                    color: Color(0xff82B457),
+                                    color: color.lightgreen,
                                     size: 25,
                                   ),
                                 )
@@ -140,11 +149,12 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   height: 7.5.h,
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Color(0xffD9E7CC)),
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: color.lightgreen.withOpacity(0.3),
+                                  ),
                                   child: Icon(
                                     Icons.arrow_downward,
-                                    color: Color(0xff82B457),
+                                    color: color.lightgreen,
                                     size: 25,
                                   ),
                                 )
@@ -155,11 +165,12 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   height: 7.5.h,
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Color(0xffD9E7CC)),
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: color.lightgreen.withOpacity(0.3),
+                                  ),
                                   child: Icon(
                                     Icons.arrow_downward,
-                                    color: Color(0xff82B457),
+                                    color: color.lightgreen,
                                     size: 25,
                                   ),
                                 )
@@ -170,11 +181,12 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   height: 7.5.h,
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Color(0xffD9E7CC)),
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: color.lightgreen.withOpacity(0.3),
+                                  ),
                                   child: Icon(
                                     Icons.arrow_downward,
-                                    color: Color(0xff82B457),
+                                    color: color.lightgreen,
                                     size: 25,
                                   ),
                                 )
@@ -185,11 +197,12 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   height: 7.5.h,
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Color(0xffD9E7CC)),
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: color.lightgreen.withOpacity(0.3),
+                                  ),
                                   child: Icon(
                                     Icons.arrow_downward,
-                                    color: Color(0xff82B457),
+                                    color: color.lightgreen,
                                     size: 25,
                                   ),
                                 )
@@ -200,11 +213,12 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   height: 7.5.h,
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Color(0xffD9E7CC)),
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: color.lightgreen.withOpacity(0.3),
+                                  ),
                                   child: Icon(
                                     Icons.arrow_downward,
-                                    color: Color(0xff82B457),
+                                    color: color.lightgreen,
                                     size: 25,
                                   ),
                                 )
@@ -216,10 +230,10 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
-                                      color: color.redbutton.withOpacity(0.2)),
+                                      color: color.red.withOpacity(0.2)),
                                   child: Icon(
                                     Icons.arrow_upward,
-                                    color: color.redbutton,
+                                    color: color.red,
                                     size: 25,
                                   ),
                                 )
@@ -228,11 +242,12 @@ class _Transaction_historyState extends State<Transaction_history> {
                                   height: 7.5.h,
                                   width: 7.5.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Color(0xffD9E7CC)),
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: color.lightgreen.withOpacity(0.3),
+                                  ),
                                   child: Icon(
                                     Icons.arrow_downward,
-                                    color: Color(0xff82B457),
+                                    color: color.lightgreen,
                                     size: 25,
                                   ),
                                 )
@@ -251,9 +266,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                     Text(
                                       LocaleKeys.Wallet_Order.tr(),
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16),
+                                          fontFamily: 'Poppins', fontSize: 16),
                                     )
                                   ] else if (transactiondata!
                                           .transactions![index]
@@ -262,9 +275,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                     Text(
                                       LocaleKeys.Order_Cancel.tr(),
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16),
+                                          fontFamily: 'Poppins', fontSize: 16),
                                     )
                                   ] else if (transactiondata!
                                           .transactions![index]
@@ -273,9 +284,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                     Text(
                                       LocaleKeys.Wallet_Recharge.tr(),
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16),
+                                          fontFamily: 'Poppins', fontSize: 16),
                                     )
                                   ] else if (transactiondata!
                                           .transactions![index]
@@ -284,9 +293,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                     Text(
                                       LocaleKeys.Wallet_Recharge.tr(),
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16),
+                                          fontFamily: 'Poppins', fontSize: 16),
                                     )
                                   ] else if (transactiondata!
                                           .transactions![index]
@@ -295,9 +302,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                     Text(
                                       LocaleKeys.Wallet_Recharge.tr(),
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16),
+                                          fontFamily: 'Poppins', fontSize: 16),
                                     )
                                   ] else if (transactiondata!
                                           .transactions![index]
@@ -306,9 +311,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                     Text(
                                       LocaleKeys.Referral_Amount.tr(),
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16),
+                                          fontFamily: 'Poppins', fontSize: 16),
                                     )
                                   ] else if (transactiondata!
                                           .transactions![index]
@@ -317,9 +320,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                     Text(
                                       LocaleKeys.Wallet_Recharge.tr(),
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16),
+                                          fontFamily: 'Poppins', fontSize: 16),
                                     )
                                   ] else if (transactiondata!
                                           .transactions![index]
@@ -339,9 +340,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                     Text(
                                       LocaleKeys.Wallet_Recharge.tr(),
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16),
+                                          fontFamily: 'Poppins', fontSize: 16),
                                     )
                                   ] else ...[
                                     Text(
@@ -349,9 +348,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                           .transactions![index].transactionType
                                           .toString(),
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16),
+                                          fontFamily: 'Poppins', fontSize: 16),
                                     )
                                   ],
                                   Row(
@@ -360,9 +357,8 @@ class _Transaction_historyState extends State<Transaction_history> {
                                               .transactionType ==
                                           "1") ...[
                                         Text(
-                                          "${LocaleKeys.Order_Id.tr()} : ${transactiondata!.transactions![index].orderNumber}",
+                                          "${LocaleKeys.Order_Id.tr()} ${transactiondata!.transactions![index].orderNumber}",
                                           style: TextStyle(
-                                              color: Colors.black,
                                               fontFamily: 'Poppins',
                                               fontSize: 10),
                                         )
@@ -371,7 +367,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                               .transactionType ==
                                           "2") ...[
                                         Text(
-                                          "${LocaleKeys.Order_Id.tr()} : ${transactiondata!.transactions![index].orderNumber}",
+                                          "${LocaleKeys.Order_Id.tr()} ${transactiondata!.transactions![index].orderNumber}",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontFamily: 'Poppins',
@@ -382,9 +378,8 @@ class _Transaction_historyState extends State<Transaction_history> {
                                               .transactionType ==
                                           "3") ...[
                                         Text(
-                                          "${LocaleKeys.Paymenttype.tr()} : ${LocaleKeys.RazorPay}",
+                                          "${LocaleKeys.Paymenttype.tr()} ${LocaleKeys.RazorPay}",
                                           style: TextStyle(
-                                              color: Colors.black,
                                               fontFamily: 'Poppins',
                                               fontSize: 10),
                                         )
@@ -393,9 +388,8 @@ class _Transaction_historyState extends State<Transaction_history> {
                                               .transactionType ==
                                           "4") ...[
                                         Text(
-                                          "${LocaleKeys.Paymenttype.tr()} : ${LocaleKeys.Stripepay}",
+                                          "${LocaleKeys.Paymenttype.tr()} ${LocaleKeys.Stripepay}",
                                           style: TextStyle(
-                                              color: Colors.black,
                                               fontFamily: 'Poppins',
                                               fontSize: 10),
                                         )
@@ -404,9 +398,8 @@ class _Transaction_historyState extends State<Transaction_history> {
                                               .transactionType ==
                                           "5") ...[
                                         Text(
-                                          "${LocaleKeys.Paymenttype.tr()} : ${LocaleKeys.Flutterwave}",
+                                          "${LocaleKeys.Paymenttype.tr()} ${LocaleKeys.Flutterwave}",
                                           style: TextStyle(
-                                              color: Colors.black,
                                               fontFamily: 'Poppins',
                                               fontSize: 10),
                                         )
@@ -415,9 +408,8 @@ class _Transaction_historyState extends State<Transaction_history> {
                                               .transactionType ==
                                           "6") ...[
                                         Text(
-                                          "${LocaleKeys.Paymenttype.tr()} : ${LocaleKeys.Paystack.tr()}",
+                                          "${LocaleKeys.Paymenttype.tr()} ${LocaleKeys.Paystack.tr()}",
                                           style: TextStyle(
-                                              color: Colors.black,
                                               fontFamily: 'Poppins',
                                               fontSize: 10),
                                         )
@@ -428,7 +420,6 @@ class _Transaction_historyState extends State<Transaction_history> {
                                         Text(
                                           "${LocaleKeys.Referral_Amount.tr()} ",
                                           style: TextStyle(
-                                              color: Colors.black,
                                               fontFamily: 'Poppins',
                                               fontSize: 10),
                                         )
@@ -437,9 +428,8 @@ class _Transaction_historyState extends State<Transaction_history> {
                                               .transactionType ==
                                           "8") ...[
                                         Text(
-                                          "${LocaleKeys.Paymenttype.tr()} : ${LocaleKeys.Cash.tr()}",
+                                          "${LocaleKeys.Paymenttype.tr()} ${LocaleKeys.Cash.tr()}",
                                           style: TextStyle(
-                                              color: Colors.black,
                                               fontFamily: 'Poppins',
                                               fontSize: 10),
                                         )
@@ -448,9 +438,8 @@ class _Transaction_historyState extends State<Transaction_history> {
                                               .transactionType ==
                                           "9") ...[
                                         Text(
-                                          "${LocaleKeys.Paymenttype.tr()} : ${LocaleKeys.Cash.tr()}",
+                                          "${LocaleKeys.Paymenttype.tr()} ${LocaleKeys.Cash.tr()}",
                                           style: TextStyle(
-                                              color: Colors.black,
                                               fontFamily: 'Poppins',
                                               fontSize: 10),
                                         )
@@ -465,7 +454,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                                               : '${numberFormat.format(double.parse(transactiondata!.transactions![index].amount.toString()))}$currency',
                                           textAlign: TextAlign.end,
                                           style: TextStyle(
-                                              color: color.redbutton,
+                                              color: color.red,
                                               fontFamily: 'Poppins_Semibold',
                                               fontSize: 16),
                                         ),
@@ -615,7 +604,7 @@ class _Transaction_historyState extends State<Transaction_history> {
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.height / 95,
                         right: MediaQuery.of(context).size.height / 95),
-                    color: Colors.black12,
+                    color: Colors.grey,
                     height: 1,
                     width: MediaQuery.of(context).size.width / 1.05,
                   ),
@@ -623,7 +612,7 @@ class _Transaction_historyState extends State<Transaction_history> {
               }
               return Center(
                 child: CircularProgressIndicator(
-                  color: color.redbutton,
+                  color: color.primarycolor,
                 ),
               );
             }));

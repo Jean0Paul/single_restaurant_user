@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, prefer_const_constructors, sized_box_for_whitespace, non_constant_identifier_names, prefer_final_fields, avoid_print, avoid_unnecessary_containers
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors, sized_box_for_whitespace, non_constant_identifier_names, prefer_final_fields,  avoid_unnecessary_containers
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -57,14 +57,12 @@ class _ProfilepageState extends State<Profilepage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       userid = prefs.getString(UD_user_id)!;
-      print(userid);
+
       useremail = (prefs.getString(UD_user_email) ?? 'Guest');
       username = (prefs.getString(UD_user_name) ?? 'Guest');
       userprofile = (prefs.getString(UD_user_profileimage)!);
       user_logintype = (prefs.getString(UD_user_logintype)!);
       check_addons = (prefs.getString(APPCheck_addons)!);
-
-      print(userprofile);
     });
   }
 
@@ -86,7 +84,7 @@ class _ProfilepageState extends State<Profilepage> {
                 Container(
                   height: 23.h,
                   width: MediaQuery.of(context).size.width,
-                  color: themenofier.isdark ? Colors.white : color.blackbutton,
+                  color: themenofier.isdark ? Colors.white : color.black,
                   child: Column(
                     children: [
                       Row(
@@ -145,36 +143,43 @@ class _ProfilepageState extends State<Profilepage> {
                       ),
                       Row(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
+                          if (userid != "") ...[
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              height: 10.5.h,
+                              width: 10.5.h,
+                              margin: EdgeInsets.only(
+                                left: 4.w,
+                                right: 4.w,
+                                top: 1.3.h,
+                              ),
+                              child: ClipOval(
+                                child: FadeInImage(
+                                  fit: BoxFit.cover,
+                                  placeholder: AssetImage(
+                                    'Assets/Image/defaultuserprofile.png',
+                                  ),
+                                  image: NetworkImage(
+                                    userprofile.toString(),
+                                  ),
+                                ),
+                              ),
                             ),
-                            height: 10.5.h,
-                            width: 11.h,
-                            margin: EdgeInsets.only(
-                                left: 4.w, right: 4.w, top: 1.3.h),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: userid == ""
-                                  ? Image.asset(
-                                      'Assets/Image/defaultuserprofile.png')
-                                  : Image(
-                                      image:
-                                          NetworkImage(userprofile.toString()),
-                                      fit: BoxFit.fill,
-                                    ),
-                            ),
-                          ),
+                          ],
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               if (userid == "") ...[
                                 Container(
                                   margin: EdgeInsets.only(
-                                    left: 3.w,
+                                    left: 4.w,
+                                    right: 4.w,
+                                    top: 3.h,
                                   ),
                                   child: Text(
-                                    LocaleKeys.Gravityinfotech.tr(),
+                                    LocaleKeys.Restaurant_User.tr(),
                                     style: TextStyle(
                                         color: themenofier.isdark
                                             ? Colors.black
@@ -183,11 +188,23 @@ class _ProfilepageState extends State<Profilepage> {
                                         fontFamily: 'Poppins_semibold'),
                                   ),
                                 ),
-                              ] else ...[
                                 Container(
                                   margin: EdgeInsets.only(
-                                    left: 3.w,
+                                    left: 4.w,
+                                    right: 4.w,
                                   ),
+                                  child: Text(
+                                    LocaleKeys.welcomes_you.tr(),
+                                    style: TextStyle(
+                                        color: themenofier.isdark
+                                            ? Colors.black
+                                            : Colors.white,
+                                        fontSize: 10.sp,
+                                        fontFamily: 'Poppins'),
+                                  ),
+                                ),
+                              ] else ...[
+                                Container(
                                   child: Text(
                                     username,
                                     style: TextStyle(
@@ -198,27 +215,7 @@ class _ProfilepageState extends State<Profilepage> {
                                         fontFamily: 'Poppins_semibold'),
                                   ),
                                 ),
-                              ],
-                              if (userid == "") ...[
                                 Container(
-                                  margin: EdgeInsets.only(
-                                    left: 3.w,
-                                  ),
-                                  child: Text(
-                                    LocaleKeys.Infotechgravitygmail.tr(),
-                                    style: TextStyle(
-                                        color: themenofier.isdark
-                                            ? Colors.black
-                                            : Colors.white,
-                                        fontSize: 10.sp,
-                                        fontFamily: 'Poppins'),
-                                  ),
-                                ),
-                              ] else ...[
-                                Container(
-                                  margin: EdgeInsets.only(
-                                    left: 3.w,
-                                  ),
                                   child: Text(
                                     useremail,
                                     style: TextStyle(
@@ -229,7 +226,8 @@ class _ProfilepageState extends State<Profilepage> {
                                         fontFamily: 'Poppins'),
                                   ),
                                 ),
-                              ]
+                              ],
+                              // if (userid == "") ...[] else ...[]
                             ],
                           )
                         ],
@@ -259,7 +257,7 @@ class _ProfilepageState extends State<Profilepage> {
                                   fontFamily: 'Poppins_semibold',
                                   color: themenofier.isdark
                                       ? Colors.white
-                                      : color.blackbutton,
+                                      : color.black,
                                 ),
                               ),
                             ],
@@ -320,7 +318,7 @@ class _ProfilepageState extends State<Profilepage> {
                                 themenofier.isdark ? Colors.white : Colors.grey,
                           ),
                         ],
-                        InkWell(
+                        /*InkWell(
                           onTap: () {
                             userid == ""
                                 ? Navigator.of(context).pushAndRemoveUntil(
@@ -363,7 +361,7 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),
+                        ),*/
                         Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
@@ -413,7 +411,7 @@ class _ProfilepageState extends State<Profilepage> {
                             ),
                           ),
                         ),
-                        Container(
+                        /*Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
@@ -458,8 +456,8 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),
-                        Container(
+                        ),*/
+                        /*Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
@@ -508,7 +506,7 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),
+                        ),*/
                         Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
@@ -559,7 +557,7 @@ class _ProfilepageState extends State<Profilepage> {
                             ),
                           ),
                         ),
-                        Container(
+                        /*Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
@@ -600,7 +598,7 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),
+                        ),*/
                         Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
@@ -647,7 +645,7 @@ class _ProfilepageState extends State<Profilepage> {
                             ),
                           ),
                         ),
-                        Container(
+                       /*Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
@@ -692,8 +690,8 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),
-                        Container(
+                        ),*/
+                       /* Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
@@ -738,8 +736,8 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),
-                        Container(
+                        ),*/
+                        /*Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
@@ -783,8 +781,8 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),
-                        Container(
+                        ),*/
+                        /*Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
@@ -829,7 +827,7 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),
+                        ),*/
                         Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
@@ -877,7 +875,7 @@ class _ProfilepageState extends State<Profilepage> {
                             ),
                           ),
                         ),
-                        Container(
+                       /* Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
@@ -919,7 +917,7 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),
+                        ),*/
                         Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
@@ -1007,6 +1005,95 @@ class _ProfilepageState extends State<Profilepage> {
                             ),
                           ),
                         ),
+                      Container(
+                          height: 0.8.sp,
+                          width: MediaQuery.of(context).size.width,
+                          color:
+                              themenofier.isdark ? Colors.white : Colors.grey,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.to(() => Blogspage());
+                          },
+                          child: Container(
+                            height: height.settingsheight,
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'Assets/svgicon/blogs.svg',
+                                  height: height.settingiconheight,
+                                  color: themenofier.isdark
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    left: 3.3.w,
+                                    right: 3.3.w,
+                                  ),
+                                  child: Text(
+                                    LocaleKeys.Blogs.tr(),
+                                    style: TextStyle(
+                                        fontSize: 10.8.sp,
+                                        fontFamily: 'Poppins'),
+                                  ),
+                                ),
+                                Spacer(),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 13.sp,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 0.8.sp,
+                          width: MediaQuery.of(context).size.width,
+                          color:
+                              themenofier.isdark ? Colors.white : Colors.grey,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Gallary()),
+                            );
+                          },
+                          child: Container(
+                            height: height.settingsheight,
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'Assets/svgicon/blogs.svg',
+                                  height: height.settingiconheight,
+                                  color: themenofier.isdark
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    left: 3.3.w,
+                                    right: 3.3.w,
+                                  ),
+                                  child: Text(
+                                    LocaleKeys.Gallery.tr(),
+                                    style: TextStyle(
+                                        fontSize: 10.sp, fontFamily: 'Poppins'),
+                                  ),
+                                ),
+                                Spacer(),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 13.sp,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
                         Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
@@ -1023,12 +1110,34 @@ class _ProfilepageState extends State<Profilepage> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: Text('Alert'),
-                                        content: const Text(
-                                            'Are you sure to logout'),
+                                        title: Text(
+                                          LocaleKeys.Single_Restaurant.tr(),
+                                          style: TextStyle(
+                                              fontSize: 14.sp,
+                                              fontFamily: 'Poppins_semibold'),
+                                        ),
+                                        content: Text(
+                                          LocaleKeys
+                                                  .Are_you_sure_to_logout_from_this_app
+                                              .tr(),
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontFamily: 'Poppins'),
+                                        ),
                                         actions: <Widget>[
-                                          TextButton(
-                                            child: Text('Logout'),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  color.primarycolor,
+                                            ),
+                                            child: Text(
+                                              LocaleKeys.Logout.tr(),
+                                              style: TextStyle(
+                                                fontSize: 12.sp,
+                                                color: Colors.white,
+                                                fontFamily: 'Poppins',
+                                              ),
+                                            ),
                                             onPressed: () async {
                                               SharedPreferences prefs =
                                                   await SharedPreferences
@@ -1047,8 +1156,19 @@ class _ProfilepageState extends State<Profilepage> {
                                                       (r) => false);
                                             },
                                           ),
-                                          TextButton(
-                                            child: Text('Cancel'),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  color.primarycolor,
+                                            ),
+                                            child: Text(
+                                              LocaleKeys.Cancel.tr(),
+                                              style: TextStyle(
+                                                fontSize: 12.sp,
+                                                color: Colors.white,
+                                                fontFamily: 'Poppins',
+                                              ),
+                                            ),
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                             },
@@ -1116,7 +1236,9 @@ class _ProfilepageState extends State<Profilepage> {
               builder: (BuildContext context, StateSetter setState) {
             return Container(
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(7)),
+                // color: Colors.white,
+                borderRadius: BorderRadius.circular(7),
+              ),
               height: 30.h,
               child: Column(
                 children: [
@@ -1127,63 +1249,90 @@ class _ProfilepageState extends State<Profilepage> {
                     ),
                     child: Text(LocaleKeys.Select_application_layout.tr(),
                         style: TextStyle(
-                            fontSize: 9.5.sp,
-                            color: Colors.black38,
+                            fontSize: 11.5.sp,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Poppins')),
                   ),
                   Container(
                     height: 0.8.sp,
                     width: MediaQuery.of(context).size.width,
-                    color: Colors.black12,
+                    color: color.grey,
                   ),
-                  TextButton(
-                    onPressed: () async {
-                      await context.setLocale(Locale('en'));
+                  SizedBox(
+                    height: 7.h,
+                    child: InkWell(
+                      onTap: () async {
+                        await context.setLocale(Locale('en'));
 
-                      Phoenix.rebirth(context);
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(LocaleKeys.LTR.tr(),
-                        style: TextStyle(
-                            fontSize: 13.sp,
-                            fontFamily: 'Poppins_semibold',
-                            color: Colors.grey)),
+                        Phoenix.rebirth(context);
+                        Navigator.of(context).pop();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            LocaleKeys.LTR.tr(),
+                            style: TextStyle(
+                              fontSize: 13.sp,
+                              fontFamily: 'Poppins_semibold',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   Container(
                     height: 0.8.sp,
                     width: MediaQuery.of(context).size.width,
-                    color: Colors.black12,
+                    color: color.grey,
                   ),
-                  TextButton(
-                      onPressed: () async {
+                  SizedBox(
+                    height: 7.h,
+                    child: InkWell(
+                      onTap: () async {
                         await context.setLocale(Locale('ar'));
                         Navigator.of(context).pop();
                         Phoenix.rebirth(context);
                       },
-                      child: Text(LocaleKeys.RTL.tr(),
-                          style: TextStyle(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            LocaleKeys.RTL.tr(),
+                            style: TextStyle(
                               fontSize: 13.sp,
-                              color: Colors.grey,
-                              fontFamily: 'Poppins_semibold'))),
+                              fontFamily: 'Poppins_semibold',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   Container(
                     height: 0.8.sp,
                     width: MediaQuery.of(context).size.width,
-                    color: Colors.black12,
+                    color: color.grey,
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      LocaleKeys.Cancel.tr(),
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontFamily: 'Poppins_semibold',
-                        color: Colors.grey,
+                  SizedBox(
+                    height: 7.h,
+                    child: InkWell(
+                      onTap: () async {
+                        Navigator.of(context).pop();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            LocaleKeys.Cancel.tr(),
+                            style: TextStyle(
+                              fontSize: 13.sp,
+                              fontFamily: 'Poppins_semibold',
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             );
@@ -1191,3 +1340,23 @@ class _ProfilepageState extends State<Profilepage> {
         });
   }
 }
+
+// notify() async {
+//   String timezone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
+//   await AwesomeNotifications().createNotification(
+//       schedule: NotificationInterval(
+//         interval: 5,
+//         timeZone: timezone,
+//         // repeats: true,
+//       ),
+//       content: NotificationContent(
+//         id: 1,
+//         channelKey: "key1",
+//         title: "edzdfsssdtdt",
+//         body: "sdsddffghjkjhgdrseawSETRFYUJKLJHGFDS",
+//         notificationLayout: NotificationLayout.BigPicture,
+//         bigPicture:
+//             "https://images.unsplash.com/photo-1588702547919-26089e690ecc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8b25saW5lJTIwZXZlbnR8ZW58MHx8MHx8&w=1000&q=80",
+//       ));
+// }
+

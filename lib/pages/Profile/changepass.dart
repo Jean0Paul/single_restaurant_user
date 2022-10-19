@@ -2,7 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:singlerestaurant/Model/changepasswordmodel.dart';
+import 'package:singlerestaurant/Model/settings%20model/changepasswordmodel.dart';
 import 'package:singlerestaurant/Widgets/loader.dart';
 import 'package:singlerestaurant/common%20class/color.dart';
 import 'package:singlerestaurant/common%20class/height.dart';
@@ -27,6 +27,9 @@ class _ChangepassState extends State<Changepass> {
   TextEditingController newpass = TextEditingController();
   TextEditingController confirmpass = TextEditingController();
   changepasswordmodel? changepassworddata;
+  bool _obscureText1 = true;
+  bool _obscureText2 = true;
+  bool _obscureText3 = true;
 
   _Changepassword() async {
     try {
@@ -61,6 +64,11 @@ class _ChangepassState extends State<Changepass> {
     } catch (e) {
       loader.showErroDialog(description: e.toString());
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -103,7 +111,20 @@ class _ChangepassState extends State<Changepass> {
                 child: TextField(
                   cursorColor: Colors.grey,
                   controller: oldpass,
+                  obscureText: _obscureText1,
                   decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _obscureText1 = !_obscureText1;
+                            });
+                          },
+                          icon: Icon(
+                            _obscureText1
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey,
+                          )),
                       hintText: LocaleKeys.Old_password.tr(),
                       hintStyle: TextStyle(
                           fontFamily: 'Poppins',
@@ -128,8 +149,21 @@ class _ChangepassState extends State<Changepass> {
               child: Center(
                 child: TextFormField(
                   cursorColor: Colors.black,
+                  obscureText: _obscureText2,
                   controller: newpass,
                   decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _obscureText2 = !_obscureText2;
+                            });
+                          },
+                          icon: Icon(
+                            _obscureText2
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey,
+                          )),
                       hintText: LocaleKeys.New_password.tr(),
                       hintStyle: TextStyle(
                           fontFamily: 'Poppins',
@@ -153,7 +187,7 @@ class _ChangepassState extends State<Changepass> {
               width: double.infinity,
               child: Center(
                 child: TextFormField(
-                  textAlignVertical: TextAlignVertical.bottom,
+                  obscureText: _obscureText3,
                   validator: (val) {
                     if (val!.isEmpty) return 'Empty';
                     if (val != newpass.text) return 'Not Match';
@@ -162,6 +196,18 @@ class _ChangepassState extends State<Changepass> {
                   cursorColor: Colors.black,
                   controller: confirmpass,
                   decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _obscureText3 = !_obscureText3;
+                            });
+                          },
+                          icon: Icon(
+                            _obscureText3
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey,
+                          )),
                       hintText: LocaleKeys.Confirm_password.tr(),
                       hintStyle: TextStyle(
                           fontFamily: 'Poppins',
@@ -187,24 +233,34 @@ class _ChangepassState extends State<Changepass> {
               width: double.infinity,
               child: TextButton(
                 onPressed: () async {
-                  if (oldpass.text.isEmpty) {
+                  if (DefaultApi.environment == "sendbox") {
                     loader.showErroDialog(
-                        description: LocaleKeys.Please_enter_all_details.tr());
-                  } else if (newpass.text.isEmpty) {
-                    loader.showErroDialog(
-                        description: LocaleKeys.Please_enter_all_details.tr());
-                  } else if (confirmpass.text.isEmpty) {
-                    loader.showErroDialog(
-                        description: LocaleKeys.Please_enter_all_details.tr());
-                  } else if (newpass.text == confirmpass.text) {
-                    _Changepassword();
+                        description: LocaleKeys
+                                .This_operation_was_not_performed_due_to_demo_mode
+                            .tr());
                   } else {
-                    loader.showErroDialog(
-                        description:
-                            "Newpassword and confirm password are not same");
+                    if (oldpass.text.isEmpty) {
+                      loader.showErroDialog(
+                          description:
+                              LocaleKeys.Please_enter_all_details.tr());
+                    } else if (newpass.text.isEmpty) {
+                      loader.showErroDialog(
+                          description:
+                              LocaleKeys.Please_enter_all_details.tr());
+                    } else if (confirmpass.text.isEmpty) {
+                      loader.showErroDialog(
+                          description:
+                              LocaleKeys.Please_enter_all_details.tr());
+                    } else if (newpass.text == confirmpass.text) {
+                      _Changepassword();
+                    } else {
+                      loader.showErroDialog(
+                          description: LocaleKeys
+                              .New_password_Confirm_password_must_be_same.tr());
+                    }
                   }
                 },
-                style: TextButton.styleFrom(backgroundColor: color.blackbutton),
+                style: TextButton.styleFrom(backgroundColor: color.black),
                 child: Text(
                   LocaleKeys.Reset.tr(),
                   style: TextStyle(

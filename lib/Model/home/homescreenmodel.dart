@@ -9,6 +9,7 @@ class homescreenmodel {
   List<itemmodel>? todayspecial;
   List<itemmodel>? recommendeditems;
   dynamic checkaddons;
+  String? environment;
   Appdata? appdata;
   Getprofile? getprofile;
   Cartdata? cartdata;
@@ -23,6 +24,7 @@ class homescreenmodel {
       this.todayspecial,
       this.recommendeditems,
       this.checkaddons,
+      this.environment,
       this.appdata,
       this.getprofile,
       this.cartdata,
@@ -52,6 +54,7 @@ class homescreenmodel {
       });
     }
     checkaddons = json['checkaddons'];
+    environment = json['environment'];
     appdata =
         json['appdata'] != null ? Appdata.fromJson(json['appdata']) : null;
     getprofile = json['getprofile'] != null
@@ -90,6 +93,7 @@ class homescreenmodel {
           recommendeditems!.map((v) => v.toJson()).toList();
     }
     data['checkaddons'] = checkaddons;
+    data['environment'] = environment;
     if (appdata != null) {
       data['appdata'] = appdata!.toJson();
     }

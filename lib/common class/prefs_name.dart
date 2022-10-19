@@ -17,11 +17,17 @@ const UD_user_profileimage = "UD_user_profileimage";
 const init_Screen = "initScreen";
 const APPcurrency = "currency";
 const APPcurrency_position = "currency_position";
+const referral_amount = "referral_amount";
 const APPcart_count = "cart_count";
 const APPCheck_addons = "Check_addons";
 const about_us = "about_us";
+const min_order_amount = "min_order_amount";
+const max_order_amount = "max_order_amount";
 // extra
 
+// const environment = "environment";
+const Androidlink = "Androilink";
+const Ioslink = "Ioslink";
 const restaurantlat = "restaurantlat";
 const restaurantlang = "restaurantlang";
 const deliverycharges = "deliverycharge";

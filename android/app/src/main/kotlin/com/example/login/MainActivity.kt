@@ -1,4 +1,4 @@
-package com.excellentia.user
+package com.singlerestaurant.user
 
 import io.flutter.embedding.android.FlutterActivity
 

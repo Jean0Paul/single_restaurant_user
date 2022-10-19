@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_renaming_method_parameters, must_be_immutable, camel_case_types, non_constant_identifier_names, avoid_print, use_build_context_synchronously, prefer_const_constructors, use_key_in_widget_constructors
+// ignore_for_file: avoid_renaming_method_parameters, must_be_immutable, camel_case_types, non_constant_identifier_names,   use_build_context_synchronously, prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -79,11 +79,9 @@ class _stripeState extends State<stripe> {
         "card_exp_year": YYYY.value.text,
         "card_cvc": CVV.value.text
       };
-      print(map);
       var response =
           await Dio().post(DefaultApi.appUrl + PostAPI.addwallet, data: map);
       addwalletdata = addwalletMODEL.fromJson(response.data);
-      print(response);
       if (addwalletdata!.status == 1) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -100,7 +98,7 @@ class _stripeState extends State<stripe> {
             MaterialPageRoute(builder: (c) => Addmoney()), (r) => false);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -271,7 +269,7 @@ class _stripeState extends State<stripe> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      color: color.blackbutton),
+                      color: color.black),
                   margin: EdgeInsets.only(
                     top: 2.h,
                     bottom: 2.h,

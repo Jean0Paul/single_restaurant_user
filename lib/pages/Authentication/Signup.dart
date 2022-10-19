@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:singlerestaurant/common%20class/prefs_name.dart';
 import 'package:singlerestaurant/pages/Authentication/Otp.dart';
 import 'package:singlerestaurant/pages/Authentication/tearms_condition.dart';
-import 'package:singlerestaurant/Model/signupmodel.dart';
+import 'package:singlerestaurant/Model/authentication/signupmodel.dart';
 import 'package:singlerestaurant/Widgets/loader.dart';
 import 'package:singlerestaurant/translation/locale_keys.g.dart';
 import 'package:singlerestaurant/validation/validator.dart/validator.dart';
@@ -41,6 +41,7 @@ class _SignupState extends State<Signup> {
   final Mobile = TextEditingController();
   final Refcode = TextEditingController();
   final Password = TextEditingController();
+  bool _obscureText = true;
   String? countrycode = "91";
 
   bool isChecked = false;
@@ -90,9 +91,12 @@ class _SignupState extends State<Signup> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Otp(registertype == "mobile"
-                ? "+${countrycode! + Mobile.text.toString()}"
-                : Email.value.text),
+            builder: (context) => Otp(
+              registertype == "mobile"
+                  ? "+${countrycode! + Mobile.text.toString()}"
+                  : Email.value.text,
+              Signupdata!.otp.toString(),
+            ),
           ),
         );
       } else if (Signupdata!.status == 0) {
@@ -100,9 +104,12 @@ class _SignupState extends State<Signup> {
         print(Signupdata!.message);
       } else if (Signupdata!.status == 3) {
         Get.to(
-          () => Otp(registertype == "mobile"
-              ? "+${countrycode! + Mobile.text.toString()}"
-              : Email.value.text),
+          () => Otp(
+            registertype == "mobile"
+                ? ("+${countrycode! + Mobile.text.toString()}")
+                : Email.value.text,
+            Signupdata!.otp.toString(),
+          ),
         );
       } else {
         loader.showErroDialog(description: Signupdata!.message);
@@ -196,17 +203,19 @@ class _SignupState extends State<Signup> {
                     child: TextFormField(
                       validator: (value) => Validators.validateName(
                           value!, LocaleKeys.First_name.tr()),
-                      cursorColor: Colors.black38,
+                      cursorColor: color.grey,
                       textInputAction: TextInputAction.next,
                       controller: Name,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: color.blackgrey,
+                            color: color.grey,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: color.blackgrey),
+                          borderSide: BorderSide(
+                            color: color.grey,
+                          ),
                         ),
                         border: OutlineInputBorder(),
                         hintText: (LocaleKeys.Full_name.tr()),
@@ -230,18 +239,18 @@ class _SignupState extends State<Signup> {
                         value!,
                       ),
                       readOnly: widget.emailid != null ? true : false,
-                      cursorColor: Colors.black38,
+                      cursorColor: color.grey,
                       textInputAction: TextInputAction.next,
                       controller: Email,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: color.blackgrey,
+                            color: color.grey,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: color.blackgrey,
+                            color: color.grey,
                           ),
                         ),
                         border: OutlineInputBorder(),
@@ -256,7 +265,7 @@ class _SignupState extends State<Signup> {
                   margin: EdgeInsets.only(left: 4.w, top: 2.h, right: 4.w),
                   child: Center(
                     child: IntlPhoneField(
-                      cursorColor: Colors.black38,
+                      cursorColor: color.grey,
                       controller: Mobile,
                       showCountryFlag: false,
                       disableLengthCheck: true,
@@ -270,10 +279,10 @@ class _SignupState extends State<Signup> {
                         ),
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: color.blackgrey),
+                          borderSide: BorderSide(color: color.grey),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: color.blackgrey),
+                          borderSide: BorderSide(color: color.grey),
                         ),
                       ),
                       initialCountryCode: 'IN',
@@ -288,15 +297,16 @@ class _SignupState extends State<Signup> {
                   margin: EdgeInsets.only(left: 4.w, top: 2.h, right: 4.w),
                   child: Center(
                     child: TextField(
+                      cursorColor: color.grey,
                       controller: Refcode,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: color.blackgrey),
+                          borderSide: BorderSide(color: color.grey),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: color.blackgrey),
+                          borderSide: BorderSide(color: color.grey),
                         ),
                         hintText: LocaleKeys.Referral_code_Optional.tr(),
                         hintStyle: TextStyle(
@@ -312,16 +322,34 @@ class _SignupState extends State<Signup> {
                     margin: EdgeInsets.only(left: 4.w, top: 2.h, right: 4.w),
                     child: Center(
                       child: TextFormField(
+                        cursorColor: color.grey,
+                        obscureText: _obscureText,
                         validator: (value) =>
                             Validators.validatePassword(value!),
                         controller: Password,
                         textInputAction: TextInputAction.done,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
+                              icon: Icon(
+                                _obscureText
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.grey,
+                              )),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: color.blackgrey),
+                            borderSide: BorderSide(
+                              color: color.grey,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: color.blackgrey),
+                            borderSide: BorderSide(
+                              color: color.grey,
+                            ),
                           ),
                           border: OutlineInputBorder(),
                           hintText: LocaleKeys.Password.tr(),
@@ -363,6 +391,7 @@ class _SignupState extends State<Signup> {
                         LocaleKeys.I_accept_the_terms_conditions.tr(),
                         style: TextStyle(
                           fontSize: 11.sp,
+                          fontFamily: 'Poppins',
                         ),
                       ),
                     ),
@@ -381,7 +410,7 @@ class _SignupState extends State<Signup> {
                                   .Please_select_terms_conditions.tr());
                         } else {
                           if (widget.type == null && registertype == "email") {
-                            // SignupAPI("email");
+                            SignupAPI("email");
                             print(1);
                           } else if (widget.type == "google") {
                             SignupAPI("google");
@@ -397,7 +426,7 @@ class _SignupState extends State<Signup> {
                       }
                     },
                     style: TextButton.styleFrom(
-                      backgroundColor: color.greenbutton,
+                      backgroundColor: color.primarycolor,
                     ),
                     child: Text(
                       LocaleKeys.Signup.tr(),

@@ -217,7 +217,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:438612959348:android:ea08dd981869b8c2f9f121",
         "android_client_info": {
-          "package_name": "com.excellentia.user"
+          "package_name": "com.singlerestaurant.user"
         }
       },
       "oauth_client": [
@@ -225,7 +225,7 @@
           "client_id": "438612959348-47vj1qh605qbeqqjsq31i20m4b2d2rqf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.excellentia.user",
+            "package_name": "com.singlerestaurant.user",
             "certificate_hash": "054a8b14c87133441ff7661bd45ed915112def1f"
           }
         },
@@ -233,7 +233,7 @@
           "client_id": "438612959348-8vna6cjd7jj5k87jci8ib6e76tkirq7t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.excellentia.user",
+            "package_name": "com.singlerestaurant.user",
             "certificate_hash": "fb2171f17be5cbdb66575d77bcfa715fe62c1260"
           }
         },
@@ -241,7 +241,7 @@
           "client_id": "438612959348-l7nktmstt9am2uhmk8s479vlnt0gmha7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.excellentia.user",
+            "package_name": "com.singlerestaurant.user",
             "certificate_hash": "031c48b55613d351d6a1db27ca6e40aa74c55ba3"
           }
         },

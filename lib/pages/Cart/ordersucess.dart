@@ -72,7 +72,7 @@ class _OrdersucesspageState extends State<Ordersucesspage> {
               count.cartcountnumber.value = 0;
               Get.offAll(() => Homepage(3));
             },
-            style: TextButton.styleFrom(backgroundColor: color.redbutton),
+            style: TextButton.styleFrom(backgroundColor: color.primarycolor),
             child: Text(
               LocaleKeys.Check_Order_Details.tr(),
               style: TextStyle(

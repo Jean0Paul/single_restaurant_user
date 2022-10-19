@@ -3,6 +3,7 @@
 class DefaultApi {
   static String baseUrl = "https://services.app-myexcellentia.com/Project/";
   static String appUrl = baseUrl + "api/";
+  static String environment = "live";
 }
 
 class PostAPI {

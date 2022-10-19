@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, use_build_context_synchronously, unused_field, prefer_final_fields, non_constant_identifier_names, unused_element, avoid_print, prefer_const_constructors
+// ignore_for_file: file_names, use_build_context_synchronously, unused_field, prefer_final_fields, non_constant_identifier_names, unused_element,   prefer_const_constructors
 
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,8 +10,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:singlerestaurant/pages/Authentication/Otp.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:singlerestaurant/Model/Loginmodel.dart';
-import 'package:singlerestaurant/Model/signupmodel.dart';
+import 'package:singlerestaurant/Model/authentication/Loginmodel.dart';
+import 'package:singlerestaurant/Model/authentication/signupmodel.dart';
 import 'package:singlerestaurant/Widgets/loader.dart';
 import 'package:singlerestaurant/common%20class/color.dart';
 import 'package:singlerestaurant/common%20class/prefs_name.dart';
@@ -43,14 +43,19 @@ class _LoginState extends State<Login> {
 
   token() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     setState(() {
       Logintype = prefs.getString(APPCheck_addons);
+
+      if (DefaultApi.environment == "sendbox") {
+        email.value = TextEditingValue(text: "user@gmail.com");
+        password.value = TextEditingValue(text: "123456");
+      }
     });
     await FirebaseMessaging.instance.getToken().then((token) {
       if (kDebugMode) {
         print(token);
       }
-      print("token");
       Googletoken = token!;
     });
   }
@@ -60,8 +65,8 @@ class _LoginState extends State<Login> {
   Map? userdata;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   bool _obscureText = true;
-  final email = TextEditingController();
-  final mobile = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController mobile = TextEditingController();
   final password = TextEditingController();
   Loginmodel? jsondata;
   Map<String, dynamic>? _userData;
@@ -88,33 +93,18 @@ class _LoginState extends State<Login> {
       }
       // _userData = userdata;
 
-      print("email  ${userdata["email"]}");
-      print("name  ${userdata["name"]}");
-
-      print("id  ${userdata["id"]}");
       _FBlogout();
 
       registerAPIforfb(userdata["email"], userdata["name"], userdata["id"]);
-    } else {
-      print(result.status);
-      print(result.message);
-    }
+    } else {}
   }
 
   registerAPIforfb(email, name, id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     loader.showLoading();
-    var map = {
-      "name": name,
-      "email": email,
-      "mobile": "",
-      "token": Googletoken,
-      "facebook_id": id,
-      "login_type": "facebook",
-    };
+    var map = {};
     var response =
         await Dio().post(DefaultApi.appUrl + PostAPI.register, data: map);
-    print(response);
     Signupmodel data = Signupmodel.fromJson(response.data);
     loader.hideLoading();
     if (data.status == 1) {
@@ -128,7 +118,10 @@ class _LoginState extends State<Login> {
     } else if (data.status == 2) {
       Get.to(() => Signup(email, name, "facebook", id.toString()));
     } else if (data.status == 3) {
-      Get.to(() => Otp(email));
+      Get.to(() => Otp(
+            email,
+            data.otp.toString(),
+          ));
     } else {
       loader.showErroDialog(description: data.message);
     }
@@ -155,19 +148,16 @@ class _LoginState extends State<Login> {
               "token": Googletoken
             };
 
-      print(map);
       var response = await Dio().post(
         DefaultApi.appUrl + PostAPI.loginAPi,
         data: map,
         options: Options(
           followRedirects: false,
           validateStatus: (status) {
-            print(status);
             return status! < 500;
           },
         ),
       );
-      print(response);
       if (response.statusCode! > 300) {
         loader.showErroDialog(description: "serrr");
       }
@@ -196,7 +186,6 @@ class _LoginState extends State<Login> {
         prefs.setString(
             UD_user_profileimage, jsondata!.data!.profileImage.toString());
 
-        print(jsondata!.data);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Homepage(0)),
@@ -208,19 +197,20 @@ class _LoginState extends State<Login> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => Otp(Logintype == "mobile"
-                  ? "+${countrycode! + mobile.value.text}"
-                  : email.text.toString())),
+            builder: (context) => Otp(
+                Logintype == "mobile"
+                    ? "+${countrycode! + mobile.value.text}"
+                    : email.text.toString(),
+                jsondata!.otp.toString()),
+          ),
         );
       } else {
         loader.showErroDialog(description: jsondata!.message);
-        print(jsondata!.message);
       }
 
       return jsondata;
     } on DioError catch (e) {
       loader.showErroDialog(description: "server time  out");
-      print(e.type);
 
       if (e.type == DioErrorType.connectTimeout) {
         loader.showErroDialog(description: "server time  out");
@@ -228,7 +218,6 @@ class _LoginState extends State<Login> {
       loader.hideLoading();
 
       // loader.showErroDialog(description: e.toString());
-      print("close");
     }
   }
 
@@ -242,25 +231,46 @@ class _LoginState extends State<Login> {
             builder: (context) {
               return AlertDialog(
                 title: Text(
-                  "Alert",
-                  style: TextStyle(),
+                  LocaleKeys.Single_Restaurant.tr(),
+                  style: TextStyle(
+                      fontSize: 14.sp, fontFamily: 'Poppins_semibold'),
                 ),
                 content: Text(
-                  "are you sure to exit",
-                  style: TextStyle(),
+                  LocaleKeys.Are_you_sure_to_exit_from_this_app.tr(),
+                  style: TextStyle(fontSize: 12.sp, fontFamily: 'Poppins'),
                 ),
                 actions: [
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(false);
                     },
-                    child: Text(LocaleKeys.No.tr()),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: color.primarycolor,
+                    ),
+                    child: Text(
+                      LocaleKeys.No.tr(),
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.white,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
                   ),
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(true);
                     },
-                    child: Text(LocaleKeys.Yes.tr()),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: color.primarycolor,
+                    ),
+                    child: Text(
+                      LocaleKeys.Yes.tr(),
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.white,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
                   ),
                 ],
               );
@@ -331,7 +341,6 @@ class _LoginState extends State<Login> {
                           initialCountryCode: 'IN',
                           onCountryChanged: (value) {
                             countrycode = value.dialCode;
-                            print(countrycode);
                           },
                         ),
                       ),
@@ -367,7 +376,7 @@ class _LoginState extends State<Login> {
                         child: TextFormField(
                           validator: (value) =>
                               Validators.validatePassword(value!),
-                          cursorColor: Colors.black38,
+                          cursorColor: Colors.grey,
                           controller: password,
                           obscureText: _obscureText,
                           textInputAction: TextInputAction.done,
@@ -387,10 +396,10 @@ class _LoginState extends State<Login> {
                               hintText: LocaleKeys.Password.tr(),
                               border: const OutlineInputBorder(),
                               enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black26),
+                                borderSide: BorderSide(color: Colors.grey),
                               ),
                               focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black26),
+                                borderSide: BorderSide(color: Colors.grey),
                               )),
                         ),
                       ),
@@ -425,15 +434,12 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: TextButton(
                       onPressed: () async {
-                        print(mobile.value);
                         // if (mobile.value.text.isEmpty) {
                         //   loader.showErroDialog(description: "enter");
                         // }
 
                         if (_formkey.currentState!.validate()) {
-                          print("12");
                           if (Logintype == "mobile") {
-                            print("1");
                             if (mobile.value.text.isEmpty) {
                               loader.showErroDialog(
                                   description:
@@ -442,14 +448,13 @@ class _LoginState extends State<Login> {
                               login();
                             }
                           } else {
-                            print("dkjklndsgbkljdabkj");
                             login();
                           }
                         }
                       },
                       style: TextButton.styleFrom(
                           foregroundColor: Colors.grey,
-                          backgroundColor: color.redbutton),
+                          backgroundColor: color.primarycolor),
                       child: Text(
                         LocaleKeys.Login.tr(),
                         style: TextStyle(
@@ -507,8 +512,6 @@ class _LoginState extends State<Login> {
                           elevation: 0,
                           child: InkWell(
                               onTap: () async {
-                                print("object");
-
                                 _FBlogin();
                               },
                               child: Image.asset(
@@ -552,7 +555,9 @@ class _LoginState extends State<Login> {
             ),
           ),
           bottomSheet: Container(
-              decoration: BoxDecoration(color: color.greenbutton),
+              decoration: BoxDecoration(
+                color: color.green,
+              ),
               height: 8.h,
               width: MediaQuery.of(context).size.width,
               child: InkWell(
@@ -582,8 +587,6 @@ class _LoginState extends State<Login> {
       loader.hideLoading();
       _googleSignIn.signOut();
       registerAPI(value!);
-
-      print(value);
     }).catchError((e) {
       loader.showErroDialog(description: e);
     });
@@ -602,7 +605,6 @@ class _LoginState extends State<Login> {
     };
     var response =
         await Dio().post(DefaultApi.appUrl + PostAPI.register, data: map);
-    print(response);
     Signupmodel data = Signupmodel.fromJson(response.data);
     loader.hideLoading();
     if (data.status == 1) {
@@ -617,7 +619,10 @@ class _LoginState extends State<Login> {
       Get.to(() => Signup(
           value.email, value.displayName, "google", value.id.toString()));
     } else if (data.status == 3) {
-      Get.to(() => Otp(value.email));
+      Get.to(() => Otp(
+            value.email,
+            data.otp.toString(),
+          ));
     } else {
       loader.showErroDialog(description: data.message);
     }

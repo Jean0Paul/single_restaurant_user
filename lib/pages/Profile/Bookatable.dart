@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, non_constant_identifier_names, no_leading_underscores_for_local_identifiers, unused_local_variable, avoid_print, override_on_non_overriding_member, use_build_context_synchronously, prefer_const_constructors
+// ignore_for_file: file_names, non_constant_identifier_names, no_leading_underscores_for_local_identifiers, unused_local_variable,   override_on_non_overriding_member, use_build_context_synchronously, prefer_const_constructors
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +35,19 @@ class _BookatableState extends State<Bookatable> {
   booktablemodel? booktabledata;
 
   Future<void> displayTimeDialog(BuildContext context) async {
-    var picked =
-        await showTimePicker(context: context, initialTime: currenttime);
+    var picked = await showTimePicker(
+      context: context,
+      initialTime: currenttime,
+      builder: (context, child) {
+        return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: color.primarycolor,
+              ),
+            ),
+            child: child!);
+      },
+    );
     if (picked != null) {
       setState(() {
         String _hour = picked.hour.toString();
@@ -57,7 +68,6 @@ class _BookatableState extends State<Bookatable> {
   }
 
   getFormatedTime(_time) {
-    print(_time);
     var inputFormat = DateFormat('HH:mm');
     var inputDate = inputFormat.parse(_time);
     var outputFormat = DateFormat('hh:mm a');
@@ -69,7 +79,7 @@ class _BookatableState extends State<Bookatable> {
     try {
       loader.showLoading();
       var map = {
-        "name": "test",
+        "name": Name.value.text,
         "email": Email.text.toString(),
         "mobile": Mobile.text.toString(),
         "guests": Noofguest.text.toString(),
@@ -78,25 +88,24 @@ class _BookatableState extends State<Bookatable> {
         "reservation_type": Reservation.text.toString(),
         "special_request": Specialrequest.text.toString()
       };
-      print(Date);
-      print(Time);
-      print(map);
 
-      var response = await Dio().post(DefaultApi.appUrl + PostAPI.Bookatable);
+      var response = await Dio().post(
+        DefaultApi.appUrl + PostAPI.Bookatable,
+        data: map,
+      );
       var finallist = response.data;
       booktabledata = booktablemodel.fromJson(finallist);
-      print(booktabledata);
-      print(booktabledata!.message);
+      loader.hideLoading();
 
       if (booktabledata!.status == 1) {
         Navigator.of(context).pop();
+
         loader.showErroDialog(description: "Booking Success");
       } else {
         loader.showErroDialog(description: booktabledata!.message);
-        print("error");
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -246,6 +255,15 @@ class _BookatableState extends State<Bookatable> {
                             initialDate: DateTime.now(),
                             firstDate: DateTime.now(),
                             lastDate: DateTime(2030),
+                            builder: (context, child) {
+                              return Theme(
+                                  data: Theme.of(context).copyWith(
+                                    colorScheme: ColorScheme.light(
+                                      primary: color.primarycolor,
+                                    ),
+                                  ),
+                                  child: child!);
+                            },
                           ).then((date) {
                             setState(() {
                               String _day = date!.day.toString();
@@ -292,7 +310,6 @@ class _BookatableState extends State<Bookatable> {
                       child: GestureDetector(
                         onTap: () {
                           displayTimeDialog(context);
-                          print(Time);
                         },
                         child: AbsorbPointer(
                           child: TextFormField(
@@ -397,7 +414,7 @@ class _BookatableState extends State<Bookatable> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      color: color.blackbutton,
+                      color: color.black,
                     ),
                     child: Center(
                       child: Text(

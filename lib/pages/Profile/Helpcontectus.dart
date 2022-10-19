@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, avoid_print, use_build_context_synchronously, prefer_const_constructors
+// ignore_for_file: file_names,   use_build_context_synchronously, prefer_const_constructors
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -35,7 +35,6 @@ class _HelpcontactusState extends State<Helpcontactus> {
         "email": email.text.toString(),
         "message": message.text.toString()
       };
-      print(map);
       var response =
           await Dio().post(DefaultApi.appUrl + PostAPI.contact, data: map);
       var finalist = await response.data;
@@ -48,7 +47,7 @@ class _HelpcontactusState extends State<Helpcontactus> {
         loader.showErroDialog(description: helpdata!.message);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -310,8 +309,7 @@ class _HelpcontactusState extends State<Helpcontactus> {
                                   LocaleKeys.Please_enter_all_details.tr());
                         }
                       },
-                      style: TextButton.styleFrom(
-                          backgroundColor: color.blackbutton),
+                      style: TextButton.styleFrom(backgroundColor: color.black),
                       child: Text(
                         LocaleKeys.Submit.tr(),
                         style: TextStyle(

@@ -87,13 +87,13 @@ class _TrendingfoodState extends State<Trendingfood> {
         "item_image": itemimage,
         "item_type": itemtype,
         "tax": itemtax,
-        "item_price": numberFormat.format(double.parse(itemprice)),
+        "item_price": itemprice,
         "variation_id": "",
         "variation": "",
         "addons_id": "",
         "addons_name": "",
         "addons_price": "",
-        "addons_total_price": numberFormat.format(double.parse("0")),
+        "addons_total_price": "0",
       };
 
       print(map);
@@ -437,7 +437,7 @@ class _TrendingfoodState extends State<Trendingfood> {
                                       style: TextStyle(
                                         fontSize: 11,
                                         fontFamily: 'Poppins',
-                                        color: color.greenbutton,
+                                        color: color.green,
                                       ),
                                     ),
                                     const Spacer(),
@@ -496,8 +496,8 @@ class _TrendingfoodState extends State<Trendingfood> {
                                           "1") ...[
                                         Text(
                                           currency_position == "1"
-                                              ? "$currency${numberFormat.format(double.parse(itemdata!.data![index].variation![0].productPrice.toString()))}"
-                                              : "${numberFormat.format(double.parse(itemdata!.data![index].variation![0].productPrice.toString()))}$currency",
+                                              ? "$currency${itemdata!.data![index].variation![0].productPrice.toString()}"
+                                              : "${itemdata!.data![index].variation![0].productPrice.toString()}$currency",
                                           style: TextStyle(
                                             fontSize: 10.sp,
                                             fontFamily: 'Poppins_bold',
@@ -506,8 +506,8 @@ class _TrendingfoodState extends State<Trendingfood> {
                                       ] else ...[
                                         Text(
                                           currency_position == "1"
-                                              ? "$currency${numberFormat.format(double.parse(itemdata!.data![index].price.toString()))}"
-                                              : "${numberFormat.format(double.parse(itemdata!.data![index].price.toString()))}$currency",
+                                              ? "$currency${itemdata!.data![index].price.toString()}"
+                                              : "${itemdata!.data![index].price.toString()}$currency",
                                           style: TextStyle(
                                             fontSize: 10.sp,
                                             fontFamily: 'Poppins_bold',
@@ -578,7 +578,7 @@ class _TrendingfoodState extends State<Trendingfood> {
                                                   style: TextStyle(
                                                       fontFamily: 'Poppins',
                                                       fontSize: 9.5.sp,
-                                                      color: color.greenbutton),
+                                                      color: color.green),
                                                 ),
                                               )),
                                         ),
@@ -607,7 +607,7 @@ class _TrendingfoodState extends State<Trendingfood> {
                                                   },
                                                   child: Icon(
                                                     Icons.remove,
-                                                    color: color.greenbutton,
+                                                    color: color.green,
                                                     size: 16,
                                                   )),
                                               Container(
@@ -671,7 +671,7 @@ class _TrendingfoodState extends State<Trendingfood> {
                                                   },
                                                   child: Icon(
                                                     Icons.add,
-                                                    color: color.greenbutton,
+                                                    color: color.green,
                                                     size: 16,
                                                   )),
                                             ],

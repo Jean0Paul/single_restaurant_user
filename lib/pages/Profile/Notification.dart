@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, avoid_print, prefer_const_constructors
+// ignore_for_file: file_names,   prefer_const_constructors
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -31,13 +31,11 @@ class _NotificationpageState extends State<Notificationpage> {
 
   isisnotificationAPI(notification, mail) async {
     loader.showLoading();
-    print(userid);
     var map = {
       "user_id": userid,
       "notification_status": notification,
       "mail_status": mail,
     };
-    print(map);
 
     var response =
         await Dio().post(DefaultApi.appUrl + PostAPI.Isnotification, data: map);
@@ -50,8 +48,6 @@ class _NotificationpageState extends State<Notificationpage> {
       prefs.setString(UD_user_ismail, notificationdata!.mailStatus.toString());
     }
     loader.hideLoading();
-    print(notificationdata!.mailStatus);
-    print(notificationdata!.notificationStatus);
   }
 
   @override
@@ -67,8 +63,6 @@ class _NotificationpageState extends State<Notificationpage> {
       isnotification = prefs.getString(UD_user_isnotification);
       ismail = prefs.getString(UD_user_ismail);
     });
-    print("unoti $isnotification");
-    print("mail $ismail");
   }
 
   @override
@@ -109,10 +103,10 @@ class _NotificationpageState extends State<Notificationpage> {
                   Spacer(),
                   FlutterSwitch(
                     inactiveColor: Colors.grey,
-                    activeColor: color.blackbutton,
+                    activeColor: color.black,
                     width: 12.8.w,
                     height: 3.9.h,
-                    value: isnotification == "1" ? false : true,
+                    value: isnotification == "1" ? true : false,
                     borderRadius: 30.0,
                     padding: 4.0,
                     showOnOff: false,
@@ -136,7 +130,7 @@ class _NotificationpageState extends State<Notificationpage> {
               Container(
                 margin: EdgeInsets.only(top: 1.h, bottom: 1.1.h),
                 height: 0.8.sp,
-                color: color.greybutton,
+                color: color.grey,
               ),
               Row(
                 children: [
@@ -159,10 +153,10 @@ class _NotificationpageState extends State<Notificationpage> {
                   Spacer(),
                   FlutterSwitch(
                     inactiveColor: Colors.grey,
-                    activeColor: color.blackbutton,
+                    activeColor: color.black,
                     width: 12.8.w,
                     height: 3.9.h,
-                    value: ismail == "1" ? false : true,
+                    value: ismail == "1" ? true : false,
                     borderRadius: 30.0,
                     padding: 4.0,
                     showOnOff: false,

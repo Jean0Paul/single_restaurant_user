@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, avoid_print, non_constant_identifier_names, prefer_const_constructors
+// ignore_for_file: file_names, camel_case_types,   non_constant_identifier_names, prefer_const_constructors
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -34,14 +34,12 @@ class productcontroller extends GetxController {
         "filter": "",
         "search": "",
       };
-      print(map);
       var product =
           await Dio().post(DefaultApi.appUrl + PostAPI.Searchitem, data: map);
       var productdata = searchmodel.fromJson(product.data);
-      print(product);
       return productlist.assignAll(productdata.data!.toList());
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 }
@@ -74,15 +72,13 @@ class _SearchState extends State<Search> {
         "filter": "",
         "search": "",
       };
-      print(map);
       var response =
           await Dio().post(DefaultApi.appUrl + PostAPI.Searchitem, data: map);
       searchdata = searchmodel.fromJson(response.data);
-      print(response);
       issearch = false;
       return searchdata;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -97,7 +93,6 @@ class _SearchState extends State<Search> {
               user.itemName!.toString().toLowerCase().contains(search))
           .toList();
     });
-    print(searchlist);
   }
 
   @override
@@ -243,7 +238,7 @@ class _SearchState extends State<Search> {
                                                   style: TextStyle(
                                                     fontSize: 11,
                                                     fontFamily: 'Poppins',
-                                                    color: color.greenbutton,
+                                                    color: color.green,
                                                   ),
                                                 ),
                                                 const Spacer(),
@@ -363,7 +358,7 @@ class _SearchState extends State<Search> {
                       }
                       return Center(
                         child: CircularProgressIndicator(
-                          color: color.redbutton,
+                          color: color.primarycolor,
                         ),
                       );
                     },

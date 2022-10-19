@@ -15,8 +15,7 @@ class MyThemes {
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white,
     ),
-    bottomSheetTheme:
-        const BottomSheetThemeData(backgroundColor: Colors.transparent),
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.black),
     colorScheme: ColorScheme(
       brightness: Brightness.dark,
       surface: Colors.transparent,

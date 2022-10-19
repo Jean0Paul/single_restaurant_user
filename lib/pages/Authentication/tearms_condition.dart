@@ -65,7 +65,7 @@ class _teamsconditionState extends State<teamscondition> {
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(
-                child: CircularProgressIndicator(color: color.redbutton),
+                child: CircularProgressIndicator(color: color.primarycolor),
               );
             }
             return WebView(

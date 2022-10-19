@@ -129,7 +129,7 @@ class _FaqsState extends State<Faqs> {
                   }
                   return Center(
                     child: CircularProgressIndicator(
-                      color: color.redbutton,
+                      color: color.primarycolor,
                     ),
                   );
                 })));

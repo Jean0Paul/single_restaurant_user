@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, file_names
+// ignore_for_file: prefer_const_constructors,   file_names
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -28,7 +28,7 @@ class _BlogspageState extends State<Blogspage> {
       blogsdata = blogsmodel.fromJson(finallist);
       return blogsdata;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -164,7 +164,7 @@ class _BlogspageState extends State<Blogspage> {
                 }
                 return Center(
                   child: CircularProgressIndicator(
-                    color: color.redbutton,
+                    color: color.primarycolor,
                   ),
                 );
               },

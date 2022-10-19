@@ -81,218 +81,225 @@ class _WalletState extends State<Wallet> {
             const Padding(padding: EdgeInsets.only(right: 15))
           ],
         ),
-        body: Column(children: [
-          Container(
-            margin: EdgeInsets.only(
-                top: 1.5.h, bottom: 1.5.h, left: 3.5.w, right: 3.5.w),
-            child: Card(
-              elevation: 5,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color:
-                      themenofier.isdark ? Colors.grey.shade800 : Colors.white,
-                ),
-                height: 43.h,
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 2.h),
-                      // color: color.redbutton,
-                      child: Image.asset(
-                        'Assets/Icons/whitelogo.png',
-                        height: 12.h,
-                        color: color.redbutton,
+        body: SingleChildScrollView(
+          child: Column(children: [
+            Container(
+              margin: EdgeInsets.only(
+                bottom: 5.h,
+                left: 2.w,
+                right: 2.w,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                // color: themenofier.isdark ? Colors.grey.shade800 : Colors.white,
+              ),
+              // height: 43.h,
+              width: double.infinity,
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 2.h),
+                    // color: color.primarycolor,
+                    child: Image.asset(
+                      'Assets/Icons/ic_logo.png',
+                      height: 12.h,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 1.6.h,
+                    ),
+                    child: Text(
+                      LocaleKeys.Wallet_Money.tr(),
+                      style: TextStyle(
+                        fontFamily: 'Poppins_semibold',
+                        fontSize: 17.sp,
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 1.6.h,
+                  ),
+                  SizedBox(
+                    height: 8.w,
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'Assets/Icons/right.png',
+                        height: 4.h,
                       ),
-                      child: Text(
-                        LocaleKeys.Wallet_Money.tr(),
+                      SizedBox(
+                        width: 2.5.w,
+                      ),
+                      Text(
+                        LocaleKeys.Fast_Easy_Payments.tr(),
                         style: TextStyle(
-                            fontFamily: 'Poppins_semibold',
-                            fontSize: 17.sp,
-                            color: Colors.black),
+                          fontFamily: 'Poppins',
+                          fontSize: 12.sp,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 4.5.w,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 3.5.w, right: 2.5.w),
-                          child: Image.asset(
-                            'Assets/Icons/right.png',
-                            height: 4.h,
-                          ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 50,
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'Assets/Icons/right.png',
+                        height: 4.h,
+                      ),
+                      SizedBox(
+                        width: 2.5.w,
+                      ),
+                      Text(
+                        LocaleKeys.Secure_Payments.tr(),
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 12.sp,
                         ),
-                        Text(
-                          LocaleKeys.Fast_Easy_Payments.tr(),
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 12.sp,
-                          ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 50,
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'Assets/Icons/right.png',
+                        height: 4.h,
+                      ),
+                      SizedBox(
+                        width: 2.5.w,
+                      ),
+                      Text(
+                        LocaleKeys.No_Document_Upload_Required.tr(),
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 12.sp,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 50,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 3.5.w, right: 2.5.w),
-                          child: Image.asset(
-                            'Assets/Icons/right.png',
-                            height: 4.h,
-                          ),
-                        ),
-                        Text(
-                          LocaleKeys.Secure_Payments.tr(),
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 50,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 3.5.w, right: 2.5.w),
-                          child: Image.asset(
-                            'Assets/Icons/right.png',
-                            height: 4.h,
-                          ),
-                        ),
-                        Text(
-                          LocaleKeys.No_Document_Upload_Required.tr(),
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
-          ),
-          Text(
-            LocaleKeys.Devbygravityinfo.tr(),
-            style: TextStyle(fontFamily: 'Poppins', fontSize: 8.8.sp),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                top: 2.h, left: 3.5.w, right: 3.5.w, bottom: 2.h),
-            child: Card(
-              elevation: 5,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: color.redbutton,
-                ),
-                height: 22.5.h,
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 1.h,
-                        left: 2.5.w,
-                        right: 2.5.w,
-                      ),
-                      child: Text(
-                        LocaleKeys.Wallet_Money.tr(),
-                        style: TextStyle(
-                            fontFamily: 'Poppins_semibold',
-                            fontSize: 15.sp,
-                            color: Colors.white),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 4.h,
-                        left: 2.5.w,
-                        right: 2.5.w,
-                      ),
-                      child: Text(
-                        LocaleKeys.Total_Balance.tr(),
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 8.8.sp,
-                            color: Colors.white),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 1.h,
-                        bottom: 1.5.h,
-                        left: 2.5.w,
-                        right: 2.5.w,
-                      ),
-                      child: Text(
-                        // walletmoney.toString(),
-                        currency_position == "1"
-                            ? "$currency${numberFormat.format(double.parse(walletmoney.toString()))}"
-                            : "${numberFormat.format(double.parse(
-                                walletmoney.toString(),
-                              ))}$currency",
-                        style: TextStyle(
-                            fontFamily: 'Poppins_bold',
-                            fontSize: 12.5.sp,
-                            color: Colors.white),
-                      ),
-                    ),
-                    const Spacer(),
-                    Container(
-                      margin: EdgeInsets.only(
-                        bottom: 1.2.h,
-                        left: 2.5.w,
-                        right: 2.5.w,
-                      ),
-                      child: Text(
-                        LocaleKeys.WALLET_MONEY_Can_only_be_used_for_your_orders
-                            .tr(),
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 7.sp,
-                            color: Colors.white),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () async {
-              amount = await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Addmoney()),
-              );
-              if (amount == null) {
-                getdata();
-              }
-            },
-            child: Text(
-              LocaleKeys.ADD_MONEY.tr(),
+            Text(
+              LocaleKeys.Devbygravityinfo.tr(),
               style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 10.sp,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                top: 2.h,
+                left: 2.w,
+                right: 2.w,
+                bottom: 2.h,
+              ),
+              child: Card(
+                elevation: 5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: color.primarycolor,
+                  ),
+                  height: 22.5.h,
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 1.h,
+                          left: 2.5.w,
+                          right: 2.5.w,
+                        ),
+                        child: Text(
+                          LocaleKeys.Wallet_Money.tr(),
+                          style: TextStyle(
+                              fontFamily: 'Poppins_semibold',
+                              fontSize: 15.sp,
+                              color: Colors.white),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 4.h,
+                          left: 2.5.w,
+                          right: 2.5.w,
+                        ),
+                        child: Text(
+                          LocaleKeys.Total_Balance.tr(),
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 8.8.sp,
+                              color: Colors.white),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 1.h,
+                          bottom: 1.5.h,
+                          left: 2.5.w,
+                          right: 2.5.w,
+                        ),
+                        child: Text(
+                          // walletmoney.toString(),
+                          currency_position == "1"
+                              ? "$currency${numberFormat.format(double.parse(walletmoney.toString()))}"
+                              : "${numberFormat.format(double.parse(
+                                  walletmoney.toString(),
+                                ))}$currency",
+                          style: TextStyle(
+                              fontFamily: 'Poppins_bold',
+                              fontSize: 12.5.sp,
+                              color: Colors.white),
+                        ),
+                      ),
+                      const Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(
+                          bottom: 1.2.h,
+                          left: 2.5.w,
+                          right: 2.5.w,
+                        ),
+                        child: Text(
+                          LocaleKeys
+                                  .WALLET_MONEY_Can_only_be_used_for_your_orders
+                              .tr(),
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 7.sp,
+                              color: Colors.white),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                amount = await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Addmoney()),
+                );
+                if (amount == null) {
+                  getdata();
+                }
+              },
+              child: Text(
+                LocaleKeys.ADD_MONEY.tr(),
+                style: TextStyle(
                   fontFamily: 'Poppins_semibold',
                   fontSize: 11.sp,
-                  color: Colors.green),
-            ),
-          )
-        ]),
+                  color: color.green,
+                ),
+              ),
+            )
+          ]),
+        ),
       );
     });
   }

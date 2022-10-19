@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, non_constant_identifier_names, avoid_print, avoid_unnecessary_containers, prefer_const_constructors
+// ignore_for_file: file_names, camel_case_types, non_constant_identifier_names,   avoid_unnecessary_containers, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:singlerestaurant/common%20class/color.dart';
@@ -20,6 +20,10 @@ class _Refer_earnState extends State<Refer_earn> {
   String? userid;
   String? user_refer_code;
   String? currency;
+  String? currencyposition;
+  String? _reffer_amount;
+  String? Androidapplink;
+  String? IosApplink;
 
   @override
   void initState() {
@@ -29,12 +33,16 @@ class _Refer_earnState extends State<Refer_earn> {
 
   refer_data() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     setState(() {
       userid = (prefs.getString(UD_user_id) ?? "null");
       user_refer_code = (prefs.getString(UD_user_refer_code) ?? "null");
       currency = (prefs.getString(APPcurrency) ?? "null");
+      currencyposition = (prefs.getString(APPcurrency_position) ?? "null");
+      _reffer_amount = (prefs.getString(referral_amount) ?? "null");
+      Androidapplink = (prefs.getString(Androidlink) ?? "null");
+      IosApplink = (prefs.getString(Ioslink) ?? "null");
     });
-    print(user_refer_code);
   }
 
   @override
@@ -81,7 +89,9 @@ class _Refer_earnState extends State<Refer_earn> {
               height: 11.h,
               width: 80.w,
               child: Text(
-                "${LocaleKeys.refer_code1.tr()} $currency ${LocaleKeys.refer_code2.tr()}",
+                currencyposition == "1"
+                    ? "${LocaleKeys.refer_code1.tr()} $currency$_reffer_amount ${LocaleKeys.refer_code2.tr()}"
+                    : "${LocaleKeys.refer_code1.tr()} $_reffer_amount$currency ${LocaleKeys.refer_code2.tr()}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -110,7 +120,7 @@ class _Refer_earnState extends State<Refer_earn> {
                     Container(
                       height: 7.h,
                       width: 25.w,
-                      color: color.blackbutton,
+                      color: color.black,
                       child: TextButton(
                         child: Text(
                           LocaleKeys.Share.tr(),
@@ -121,7 +131,10 @@ class _Refer_earnState extends State<Refer_earn> {
                         ),
                         onPressed: () {
                           Share.share(
-                              'Use this code $user_refer_code to register with Restaurant User & get bonus amount \$30.00');
+                            currencyposition == "1"
+                                ? '${LocaleKeys.Use_this_code.tr()} $user_refer_code ${LocaleKeys.to_register_with.tr()} ${LocaleKeys.Restaurant_User.tr()} ${LocaleKeys.get_bonus_amount.tr()} $currency$_reffer_amount \n $Androidapplink \n $IosApplink   '
+                                : '${LocaleKeys.Use_this_code.tr()} $user_refer_code ${LocaleKeys.to_register_with.tr()} ${LocaleKeys.Restaurant_User.tr()} ${LocaleKeys.get_bonus_amount.tr()} $_reffer_amount$currency \n $Androidapplink \n $IosApplink  ',
+                          );
                         },
                       ),
                     )

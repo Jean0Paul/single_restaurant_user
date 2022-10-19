@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, unnecessary_string_interpolations, must_be_immutable, use_key_in_widget_constructors, body_might_complete_normally_nullable, avoid_print, unrelated_type_equality_checks, unused_local_variable, use_build_context_synchronously
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, unnecessary_string_interpolations, must_be_immutable, use_key_in_widget_constructors, body_might_complete_normally_nullable,   unrelated_type_equality_checks, unused_local_variable, use_build_context_synchronously
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,7 @@ import 'package:singlerestaurant/common%20class/color.dart';
 import 'package:singlerestaurant/common%20class/icons.dart';
 import 'package:singlerestaurant/common%20class/prefs_name.dart';
 import 'package:singlerestaurant/config/API/API.dart';
+import 'package:singlerestaurant/pages/Cart/addonslist.dart';
 import 'package:singlerestaurant/translation/locale_keys.g.dart';
 import 'package:sizer/sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -41,17 +42,15 @@ class _OrderdetailsState extends State<Orderdetails> {
       var map = {
         "order_id": widget.Orderid,
       };
-      print(map);
       var response = await Dio()
           .post(DefaultApi.appUrl + PostAPI.Getorderdetails, data: map);
 
       var finalist = await response.data;
-      print(finalist);
       Orderdetailsdata = Orderdetailsmodel.fromJson(finalist);
 
       return Orderdetailsdata;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -81,7 +80,7 @@ class _OrderdetailsState extends State<Orderdetails> {
             return Scaffold(
               body: Center(
                 child: CircularProgressIndicator(
-                  color: color.redbutton,
+                  color: color.primarycolor,
                 ),
               ),
             );
@@ -141,7 +140,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                         "1") ...[
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: color.blackgrey,
+                                            color: color.status1,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         padding: EdgeInsets.all(7),
@@ -159,7 +158,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                         "2") ...[
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: Color(0xffFF9500),
+                                            color: color.status2,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         padding: EdgeInsets.all(7),
@@ -177,7 +176,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                         "3") ...[
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: color.skyblue,
+                                            color: color.status3,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         padding: EdgeInsets.all(7),
@@ -198,7 +197,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                           "1") ...[
                                         Container(
                                           decoration: BoxDecoration(
-                                              color: color.blue,
+                                              color: color.status4,
                                               borderRadius:
                                                   BorderRadius.circular(5)),
                                           padding: EdgeInsets.all(7),
@@ -217,7 +216,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                           "2") ...[
                                         Container(
                                           decoration: BoxDecoration(
-                                              color: color.blue,
+                                              color: color.status4,
                                               borderRadius:
                                                   BorderRadius.circular(5)),
                                           padding: EdgeInsets.all(7),
@@ -238,7 +237,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                         "5") ...[
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: color.greenbutton,
+                                            color: color.status5,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         padding: EdgeInsets.all(7),
@@ -256,7 +255,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                         "6") ...[
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: color.darkred,
+                                            color: color.status67,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         padding: EdgeInsets.all(7),
@@ -274,7 +273,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                         "7") ...[
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: color.darkred,
+                                            color: color.status67,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         padding: EdgeInsets.all(7),
@@ -304,11 +303,14 @@ class _OrderdetailsState extends State<Orderdetails> {
                                     if (Orderdetailsdata
                                             ?.summery!.transactionType ==
                                         "1") ...[
-                                      Text(LocaleKeys.Cash.tr(),
-                                          style: TextStyle(
-                                              fontSize: 8.5.sp,
-                                              fontFamily: 'Poppins',
-                                              color: Colors.grey)),
+                                      Text(
+                                        LocaleKeys.Cash.tr(),
+                                        style: TextStyle(
+                                          fontSize: 8.5.sp,
+                                          fontFamily: 'Poppins',
+                                          color: color.grey,
+                                        ),
+                                      ),
                                     ] else if (Orderdetailsdata
                                             ?.summery!.transactionType ==
                                         "2") ...[
@@ -392,99 +394,197 @@ class _OrderdetailsState extends State<Orderdetails> {
                                 )
                               ])),
                       SizedBox(
-                        height: Orderdetailsdata!.data!.length * 16.2.h,
+                        height: Orderdetailsdata!.data!.length * 15.5.h,
                         child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: Orderdetailsdata!.data!.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: EdgeInsets.only(
-                                  top: 2.h,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: Orderdetailsdata!.data!.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(
+                                top: 1.h,
+                              ),
+                              height: 14.5.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7),
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                    width: 0.8.sp,
+                                  )),
+                              child: Row(children: [
+                                SizedBox(
+                                  width: 28.w,
+                                  height: 15.5.h,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(7),
+                                    child: Image.network(
+                                      Orderdetailsdata!.data![index].itemImage
+                                          .toString(),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
                                 ),
-                                padding: EdgeInsets.all(1.h),
-                                width: double.infinity,
-                                height: 14.h,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(6)),
-                                child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          if (Orderdetailsdata!
-                                                  .data![index].itemType ==
-                                              "1") ...[
-                                            Image.asset(
-                                              Defaulticon.vegicon,
-                                              height: 2.2.h,
-                                            ),
-                                          ] else ...[
-                                            Image.asset(
-                                              Defaulticon.nonvegicon,
-                                              height: 2.2.h,
-                                            ),
-                                          ],
-                                          SizedBox(
-                                            width: 1.5.w,
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      right: 2.w,
+                                      left: 2.w,
+                                      bottom: 0.8.h,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              if (Orderdetailsdata!
+                                                      .data![index].itemType ==
+                                                  "1") ...[
+                                                SizedBox(
+                                                  height: 2.h,
+                                                  // color: Colors.black,
+                                                  child: Image.asset(
+                                                    Defaulticon.vegicon,
+                                                  ),
+                                                ),
+                                              ] else if (Orderdetailsdata!
+                                                      .data![index].itemType ==
+                                                  "2") ...[
+                                                SizedBox(
+                                                  height: 2.h,
+                                                  // color: Colors.black,
+                                                  child: Image.asset(
+                                                    Defaulticon.nonvegicon,
+                                                  ),
+                                                ),
+                                              ],
+                                              SizedBox(
+                                                width: 2.w,
+                                              ),
+                                              SizedBox(
+                                                width: 42.w,
+                                                child: Text(
+                                                  Orderdetailsdata!
+                                                      .data![index].itemName
+                                                      .toString(),
+                                                  maxLines: 1,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 11.sp,
+                                                    fontFamily:
+                                                        'Poppins_semibold',
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
+                                        ),
+                                        if (Orderdetailsdata!
+                                                .data![index].variation ==
+                                            "") ...[
+                                          Expanded(
+                                            child: Text(
+                                              "-",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 9.sp,
+                                                // color: Colors.grey,
+                                                fontFamily: 'Poppins',
+                                              ),
+                                            ),
+                                          ),
+                                        ] else ...[
                                           Expanded(
                                             child: Text(
                                               Orderdetailsdata!
-                                                  .data![index].itemName
+                                                  .data![index].variation
                                                   .toString(),
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                  fontSize: 11.sp,
-                                                  fontFamily: 'Poppins'),
+                                                fontSize: 9.sp,
+                                                color: Colors.grey,
+                                                fontFamily: 'Poppins',
+                                              ),
                                             ),
                                           ),
                                         ],
-                                      ),
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                            Orderdetailsdata!
-                                                .data![index].addonsName
-                                                .toString(),
-                                            style: TextStyle(
-                                                fontSize: 8.8.sp,
-                                                fontFamily: 'Poppins',
-                                                color: Colors.grey)),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            alignment: Alignment.topLeft,
+                                        if (Orderdetailsdata!
+                                                .data![index].addonsName ==
+                                            "") ...[
+                                          Expanded(
                                             child: Text(
-                                                '${LocaleKeys.Qty.tr()} ${Orderdetailsdata!.data![index].qty}',
+                                              "-",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 9.sp,
+                                                fontFamily: 'Poppins',
+                                              ),
+                                            ),
+                                          ),
+                                        ] else ...[
+                                          Expanded(
+                                            child: InkWell(
+                                              onTap: () {
+                                                modelsheet(
+                                                    context,
+                                                    Orderdetailsdata!
+                                                        .data![index]
+                                                        .addonsName,
+                                                    Orderdetailsdata!
+                                                        .data![index]
+                                                        .addonsPrice,
+                                                    currency,
+                                                    currency_position);
+                                              },
+                                              child: Text(
+                                                "${LocaleKeys.Add_ons.tr()}>>",
+                                                overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 9.sp,
-                                                  fontFamily:
-                                                      'Poppins_semibold',
-                                                )),
+                                                  color: Colors.grey,
+                                                  fontFamily: 'Poppins',
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                          Container(
-                                            alignment: Alignment.topLeft,
-                                            margin: EdgeInsets.only(top: 1.h),
-                                            child: Text(
+                                        ],
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 0),
+                                          child: Row(children: [
+                                            Text(
+                                              "${LocaleKeys.Qty.tr()} ${Orderdetailsdata!.data![index].qty.toString()}",
+                                              style: TextStyle(
+                                                fontSize: 11.sp,
+                                                fontFamily: 'Poppins_medium',
+                                              ),
+                                            ),
+                                            Spacer(),
+                                            SizedBox(
+                                              child: Text(
                                                 currency_position == "1"
-                                                    ? '$currency${numberFormat.format(double.parse(Orderdetailsdata!.data![index].itemPrice))}'
-                                                    : "${numberFormat.format(double.parse(Orderdetailsdata!.data![index].itemPrice))}$currency",
+                                                    ? "$currency${(numberFormat.format((double.parse(Orderdetailsdata!.data![index].itemPrice!.toString()) + double.parse(Orderdetailsdata!.data![index].addonsTotalPrice!.toString()))))}"
+                                                    : "${(numberFormat.format((double.parse(Orderdetailsdata!.data![index].itemPrice!.toString()) + double.parse(Orderdetailsdata!.data![index].addonsTotalPrice!.toString()))))}$currency",
                                                 style: TextStyle(
                                                   fontSize: 12.sp,
                                                   fontFamily:
                                                       'Poppins_semibold',
-                                                )),
-                                          ),
-                                        ],
-                                      )
-                                    ]),
-                              );
-                            }),
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            );
+                          },
+                        ),
                       ),
                       Container(
                         margin:
@@ -505,7 +605,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  LocaleKeys.Item_Total.tr(),
+                                  LocaleKeys.SubTotal.tr(),
                                   style: TextStyle(
                                       fontFamily: 'Poppins', fontSize: 10.sp),
                                 ),
@@ -587,7 +687,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                             ),
                             Container(
                               height: 0.8.sp,
-                              color: color.greybutton,
+                              color: color.grey,
                             ),
                             SizedBox(
                               height: 1.h,
@@ -599,7 +699,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                   LocaleKeys.Total_pay.tr(),
                                   style: TextStyle(
                                       fontFamily: 'Poppins_semibold',
-                                      color: color.greenbutton,
+                                      color: color.green,
                                       fontSize: 12.5.sp),
                                 ),
                                 Text(
@@ -608,13 +708,13 @@ class _OrderdetailsState extends State<Orderdetails> {
                                       : '${numberFormat.format(double.parse(Orderdetailsdata!.summery!.grandTotal.toString()))}$currency',
                                   style: TextStyle(
                                       fontFamily: 'Poppins_semiBold',
-                                      color: color.greenbutton,
+                                      color: color.green,
                                       fontSize: 12.5.sp),
                                 ),
                               ],
                             ),
                             SizedBox(
-                              height: 4.h,
+                              height: 3.h,
                             ),
                             if ((Orderdetailsdata?.summery!.orderType == '1') &&
                                 (Orderdetailsdata?.summery!.status == "4" ||
@@ -697,7 +797,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                 ],
                               ),
                               SizedBox(
-                                height: 2.h,
+                                height: 1.h,
                               ),
                               Row(
                                 children: [
@@ -707,7 +807,7 @@ class _OrderdetailsState extends State<Orderdetails> {
                                     child: Image.asset(
                                       'Assets/Icons/address.png',
                                       height: 2.5.h,
-                                      color: color.redbutton,
+                                      color: color.primarycolor,
                                     ),
                                   ),
                                   Container(
@@ -726,16 +826,45 @@ class _OrderdetailsState extends State<Orderdetails> {
                                 ],
                               ),
                             ],
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  LocaleKeys.Special_instructions.tr(),
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins_semibold',
+                                      fontSize: 12.5.sp),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  Orderdetailsdata!.summery!.orderNotes == "" ||
+                                          Orderdetailsdata!
+                                                  .summery!.orderNotes ==
+                                              null
+                                      ? "-"
+                                      : Orderdetailsdata!.summery!.orderNotes,
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins_medium',
+                                      fontSize: 10.sp),
+                                ),
+                              ],
+                            ),
                             if (Orderdetailsdata!.summery!.status == "1") ...[
                               SizedBox(
-                                height: 8.5.h,
+                                height: 8.h,
                               )
                             ]
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 2.h,
                       ),
                     ],
                   ),
@@ -761,7 +890,10 @@ class _OrderdetailsState extends State<Orderdetails> {
                                       .tr(),
                                 ),
                                 actions: <Widget>[
-                                  TextButton(
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: color.primarycolor,
+                                    ),
                                     child: Text(
                                       LocaleKeys.Yes.tr(),
                                       style: TextStyle(
@@ -774,7 +906,10 @@ class _OrderdetailsState extends State<Orderdetails> {
                                       cancelorder();
                                     },
                                   ),
-                                  TextButton(
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: color.primarycolor,
+                                    ),
                                     child: Text(
                                       LocaleKeys.No.tr(),
                                       style: TextStyle(
@@ -792,19 +927,26 @@ class _OrderdetailsState extends State<Orderdetails> {
                       },
                       child: Container(
                         margin: EdgeInsets.only(
-                            top: 1.h, left: 3.w, right: 3.w, bottom: 1.h),
+                          top: 1.h,
+                          left: 3.w,
+                          right: 3.w,
+                          bottom: 1.h,
+                        ),
                         height: 6.5.h,
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: color.redbutton),
+                            border: Border.all(
+                              color: color.red,
+                            ),
                             borderRadius: BorderRadius.circular(6.5)),
                         child: Center(
                           child: Text(
                             LocaleKeys.Cancel_Order.tr(),
                             style: TextStyle(
-                                fontFamily: 'Poppins_semibold',
-                                fontSize: 11.5.sp,
-                                color: color.redbutton),
+                              fontFamily: 'Poppins_semibold',
+                              fontSize: 11.5.sp,
+                              color: color.red,
+                            ),
                           ),
                         ),
                       ),

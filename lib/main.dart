@@ -8,13 +8,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
-import 'package:overlay_support/overlay_support.dart';
 import 'package:singlerestaurant/Theme/MyThemes.dart';
 import 'package:singlerestaurant/Theme/ThemeModel.dart';
 import 'package:singlerestaurant/common%20class/prefs_name.dart';
-import 'package:singlerestaurant/Widgets/splashscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:singlerestaurant/splashscreen.dart';
 import 'package:singlerestaurant/translation/codegen_loader.g.dart';
 import 'package:sizer/sizer.dart';
 

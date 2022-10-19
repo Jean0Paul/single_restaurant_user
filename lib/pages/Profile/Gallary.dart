@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, file_names, avoid_print, must_be_immutable, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, file_names,   must_be_immutable, use_key_in_widget_constructors
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
@@ -29,7 +29,7 @@ class _GallaryState extends State<Gallary> {
       Gallerydata = gallerymodel.fromJson(finalist);
       return Gallerydata;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -77,13 +77,13 @@ class _GallaryState extends State<Gallary> {
                             },
                             child: Image.network(
                               Gallerydata!.data![index].imageUrl.toString(),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ));
                       },
                     );
                   }
                   return Center(
-                    child: CircularProgressIndicator(color: color.redbutton),
+                    child: CircularProgressIndicator(color: color.primarycolor),
                   );
                 })));
   }

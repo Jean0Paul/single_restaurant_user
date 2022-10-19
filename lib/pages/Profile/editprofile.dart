@@ -1,11 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, use_build_context_synchronously, avoid_print, unused_element
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, use_build_context_synchronously,   unused_element
 
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:singlerestaurant/Model/Loginmodel.dart';
+import 'package:singlerestaurant/Model/authentication/Loginmodel.dart';
 import 'package:singlerestaurant/Widgets/loader.dart';
 import 'package:singlerestaurant/common%20class/height.dart';
 import 'package:singlerestaurant/common%20class/prefs_name.dart';
@@ -166,7 +166,6 @@ class _EditprofileState extends State<Editprofile> {
                 filename: imagepath.split("/").last)
             : userprofileURl,
       });
-      print(formdata.fields);
       loader.showLoading();
 
       var response = await Dio()
@@ -197,7 +196,7 @@ class _EditprofileState extends State<Editprofile> {
         Navigator.of(context).pop();
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -359,8 +358,12 @@ class _EditprofileState extends State<Editprofile> {
           Spacer(),
           InkWell(
             onTap: () {
-              print("aa");
-              if (_formkey.currentState!.validate()) {
+              if (DefaultApi.environment == "sendbox") {
+                loader.showErroDialog(
+                  description: LocaleKeys
+                      .This_operation_was_not_performed_due_to_demo_mode.tr(),
+                );
+              } else if (_formkey.currentState!.validate()) {
                 EditprofileAPI();
               }
             },
@@ -369,7 +372,8 @@ class _EditprofileState extends State<Editprofile> {
               margin:
                   EdgeInsets.only(left: 4.w, right: 4.w, top: 2.h, bottom: 1.h),
               width: double.infinity,
-              color: color.blackbutton,
+              decoration: BoxDecoration(
+                  color: color.black, borderRadius: BorderRadius.circular(7)),
               child: Center(
                 child: Text(
                   LocaleKeys.Save.tr(),

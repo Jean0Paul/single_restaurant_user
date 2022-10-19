@@ -101,7 +101,7 @@ class _SelectpromocodeState extends State<Selectpromocode> {
                                         style: TextStyle(
                                             fontSize: 10.5.sp,
                                             fontFamily: 'Poppins_semibold',
-                                            color: color.greenbutton)),
+                                            color: color.green)),
                                   )
                                 ],
                               ),
@@ -113,7 +113,7 @@ class _SelectpromocodeState extends State<Selectpromocode> {
                                       style: TextStyle(
                                           fontSize: 12.sp,
                                           fontFamily: 'Poppins_semibold',
-                                          color: color.greenbutton)),
+                                          color: color.green)),
                                 ],
                               ),
                               SizedBox(height: 2.h),
@@ -134,7 +134,7 @@ class _SelectpromocodeState extends State<Selectpromocode> {
                 }
                 return Center(
                   child: CircularProgressIndicator(
-                    color: color.redbutton,
+                    color: color.primarycolor,
                   ),
                 );
               },

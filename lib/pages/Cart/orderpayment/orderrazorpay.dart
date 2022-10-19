@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, camel_case_types, non_constant_identifier_names, use_key_in_widget_constructors, avoid_print, prefer_const_constructors, use_build_context_synchronously
+// ignore_for_file: must_be_immutable, camel_case_types, non_constant_identifier_names, use_key_in_widget_constructors,   prefer_const_constructors, use_build_context_synchronously
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -69,11 +69,6 @@ class _orderrazorpayState extends State<orderrazorpay> {
   @override
   void initState() {
     super.initState();
-    print(
-      (double.parse(widget.ordertotal!) * 100).toInt(),
-    );
-    print(widget.ordertotal);
-    print(widget.publickey);
     razorpay = Razorpay();
     razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -88,8 +83,6 @@ class _orderrazorpayState extends State<orderrazorpay> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    print("succes");
-    print("maaaa${response.paymentId}");
     payment_id = response.paymentId;
     pay_message = "sucscess"; // Do
 
@@ -97,15 +90,11 @@ class _orderrazorpayState extends State<orderrazorpay> {
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    print(response.code);
-    print(response.message);
-    print('Error Response: $response');
     Get.back();
     loader.showErroDialog(description: "payment failed");
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    print('External SDK Response: $response');
     loader.showErroDialog(description: response.toString());
   }
 
@@ -123,11 +112,10 @@ class _orderrazorpayState extends State<orderrazorpay> {
         'email': prefs.getString(UD_user_email),
       }
     };
-    print("option $options");
     try {
       razorpay.open(options);
     } catch (e) {
-      print("error $e");
+      rethrow;
     }
   }
 
@@ -156,7 +144,6 @@ class _orderrazorpayState extends State<orderrazorpay> {
       "card_exp_year": "",
       "card_cvc": ""
     };
-    print(map);
     var response =
         await Dio().post(DefaultApi.appUrl + PostAPI.Order, data: map);
     orderplaceMODEL placedorederdata = orderplaceMODEL.fromJson(response.data);

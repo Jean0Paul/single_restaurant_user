@@ -1,96 +1,92 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: constant_identifier_names
-
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const hello = 'hello';
   static const english = 'english';
   static const arabic = 'arabic';
   static const welcome = 'Bienvenue';
+  static const welcomes_you = 'vous souhaite la bienvenue';
   static const comment1 = 'comment1';
+  static const This_operation_was_not_performed_due_to_demo_mode = 'This_operation_was_not_performed_due_to_demo_mode';
+  static const Single_Restaurant = 'Restaurant unique';
+  static const APP_pacakgename = 'APP_pacakgename';
+  static const To = 'To';
   static const Login = 'Login';
-  static const Signin_to_your_account = 'Signin_to_your_account';
+  static const Signin_to_your_account = 'Connectez-vous à votre compte';
   static const Email = 'Email';
-  static const Password = 'Password';
-  static const Forgot_Password = 'Forgot_Password';
+  static const Password = 'Mot de passe';
+  static const Forgot_Password = 'Mot de passe oublié';
   static const OR = 'OR';
-  static const Dont_have_an_account = 'Dont_have_an_account';
-  static const Signup = 'Signup';
-  static const Skip_continue = 'Skip_continue';
-  static const Please_enter_valid_email_address =
-      'Please_enter_valid_email_address';
-  static const Please_enter_all_details = 'Please_enter_all_details';
+  static const Dont_have_an_account = 'Ne pas avoir de compte';
+  static const Signup = 'S inscrire';
+  static const Skip_continue = 'Ignorer continuer';
+  static const Please_enter_valid_email_address = 'Veuillez enter valid email address';
+  static const Please_enter_all_details = 'Veuillez entrer tous les détails';
   static const comment2 = 'comment2';
-  static const Create_an_account_so_you_can_order_your_favourite_product_faster =
-      'Create_an_account_so_you_can_order_your_favourite_product_faster';
-  static const Full_name = 'Full_name';
+  static const Create_an_account_so_you_can_order_your_favourite_product_faster = 'Create_an_account_so_you_can_order_your_favourite_product_faster';
+  static const Full_name = 'Nom et prénom';
   static const Mobile = 'Mobile';
-  static const Referral_code_Optional = 'Referral_code_Optional';
-  static const I_accept_the_terms_conditions = 'I_accept_the_terms_conditions';
+  static const Referral_code_Optional = 'Referral_code_Facultatif';
+  static const I_accept_the_terms_conditions = 'J accepte lestermes conditions';
   static const Already_have_an_account = 'Already_have_an_account';
-  static const Please_select_terms_conditions =
-      'Please_select_terms_conditions';
+  static const Please_select_terms_conditions = 'Please_select_terms_conditions';
   static const comment3 = 'comment3';
   static const TeamsConditions = 'TeamsConditions';
   static const comment4 = 'comment4';
-  static const Forgot_Password_ = 'Forgot_Password_';
-  static const Enter_your_registered_email_address_below_We_will_send_new_password_in_your_email =
-      'Enter_your_registered_email_address_below_We_will_send_new_password_in_your_email';
+  static const Forgot_Password_ = 'Mot de passe oublié';
+  static const Enter_your_registered_email_address_below_We_will_send_new_password_in_your_email = 'Enter_your_registered_email_address_below_We_will_send_new_password_in_your_email';
   static const Submit = 'Submit';
   static const comment5 = 'comment5';
   static const OTP_Verification = 'OTP_Verification';
-  static const Check_your_email_for_OTP_Enter_OTP_below_and_proceed_further =
-      'Check_your_email_for_OTP_Enter_OTP_below_and_proceed_further';
-  static const Enter_OTP_here = 'Enter_OTP_here';
-  static const Verify_Proceed = 'Verify_Proceed';
-  static const Dont_receive_an_OTP = 'Dont_receive_an_OTP';
-  static const Resend_OTP = 'Resend_OTP';
+  static const Check_your_email_for_OTP_Enter_OTP_below_and_proceed_further = 'Check_your_email_for_OTP_Enter_OTP_below_and_proceed_further';
+  static const Enter_OTP_here = 'Entrez_OTP_ici';
+  static const Verify_Proceed = 'Vérifier_Procéder';
+  static const Dont_receive_an_OTP = 'Ne pas_recevoir_un_OTP';
+  static const Resend_OTP = 'Renvoyer_OTP';
   static const comment6 = 'comment6';
-  static const Restaurant_User = 'Restaurant_User';
-  static const Welcome = 'Welcome';
+  static const Restaurant_User = 'Restaurant_Utilisateur';
+  static const Welcome = 'Bienvenue';
   static const Search_Here = 'Cherche ici';
-  static const Categories = 'Catégorie';
+  static const Categories = 'Service bar';
   static const Categories1 = 'Terrasse';
   static const Trending = 'Tendance';
   static const Todays_special = 'Todays_special';
   static const Recommended = 'Conseillé';
-  static const Testimonials = 'Testimonials';
+  static const Testimonials = 'Témoignages';
   static const ADD = 'Ajouter';
-  static const The_item_has_multtiple_customizations_added_Go_to_cart__to_remove_item =
-      'The_item_has_multtiple_customizations_added_Go_to_cart__to_remove_item';
+  static const The_item_has_multtiple_customizations_added_Go_to_cart__to_remove_item = 'The_item_has_multtiple_customizations_added_Go_to_cart__to_remove_item';
   static const GO_TO_CART = 'ALLER AU PANIER';
   static const CANCEL = 'CANCEL';
   static const comment7 = 'comment7';
   static const additional_tax = 'additional_tax';
-  static const Inclusive_of_all_taxes = 'Inclusive_of_all_taxes';
+  static const Inclusive_of_all_taxes = 'Toutes taxes inclusives';
   static const Description = 'Description';
   static const Add_ons = 'Add_ons';
   static const Related_roducts = 'Related_roducts';
   static const Add_to_cart = 'Ajouter au panier';
-  static const Viewcart = 'Afficher le panier';
+  static const Viewcart = 'Afficher panier';
   static const comment8 = 'comment8';
   static const Filter_Options = 'Filter_Options';
   static const Veg = 'Veg';
   static const Nonveg = 'Nonveg';
-  static const Both = 'Both';
+  static const Both = 'Tous les deux';
   static const comment9 = 'comment9';
-  static const Search = 'Search';
-  static const No_data_found = 'No_data_found';
+  static const Search = 'Chercher';
+  static const No_data_found = 'Aucune donnée disponible';
   static const comment10 = 'comment10';
-  static const Favorite_list = 'Favorite_list';
+  static const Favorite_list = 'Liste des favoris';
   static const comment11 = 'comment11';
-  static const Mycart = 'Mycart';
+  static const selected_Add_ons = 'selected_Add_ons';
+  static const Mycart = 'Mon panier';
   static const Continue = 'Continue';
   static const Select_Option = 'Select_Option';
   static const DELIVERY = 'DELIVERY';
-  static const Checkout = 'Checkout';
-  static const Takeaway = 'Takeaway';
-  static const Cancel = 'Cancel';
-  static const Please_select_option = 'Please_select_option';
-  static const Youve_reached_the_maximum_units_allowedfor_the_purchase_of_this_item =
-      'Youve_reached_the_maximum_units_allowedfor_the_purchase_of_this_item';
-  static const Restaurant_is_closed_Try_after_some_time =
-      'Restaurant_is_closed_Try_after_some_time';
+  static const Checkout = 'Vérifier';
+  static const Takeaway = 'Emporter';
+  static const Cancel = 'Annuler';
+  static const Please_select_option = 'Veuillez_select_option';
+  static const Youve_reached_the_maximum_units_allowedfor_the_purchase_of_this_item = 'Vous avez atteint le maximum d unités autorisé pour l achat de cet article';
+  static const Restaurant_is_closed_Try_after_some_time = 'Le restaurant est fermé Essayez après un certain temps';
   static const comment12 = 'comment12';
   static const Order_Summary = 'Order_Summary';
   static const Product_Summary = 'Product_Summary';
@@ -101,7 +97,7 @@ abstract class LocaleKeys {
   static const Apply = 'Apply';
   static const Remove = 'Remove';
   static const Bill_Details = 'Bill_Details';
-  static const Item_Total = 'Item_Total';
+  static const SubTotal = 'SubTotal';
   static const Tax = 'Tax';
   static const Delivery_Fee = 'Delivery_Fee';
   static const Discount_Offer = 'Discount_Offer';
@@ -109,30 +105,26 @@ abstract class LocaleKeys {
   static const Deliveryaddress = 'Deliveryaddress';
   static const SELECT = 'SELECT';
   static const Set_your_delivery_address = 'Set_your_delivery_address';
-  static const Please_select_delivery_address =
-      'Please_select_delivery_address';
+  static const Please_select_delivery_address = 'Please_select_delivery_address';
   static const Special_instructions = 'Special_instructions';
   static const Write_order_instructions = 'Write_order_instructions';
   static const Process_to_pay = 'Process_to_pay';
-  static const You_are_not_eligeble_for_this_offer =
-      'You_are_not_eligeble_for_this_offer';
+  static const You_are_not_eligeble_for_this_offer = 'You_are_not_eligeble_for_this_offer';
   static const Order_amount_must_be_between = 'Order_amount_must_be_between';
   static const comment13 = 'comment13';
   static const Payment_Option = 'Payment_Option';
   static const Place_Order = 'Place_Order';
   static const Please_select_payment_option = 'Please_select_payment_option';
-  static const You_dont_have_sufficient_wallet_amonut_Please_select_another_payment_option =
-      'You_dont_have_sufficient_wallet_amonut_Please_select_another_payment_option';
+  static const You_dont_have_sufficient_wallet_amonut_Please_select_another_payment_option = 'You_dont_have_sufficient_wallet_amonut_Please_select_another_payment_option';
   static const comment14 = 'comment14';
   static const Success = 'Success';
-  static const Your_order_has_been_placed_successfully_will_be_process_by_system =
-      'Your_order_has_been_placed_successfully_will_be_process_by_system';
+  static const Your_order_has_been_placed_successfully_will_be_process_by_system = 'Your_order_has_been_placed_successfully_will_be_process_by_system';
   static const Check_Order_Details = 'Check_Order_Details';
   static const comment15 = 'comment15';
   static const My_Orders = 'My_Orders';
-  static const Processing = 'Processing';
-  static const Completed = 'Completed';
-  static const Cancelled = 'Cancelled';
+  static const Processing = 'Traitement';
+  static const Completed = 'Complété';
+  static const Cancelled = 'Annulé';
   static const Cash = 'Cash';
   static const Wallet = 'Wallet';
   static const RazorPay = 'RazorPay';
@@ -151,31 +143,30 @@ abstract class LocaleKeys {
   static const Order_Details = 'Order_Details';
   static const Cancel_Order = 'Cancel_Order';
   static const Driver_information = 'Driver_information';
-  static const Are_you_sure_to_cancel_this_order_If_yes_then_order_amount_Online_payment_OR_Wallet_payment_will_be_transferred_to_your_wallet =
-      'Are_you_sure_to_cancel_this_order_If_yes_then_order_amount_Online_payment_OR_Wallet_payment_will_be_transferred_to_your_wallet';
+  static const Are_you_sure_to_cancel_this_order_If_yes_then_order_amount_Online_payment_OR_Wallet_payment_will_be_transferred_to_your_wallet = 'Are_you_sure_to_cancel_this_order_If_yes_then_order_amount_Online_payment_OR_Wallet_payment_will_be_transferred_to_your_wallet';
   static const comment17 = 'comment17';
-  static const Myprofile = 'Myprofile';
-  static const Settings = 'Settings';
-  static const Change_Password = 'Change_Password';
-  static const My_Addresses = 'My_Addresses';
-  static const My_Wallet = 'My_Wallet';
+  static const Myprofile = 'Mon profil';
+  static const Settings = 'Réglages';
+  static const Change_Password = 'Changer le mot de passe';
+  static const My_Addresses = 'Mon adresses';
+  static const My_Wallet = 'Mes Ventes';
   static const Refer_Earn = 'Refer_Earn';
-  static const Notification_Settings = 'Notification_Settings';
-  static const Change_Layout = 'Change_Layout';
-  static const Help_Contact_Us = 'Help_Contact_Us';
-  static const Privacy_Policy = 'Privacy_Policy';
-  static const About_Us = 'About_Us';
+  static const Notification_Settings = 'Notification';
+  static const Change_Layout = 'Changer la disposition';
+  static const Help_Contact_Us = 'Supports technique';
+  static const Privacy_Policy = 'Politique de confidentialité';
+  static const About_Us = 'À propos de nous';
   static const FAQs = 'FAQs';
-  static const Gallery = 'Gallery';
-  static const Book_A_Table = 'Book_A_Table';
-  static const Blogs = 'Blogs';
-  static const Our_Team = 'Our_Team';
-  static const Logout = 'Logout';
+  static const Gallery = 'Statistiques';
+  static const Book_A_Table = 'Réservation table client';
+  static const Blogs = 'Rapports';
+  static const Our_Team = 'Mes collègues';
+  static const Logout = 'Se déconnecter';
   static const Select_application_layout = 'Select_application_layout';
   static const LTR = 'LTR';
   static const RTL = 'RTL';
-  static const Are_you_sure_to_logout_from_this_app =
-      'Are_you_sure_to_logout_from_this_app';
+  static const Are_you_sure_to_logout_from_this_app = 'Are_you_sure_to_logout_from_this_app';
+  static const Are_you_sure_to_exit_from_this_app = 'Are_you_sure_to_exit_from_this_app';
   static const commment18 = 'commment18';
   static const Edit_Profile = 'Edit_Profile';
   static const Save = 'Save';
@@ -187,15 +178,13 @@ abstract class LocaleKeys {
   static const New_password = 'New_password';
   static const Confirm_password = 'Confirm_password';
   static const Reset = 'Reset';
-  static const New_password_Confirm_password_must_be_same =
-      'New_password_Confirm_password_must_be_same';
+  static const New_password_Confirm_password_must_be_same = 'New_password_Confirm_password_must_be_same';
   static const comment20 = 'comment20';
   static const Home = 'Home';
   static const Office = 'Office';
   static const Other = 'Other';
   static const Add_New_Address = 'Add_New_Address';
-  static const Are_you_sure_to_delete_this_address =
-      'Are_you_sure_to_delete_this_address';
+  static const Are_you_sure_to_delete_this_address = 'Are_you_sure_to_delete_this_address';
   static const Yes = 'Yes';
   static const No = 'No';
   static const comment21 = 'comment21';
@@ -206,8 +195,7 @@ abstract class LocaleKeys {
   static const Confirmlocation = 'Confirmlocation';
   static const comment22 = 'comment22';
   static const Confirm_Address = 'Confirm_Address';
-  static const A_detailed_address_will_help_our_delivery_parnter_reach_your_doorstep_easily =
-      'A_detailed_address_will_help_our_delivery_parnter_reach_your_doorstep_easily';
+  static const A_detailed_address_will_help_our_delivery_parnter_reach_your_doorstep_easily = 'A_detailed_address_will_help_our_delivery_parnter_reach_your_doorstep_easily';
   static const Complete_address = 'Complete_address';
   static const House_flate_Floorno = 'House_flate_Floorno';
   static const Apartment_Road_Area_Optional = 'Apartment_Road_Area_Optional';
@@ -222,8 +210,7 @@ abstract class LocaleKeys {
   static const Secure_Payments = 'Secure_Payments';
   static const No_Document_Upload_Required = 'No_Document_Upload_Required';
   static const Total_Balance = 'Total_Balance';
-  static const WALLET_MONEY_Can_only_be_used_for_your_orders =
-      'WALLET_MONEY_Can_only_be_used_for_your_orders';
+  static const WALLET_MONEY_Can_only_be_used_for_your_orders = 'WALLET_MONEY_Can_only_be_used_for_your_orders';
   static const ADD_MONEY = 'ADD_MONEY';
   static const comment24 = 'comment24';
   static const Add_Money = 'Add_Money';
@@ -231,10 +218,8 @@ abstract class LocaleKeys {
   static const Procaddmoney = 'Procaddmoney';
   static const Total_Balance_ = 'Total_Balance_';
   static const NOTES = 'NOTES';
-  static const Wallet_Money_cannot_be_transferred_to_your_bank_account =
-      'Wallet_Money_cannot_be_transferred_to_your_bank_account';
-  static const You_can_use_Wallet_Money_only_on_orders =
-      'You_can_use_Wallet_Money_only_on_orders';
+  static const Wallet_Money_cannot_be_transferred_to_your_bank_account = 'Wallet_Money_cannot_be_transferred_to_your_bank_account';
+  static const You_can_use_Wallet_Money_only_on_orders = 'You_can_use_Wallet_Money_only_on_orders';
   static const Please_enter_amount = 'Please_enter_amount';
   static const comment25 = 'comment25';
   static const Transaction_History = 'Transaction_History';
@@ -250,8 +235,7 @@ abstract class LocaleKeys {
   static const Share = 'Share';
   static const refer_code1 = 'refer_code1';
   static const refer_code2 = 'refer_code2';
-  static const bonus_amount_under_our_referral_program =
-      'bonus_amount_under_our_referral_program';
+  static const bonus_amount_under_our_referral_program = 'bonus_amount_under_our_referral_program';
   static const Use_this_code = 'Use_this_code';
   static const to_register_with = 'to_register_with';
   static const get_bonus_amount = 'get_bonus_amount';
@@ -259,8 +243,7 @@ abstract class LocaleKeys {
   static const Push_Notifications = 'Push_Notifications';
   static const keepthisonnoti = 'keepthisonnoti';
   static const Emails = 'Emails';
-  static const Keep_this_on_to_receive_emails_from_system =
-      'Keep_this_on_to_receive_emails_from_system';
+  static const Keep_this_on_to_receive_emails_from_system = 'Keep_this_on_to_receive_emails_from_system';
   static const comment29 = 'comment29';
   static const Contact_Us = 'Contact_Us';
   static const Inquiry_form = 'Inquiry_form';
@@ -273,8 +256,7 @@ abstract class LocaleKeys {
   static const Time = 'Time';
   static const Reservation_Type = 'Reservation_Type';
   static const Special_Request_Optional = 'Special_Request_Optional';
-  static const Your_booking_request_is_registered_successfully =
-      'Your_booking_request_is_registered_successfully';
+  static const Your_booking_request_is_registered_successfully = 'Your_booking_request_is_registered_successfully';
   static const comment31 = 'comment31';
   static const Posted_by = 'Posted_by';
   static const comment32 = 'comment32';
@@ -289,9 +271,9 @@ abstract class LocaleKeys {
   static const YYYY = 'YYYY';
   static const CVV = 'CVV';
   static const comment34 = 'comment34';
-  static const Gravityinfotech = 'Sur My Excellentia';
+  static const Gravityinfotech = 'Gravityinfotech';
   static const Infotechgravitygmail = 'Infotechgravitygmail';
-  static const Darkmode = 'Darkmode';
+  static const Darkmode = 'Mode sombre';
   static const Name = 'Name';
   static const Phoneno = 'Phoneno';
   static const Myadresses = 'Myadresses';
@@ -313,4 +295,6 @@ abstract class LocaleKeys {
   static const Faqs = 'Faqs';
   static const Reservationtype = 'Reservationtype';
   static const Specialrequest = 'Specialrequest';
+  static const ok = 'ok';
+
 }

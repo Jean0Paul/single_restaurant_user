@@ -1,8 +1,8 @@
-// ignore_for_file: non_constant_identifier_names, file_names, duplicate_ignore, avoid_print, prefer_const_constructors, prefer_final_fields
+// ignore_for_file: non_constant_identifier_names, file_names, duplicate_ignore,   prefer_const_constructors, prefer_final_fields
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:singlerestaurant/Model/forgotpasswordmodel.dart';
+import 'package:singlerestaurant/Model/authentication/forgotpasswordmodel.dart';
 import 'package:singlerestaurant/Widgets/loader.dart';
 import 'package:singlerestaurant/common%20class/color.dart';
 import 'package:singlerestaurant/config/API/API.dart';
@@ -31,7 +31,6 @@ class _ForgotpassState extends State<Forgotpass> {
       };
       var response = await Dio()
           .post(DefaultApi.appUrl + PostAPI.forgotPassword, data: map);
-      print(map);
       var finallist = await response.data;
       Forgotpassdata = Forgotpasswordmodel.fromJson(finallist);
       loader.hideLoading();
@@ -42,8 +41,22 @@ class _ForgotpassState extends State<Forgotpass> {
         loader.showErroDialog(description: Forgotpassdata!.message);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
+  }
+
+  data() async {
+    if (DefaultApi.environment == "sendbox") {
+      setState(() {
+        _Email.value = TextEditingValue(text: "user@gmail.com");
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    data();
   }
 
   @override
@@ -123,11 +136,18 @@ class _ForgotpassState extends State<Forgotpass> {
                   child: TextButton(
                     onPressed: () async {
                       if (_formkey.currentState!.validate()) {
-                        _Forgotpassword();
+                        if (DefaultApi.environment == "sendbox") {
+                          loader.showErroDialog(
+                              description: LocaleKeys
+                                      .This_operation_was_not_performed_due_to_demo_mode
+                                  .tr());
+                        } else {
+                          _Forgotpassword();
+                        }
                       }
                     },
-                    style:
-                        TextButton.styleFrom(backgroundColor: color.redbutton),
+                    style: TextButton.styleFrom(
+                        backgroundColor: color.primarycolor),
                     child: Text(
                       LocaleKeys.Submit.tr(),
                       style: const TextStyle(

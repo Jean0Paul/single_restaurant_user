@@ -1,14 +1,15 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, use_key_in_widget_constructors, unrelated_type_equality_checks, camel_case_types, must_be_immutable, file_names, avoid_print, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, use_key_in_widget_constructors, unrelated_type_equality_checks, camel_case_types, must_be_immutable, file_names,   use_build_context_synchronously
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:singlerestaurant/Model/cartpage/isopenmodel.dart';
 import 'package:singlerestaurant/Model/cartpage/ordersummaryModel.dart';
-import 'package:singlerestaurant/Model/checkpromocodeModel.dart';
+import 'package:singlerestaurant/Model/cartpage/checkpromocodeModel.dart';
 import 'package:singlerestaurant/Model/settings%20model/getaddressmodel.dart';
 import 'package:singlerestaurant/Theme/ThemeModel.dart';
 import 'package:singlerestaurant/Widgets/loader.dart';
@@ -19,6 +20,7 @@ import 'package:provider/provider.dart';
 import 'package:singlerestaurant/common%20class/icons.dart';
 import 'package:singlerestaurant/common%20class/prefs_name.dart';
 import 'package:singlerestaurant/config/API/API.dart';
+import 'package:singlerestaurant/pages/Cart/addonslist.dart';
 import 'package:singlerestaurant/pages/Home/Homepage.dart';
 import 'package:singlerestaurant/translation/locale_keys.g.dart';
 import 'package:sizer/sizer.dart';
@@ -44,6 +46,8 @@ class _OrdersummaryState extends State<Ordersummary> {
   String? userid;
   String? currency;
   String? currency_position;
+  String? minorder_amount;
+  String? maxorder_amount;
   String ordersubtotal = "0";
   String deliveryfees = "0";
   String discountoffer = "0.00";
@@ -66,12 +70,13 @@ class _OrdersummaryState extends State<Ordersummary> {
       reslat = prefs.getString(restaurantlat);
       reslang = prefs.getString(restaurantlang);
       deliverycharge = prefs.getString(deliverycharges)!;
-      print(deliverycharge);
+      minorder_amount = prefs.getString(min_order_amount)!;
+      maxorder_amount = prefs.getString(max_order_amount)!;
 
       var map = {
         "user_id": userid,
       };
-      // print("summary $map");
+
       var response =
           await Dio().post(DefaultApi.appUrl + PostAPI.Summary, data: map);
       summarydata = order_summary_model.fromJson(response.data);
@@ -84,7 +89,7 @@ class _OrdersummaryState extends State<Ordersummary> {
       isfirstcome = false;
       return summarydata;
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -95,17 +100,11 @@ class _OrdersummaryState extends State<Ordersummary> {
         "user_id": userid,
         "offer_code": promocodedata,
       };
-      print(map);
       var response = await Dio()
           .post(DefaultApi.appUrl + PostAPI.Checkpromocode, data: map);
-      print(response);
       applypromocode = checkpromocodemodel.fromJson(response.data);
       loader.hideLoading();
       if (applypromocode!.status == 1) {
-        print(ordersubtotal);
-        print(applypromocode!.data!.offerAmount);
-        print(applypromocode!.data!.minAmount!);
-
         if ((double.parse(ordersubtotal)) <=
             (double.parse(applypromocode!.data!.minAmount!))) {
           loader.showErroDialog(
@@ -123,7 +122,6 @@ class _OrdersummaryState extends State<Ordersummary> {
                           double.parse(applypromocode!.data!.offerAmount!) /
                           100))
                   .toString();
-              print("as $ordertotal");
             });
           } else {
             setState(() {
@@ -133,14 +131,12 @@ class _OrdersummaryState extends State<Ordersummary> {
                   .toString();
             });
           }
-
-          print("$discountoffer , $ordertotal");
         }
       } else {
         loader.showErroDialog(description: applypromocode!.message!);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -158,7 +154,7 @@ class _OrdersummaryState extends State<Ordersummary> {
           if (!snapshot.hasData) {
             return Scaffold(
               body: Center(
-                child: CircularProgressIndicator(color: color.redbutton),
+                child: CircularProgressIndicator(color: color.primarycolor),
               ),
             );
           }
@@ -201,7 +197,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                     ),
                     Container(
                         // color: Colors.black12,
-                        height: 14.5.h * summarydata!.data!.length,
+                        height: 15.6.h * summarydata!.data!.length,
                         margin: EdgeInsets.only(
                           top: 2.h,
                         ),
@@ -209,76 +205,182 @@ class _OrdersummaryState extends State<Ordersummary> {
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Container(
-                                padding: EdgeInsets.all(1.h),
-                                width: double.infinity,
-                                height: 13.5.h,
+                                height: 14.5.h,
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(6)),
-                                child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          if (summarydata!
-                                                  .data![index].itemType ==
-                                              "1") ...[
-                                            Image.asset(
-                                              Defaulticon.vegicon,
-                                              fit: BoxFit.fill,
-                                              height: 2.5.h,
-                                            )
-                                          ] else ...[
-                                            Image.asset(
-                                              Defaulticon.vegicon,
-                                              fit: BoxFit.fill,
-                                              height: 2.5.h,
-                                            )
-                                          ],
-                                          SizedBox(width: 1.w),
-                                          Expanded(
-                                            child: Text(
-                                              summarydata!
-                                                  .data![index].itemName,
-                                              overflow: TextOverflow.clip,
-                                              style: TextStyle(
-                                                  fontSize: 10.5.sp,
-                                                  fontFamily: 'Poppins'),
-                                            ),
-                                          )
-                                        ],
+                                    borderRadius: BorderRadius.circular(7),
+                                    border: Border.all(
+                                      color: Colors.grey,
+                                      width: 0.8.sp,
+                                    )),
+                                child: Row(children: [
+                                  SizedBox(
+                                    width: 28.w,
+                                    height: 15.5.h,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(7),
+                                      child: Image.network(
+                                        summarydata!.data![index].itemImage
+                                            .toString(),
+                                        fit: BoxFit.fill,
                                       ),
-                                      Row(
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        right: 2.w,
+                                        left: 2.w,
+                                        bottom: 0.8.h,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
-                                            alignment: Alignment.topLeft,
-                                            margin: EdgeInsets.only(top: 1.h),
-                                            child: Text(
-                                                '${LocaleKeys.Qty.tr()} ${summarydata!.data![index].qty}',
+                                          Expanded(
+                                            child: Row(
+                                              children: [
+                                                if (summarydata!.data![index]
+                                                        .itemType ==
+                                                    "1") ...[
+                                                  SizedBox(
+                                                    height: 2.h,
+                                                    // color: Colors.black,
+                                                    child: Image.asset(
+                                                      Defaulticon.vegicon,
+                                                    ),
+                                                  ),
+                                                ] else if (summarydata!
+                                                        .data![index]
+                                                        .itemType ==
+                                                    "2") ...[
+                                                  SizedBox(
+                                                    height: 2.h,
+                                                    // color: Colors.black,
+                                                    child: Image.asset(
+                                                      Defaulticon.nonvegicon,
+                                                    ),
+                                                  ),
+                                                ],
+                                                SizedBox(
+                                                  width: 2.w,
+                                                ),
+                                                SizedBox(
+                                                  width: 42.w,
+                                                  child: Text(
+                                                    summarydata!
+                                                        .data![index].itemName
+                                                        .toString(),
+                                                    maxLines: 1,
+                                                    softWrap: true,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                      fontSize: 11.sp,
+                                                      fontFamily:
+                                                          'Poppins_semibold',
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          if (summarydata!
+                                                  .data![index].variation ==
+                                              "") ...[
+                                            Expanded(
+                                              child: Text(
+                                                "-",
+                                                overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 9.sp,
-                                                  fontFamily:
-                                                      'Poppins_semibold',
-                                                )),
-                                          ),
-                                          Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
+                                                  // color: Colors.grey,
+                                                  fontFamily: 'Poppins',
+                                                ),
+                                              ),
+                                            ),
+                                          ] else ...[
+                                            Expanded(
+                                              child: Text(
+                                                summarydata!
+                                                    .data![index].variation
+                                                    .toString(),
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 9.sp,
+                                                  color: Colors.grey,
+                                                  fontFamily: 'Poppins',
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                          if (summarydata!
+                                                  .data![index].addonsName ==
+                                              "") ...[
+                                            Expanded(
+                                              child: Text(
+                                                "-",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 9.sp,
+                                                  fontFamily: 'Poppins',
+                                                ),
+                                              ),
+                                            ),
+                                          ] else ...[
+                                            Expanded(
+                                              child: InkWell(
+                                                onTap: () {
+                                                  modelsheet(
+                                                      context,
+                                                      summarydata!.data![index]
+                                                          .addonsName,
+                                                      summarydata!.data![index]
+                                                          .addonsPrice,
+                                                      currency,
+                                                      currency_position);
+                                                },
+                                                child: Text(
+                                                  "${LocaleKeys.Add_ons.tr()}>>",
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 9.sp,
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                          Row(children: [
+                                            Text(
+                                              "${LocaleKeys.Qty.tr()} ${summarydata!.data![index].qty.toString()}",
+                                              style: TextStyle(
+                                                fontSize: 11.sp,
+                                                fontFamily: 'Poppins_medium',
+                                              ),
+                                            ),
+                                            Spacer(),
+                                            SizedBox(
+                                              child: Text(
                                                 currency_position == "1"
-                                                    ? "$currency${numberFormat.format(double.parse(summarydata!.data![index].totalPrice.toString()))}"
-                                                    : "${numberFormat.format(double.parse(summarydata!.data![index].totalPrice.toString()))}$currency",
+                                                    ? "$currency${(numberFormat.format(double.parse(summarydata!.data![index].itemPrice!.toString()) + double.parse(summarydata!.data![index].addonsTotalPrice!.toString())))}"
+                                                    : "${(numberFormat.format(double.parse(summarydata!.data![index].itemPrice!.toString()) + double.parse(summarydata!.data![index].addonsTotalPrice!.toString())))}$currency",
                                                 style: TextStyle(
                                                   fontSize: 12.sp,
                                                   fontFamily:
                                                       'Poppins_semibold',
-                                                )),
-                                          ),
+                                                ),
+                                              ),
+                                            ),
+                                          ])
                                         ],
-                                      )
-                                    ]),
+                                      ),
+                                    ),
+                                  )
+                                ]),
                               );
                             },
                             separatorBuilder: (context, index) {
@@ -329,8 +431,6 @@ class _OrdersummaryState extends State<Ordersummary> {
                                           Promocode.value = TextEditingValue(
                                               text: promocodedata);
                                         });
-                                        print(promocodedata);
-                                        print("${Promocode.text} data");
                                         // widget.promocode
 
                                       }
@@ -339,7 +439,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                         style: TextStyle(
                                             fontSize: 10.sp,
                                             fontFamily: 'Poppins',
-                                            color: color.greenbutton)))
+                                            color: color.green)))
                               ],
                             ],
                           ),
@@ -369,32 +469,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                             : Colors.black,
                                         fontSize: 10.5.sp,
                                         fontFamily: "Poppins"),
-                                  )
-
-                                  // TextField(
-                                  //   readOnly: true,
-                                  //   cursorColor: Colors.black,
-                                  //   textAlignVertical:
-                                  //       TextAlignVertical.bottom,
-                                  //   controller: Promocode,
-                                  //   decoration: InputDecoration(
-                                  //       hintText:  LocaleKeys.haveapromocode,
-                                  //       hintStyle: TextStyle(
-                                  //           color: Colors.grey,
-                                  //           fontSize: 10.5.sp,
-                                  //           fontFamily: "Poppins"),
-                                  //       enabledBorder: OutlineInputBorder(
-                                  //         borderSide:
-                                  //             BorderSide(color: Colors.grey),
-                                  //       ),
-                                  //       focusedBorder: OutlineInputBorder(
-                                  //         borderSide:
-                                  //             BorderSide(color: Colors.grey),
-                                  //       )),
-                                  // ),
-
-                                  ),
-                              // Spacer(),
+                                  )),
                               if (discountoffer == "0.00") ...[
                                 SizedBox(
                                   height: 5.h,
@@ -410,7 +485,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                       }
                                     },
                                     style: TextButton.styleFrom(
-                                        backgroundColor: color.redbutton),
+                                        backgroundColor: color.primarycolor),
                                     child: Text(
                                       LocaleKeys.Apply.tr(),
                                       style: TextStyle(
@@ -443,7 +518,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                       // }
                                     },
                                     style: TextButton.styleFrom(
-                                        backgroundColor: color.redbutton),
+                                        backgroundColor: color.primarycolor),
                                     child: Text(
                                       LocaleKeys.Remove.tr(),
                                       style: TextStyle(
@@ -477,7 +552,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                LocaleKeys.Item_Total.tr(),
+                                LocaleKeys.SubTotal.tr(),
                                 style: TextStyle(
                                     fontFamily: 'Poppins', fontSize: 10.sp),
                               ),
@@ -591,7 +666,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                 LocaleKeys.Total_pay.tr(),
                                 style: TextStyle(
                                     fontFamily: 'Poppins_semibold',
-                                    color: color.greenbutton,
+                                    color: color.green,
                                     fontSize: 12.5.sp),
                               ),
                               Text(
@@ -600,7 +675,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                     : "${numberFormat.format(double.parse(ordertotal))}$currency",
                                 style: TextStyle(
                                     fontFamily: 'Poppins_semiBold',
-                                    color: color.greenbutton,
+                                    color: color.green,
                                     fontSize: 12.5.sp),
                               ),
                             ],
@@ -642,15 +717,22 @@ class _OrdersummaryState extends State<Ordersummary> {
                                                 double.parse(Addressdata!.lang),
                                               ) /
                                               1000;
-                                          print("as $distance");
-                                          deliveryfees = (distance *
-                                                  double.parse(deliverycharge!))
-                                              .toString();
+                                          if (DefaultApi.environment ==
+                                              "sendbox") {
+                                            deliveryfees =
+                                                double.parse(deliverycharge!)
+                                                    .toString();
+                                          } else {
+                                            deliveryfees = (distance *
+                                                    double.parse(
+                                                        deliverycharge!))
+                                                .toString();
+                                          }
+
                                           ordertotal = (double.parse(
                                                       ordertotal) +
                                                   double.parse(deliveryfees))
                                               .toString();
-                                          print("charge $deliveryfees");
 
                                           setState(() {
                                             Addressdata;
@@ -670,7 +752,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                           LocaleKeys.Select.tr(),
                                           style: TextStyle(
                                               fontFamily: 'Poppins',
-                                              color: color.greenbutton,
+                                              color: color.green,
                                               fontSize: 10.5.sp),
                                         ),
                                       ))
@@ -684,10 +766,9 @@ class _OrdersummaryState extends State<Ordersummary> {
                                   padding: EdgeInsets.only(
                                     top: 0.5.h,
                                   ),
-                                  child: Image.asset(
-                                    'Assets/Icons/address.png',
-                                    height: 2.5.h,
-                                    color: color.redbutton,
+                                  child: SvgPicture.asset(
+                                    'Assets/svgicon/Address.svg',
+                                    color: color.primarycolor,
                                   ),
                                 ),
                                 SizedBox(
@@ -699,11 +780,10 @@ class _OrdersummaryState extends State<Ordersummary> {
                                       top: 0.5.h,
                                     ),
                                     child: Text(
-                                      LocaleKeys.Please_select_delivery_address
-                                          .tr(),
+                                      LocaleKeys.Set_your_delivery_address.tr(),
                                       style: TextStyle(
                                           fontSize: 10.5.sp,
-                                          fontFamily: "Poppins"),
+                                          fontFamily: "Poppins_semibold"),
                                     ),
                                   ),
                                 ] else ...[
@@ -717,7 +797,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                           LocaleKeys.Home.tr(),
                                           style: TextStyle(
                                               fontFamily: 'Poppins_semibold',
-                                              // color: color.greenbutton,
+                                              // color: color.green,
                                               fontSize: 9.sp),
                                         ),
                                       ] else if (Addressdata!.addressType ==
@@ -726,7 +806,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                           LocaleKeys.Office.tr(),
                                           style: TextStyle(
                                               fontFamily: 'Poppins_semibold',
-                                              // color: color.greenbutton,
+                                              // color: color.green,
                                               fontSize: 9.sp),
                                         ),
                                       ] else if (Addressdata!.addressType ==
@@ -735,15 +815,18 @@ class _OrdersummaryState extends State<Ordersummary> {
                                           LocaleKeys.Other.tr(),
                                           style: TextStyle(
                                               fontFamily: 'Poppins_semibold',
-                                              // color: color.greenbutton,
+                                              // color: color.green,
                                               fontSize: 9.sp),
                                         ),
                                       ],
-                                      Text(
-                                        "${Addressdata!.address} ${Addressdata!.area}",
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontSize: 9.sp),
+                                      SizedBox(
+                                        width: 75.w,
+                                        child: Text(
+                                          "${Addressdata!.address} ${Addressdata!.area}",
+                                          style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 9.sp),
+                                        ),
                                       )
                                     ],
                                   )
@@ -806,85 +889,95 @@ class _OrdersummaryState extends State<Ordersummary> {
               width: double.infinity,
               child: TextButton(
                 onPressed: () async {
-                  isopencloseMODEL? isopendata;
+                  if (int.parse(minorder_amount!) >
+                          double.parse(ordersubtotal) ||
+                      int.parse(maxorder_amount!) <
+                          double.parse(ordersubtotal)) {
+                    loader.showErroDialog(
+                        description:
+                            "${LocaleKeys.Order_amount_must_be_between.tr()} $minorder_amount ${LocaleKeys.To.tr()} $maxorder_amount");
+                  } else {
+                    isopencloseMODEL? isopendata;
 
-                  loader.showLoading();
-                  var map = {
-                    "user_id": userid,
-                  };
-                  print(map);
-                  var response = await Dio().post(
-                    DefaultApi.appUrl + PostAPI.isopenclose,
-                    data: map,
-                  );
-                  isopendata = isopencloseMODEL.fromJson(response.data);
-                  loader.hideLoading();
+                    loader.showLoading();
+                    var map = {
+                      "user_id": userid,
+                    };
+                    var response = await Dio().post(
+                      DefaultApi.appUrl + PostAPI.isopenclose,
+                      data: map,
+                    );
+                    isopendata = isopencloseMODEL.fromJson(response.data);
+                    loader.hideLoading();
 
-                  if (isopendata.status == 1) {
-                    if (isopendata.isCartEmpty == "0") {
-                      if (widget.ordertype == "1") {
-                        if (Addressdata == null) {
-                          loader.showErroDialog(
-                            description:
-                                LocaleKeys.Please_select_delivery_address.tr(),
-                          );
+                    if (isopendata.status == 1) {
+                      if (isopendata.isCartEmpty == "0") {
+                        if (widget.ordertype == "1") {
+                          if (Addressdata == null) {
+                            loader.showErroDialog(
+                              description: LocaleKeys
+                                  .Please_select_delivery_address.tr(),
+                            );
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Paymentoption(
+                                        double.parse(ordertotal)
+                                            .toStringAsFixed(2)
+                                            .toString(),
+                                        widget.ordertype,
+                                        promocodedata,
+                                        discountoffer,
+                                        summarydata!.summery!.tax.toString(),
+                                        double.parse(deliveryfees)
+                                            .toStringAsFixed(2)
+                                            .toString(),
+                                        //address
+                                        Addressdata!.addressType ?? "",
+                                        Addressdata!.address ?? "",
+                                        Addressdata!.area ?? "",
+                                        Addressdata!.houseNo ?? "",
+                                        Addressdata!.lang ?? "",
+                                        Addressdata!.lat ?? "",
+                                        Ordernote.value.text,
+                                      )),
+                            );
+                          }
                         } else {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Paymentoption(
-                                      double.parse(ordertotal)
-                                          .toStringAsFixed(2)
-                                          .toString(),
-                                      widget.ordertype,
-                                      promocodedata,
-                                      discountoffer,
-                                      summarydata!.summery!.tax.toString(),
-                                      double.parse(deliveryfees)
-                                          .toStringAsFixed(2)
-                                          .toString(),
-                                      //address
-                                      Addressdata!.addressType ?? "",
-                                      Addressdata!.address ?? "",
-                                      Addressdata!.area ?? "",
-                                      Addressdata!.houseNo ?? "",
-                                      Addressdata!.lang ?? "",
-                                      Addressdata!.lat ?? "",
-                                      Ordernote.value.text,
-                                    )),
+                              builder: (context) => Paymentoption(
+                                ordertotal,
+                                widget.ordertype,
+                                promocodedata,
+                                discountoffer,
+                                summarydata!.summery!.tax.toString(),
+                                "0.0",
+                                //address
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                Ordernote.value.text,
+                              ),
+                            ),
                           );
                         }
                       } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Paymentoption(
-                              ordertotal,
-                              widget.ordertype,
-                              promocodedata,
-                              discountoffer,
-                              summarydata!.summery!.tax.toString(),
-                              "0.0",
-                              //address
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
-                              Ordernote.value.text,
-                            ),
-                          ),
-                        );
+                        Get.to(() => Homepage(0));
                       }
                     } else {
-                      Get.to(() => Homepage(0));
+                      loader.showErroDialog(description: isopendata.message);
                     }
-                  } else {
-                    loader.showErroDialog(description: isopendata.message);
                   }
                 },
-                style: TextButton.styleFrom(backgroundColor: color.greenbutton),
+                style: TextButton.styleFrom(
+                  backgroundColor: color.primarycolor,
+                ),
                 child: Text(
                   LocaleKeys.Process_to_pay.tr(),
                   style: TextStyle(

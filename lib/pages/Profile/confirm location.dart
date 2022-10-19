@@ -153,7 +153,7 @@ class _Confirm_locationState extends State<Confirm_location> {
                 size: 20,
               )),
           title: Text(
-            LocaleKeys.Confirmlocation.tr(),
+            LocaleKeys.Confirm_Address.tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Poppins_semibold',
@@ -339,13 +339,13 @@ class _Confirm_locationState extends State<Confirm_location> {
                                       ? Colors.white
                                       : Colors.grey
                                   : addresstype == 1
-                                      ? color.blackbutton
+                                      ? color.black
                                       : Colors.transparent,
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(
                                   color: addresstype == 1
                                       ? Colors.white
-                                      : color.blackbutton)),
+                                      : color.black)),
                           height: 9.w,
                           width: 25.w,
                           child: Center(
@@ -373,13 +373,13 @@ class _Confirm_locationState extends State<Confirm_location> {
                                       ? Colors.white
                                       : Colors.grey
                                   : addresstype == 2
-                                      ? color.blackbutton
+                                      ? color.black
                                       : Colors.transparent,
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(
                                   color: addresstype == 2
                                       ? Colors.white
-                                      : color.blackbutton)),
+                                      : color.black)),
                           height: 9.w,
                           width: 25.w,
                           child: Center(
@@ -407,13 +407,13 @@ class _Confirm_locationState extends State<Confirm_location> {
                                       ? Colors.white
                                       : Colors.grey
                                   : addresstype == 3
-                                      ? color.blackbutton
+                                      ? color.black
                                       : Colors.transparent,
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(
                                   color: addresstype == 3
-                                      ? color.blackbutton
-                                      : color.blackbutton)),
+                                      ? color.black
+                                      : color.black)),
                           height: 9.w,
                           width: 25.w,
                           child: Center(
@@ -430,7 +430,7 @@ class _Confirm_locationState extends State<Confirm_location> {
                                         : Colors.black,
                                 // color: addresstype == 3
                                 //     ? Colors.white
-                                //     : color.blackbutton,
+                                //     : color.black,
                                 fontSize: 10.5.sp),
                           )))),
                 ],
@@ -454,14 +454,16 @@ class _Confirm_locationState extends State<Confirm_location> {
                       }
                     }
                   },
-                  style: TextButton.styleFrom(backgroundColor: color.redbutton),
+                  style: TextButton.styleFrom(
+                    backgroundColor: color.black,
+                  ),
                   child: Text(
                     LocaleKeys.Saveaddressdetails.tr(),
                     style: TextStyle(
-                        fontFamily: 'Poppins_bold',
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 12.sp),
+                      fontFamily: 'Poppins_semibold',
+                      color: Colors.white,
+                      fontSize: 12.sp,
+                    ),
                   ),
                 ),
               ),

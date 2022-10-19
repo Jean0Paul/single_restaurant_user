@@ -1,11 +1,11 @@
-// ignore_for_file: prefer_final_fields, file_names, non_constant_identifier_names, use_build_context_synchronously, use_key_in_widget_constructors, must_be_immutable, prefer_const_constructors, avoid_print, unused_field
+// ignore_for_file: prefer_final_fields, file_names, non_constant_identifier_names, use_build_context_synchronously, use_key_in_widget_constructors, must_be_immutable, prefer_const_constructors,   unused_field
 import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:singlerestaurant/Model/favoritepage/addtocartmodel.dart';
-import 'package:singlerestaurant/Model/otpsucessdata.dart';
+import 'package:singlerestaurant/Model/authentication/Loginmodel.dart';
+import 'package:singlerestaurant/Model/authentication/otpsucessdata.dart';
 import 'package:singlerestaurant/Widgets/loader.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:singlerestaurant/common%20class/color.dart';
@@ -19,16 +19,21 @@ import 'package:sizer/sizer.dart';
 
 class Otp extends StatefulWidget {
   String? emailno;
+  String? otp;
 
   @override
   State<Otp> createState() => _OtpState();
-  Otp([this.emailno]);
+  Otp([
+    this.emailno,
+    this.otp,
+  ]);
 }
 
 class _OtpState extends State<Otp> {
   final otp = TextEditingController();
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   otpsuccessdata? userdata;
+  bool _obscureText = true;
 
   _Otpverify() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -44,12 +49,10 @@ class _OtpState extends State<Otp> {
           : {
               "email": widget.emailno,
               "otp": otp.text.toString(),
-              "token": "cdccdcdcddcfdvbfdvbfgbgf"
+              "token": Googletoken,
             };
-      print(map);
       var response =
           await Dio().post(DefaultApi.appUrl + PostAPI.otpverify, data: map);
-      print(response);
       var finaluserdata = await response.data;
       userdata = otpsuccessdata.fromJson(finaluserdata);
       loader.hideLoading();
@@ -74,11 +77,10 @@ class _OtpState extends State<Otp> {
       }
     } catch (e) {
       loader.showErroDialog(description: e.toString());
-      print(e);
     }
   }
 
-  addtocartmodel? data;
+  // addtocartmodel? data;
 
   resendOTP() async {
     loader.showLoading();
@@ -88,19 +90,23 @@ class _OtpState extends State<Otp> {
     var response =
         await Dio().post(DefaultApi.appUrl + PostAPI.resendotp, data: map);
 
-    addtocartmodel data = addtocartmodel.fromJson(response.data);
+    Loginmodel data = Loginmodel.fromJson(response.data);
     loader.hideLoading();
     if (data.status == 1) {
+      if (DefaultApi.environment == "sendbox") {
+        setState(() {
+          otp.value = TextEditingValue(text: data.otp.toString());
+        });
+      }
       loader.showErroDialog(description: data.message);
     } else {
       loader.showErroDialog(description: data.message);
     }
   }
 
-  int _start = 120;
-  bool isresend = false;
-  Timer? _timer;
   String? Googletoken;
+  bool isresend = false;
+
   @override
   void initState() {
     super.initState();
@@ -109,33 +115,41 @@ class _OtpState extends State<Otp> {
   }
 
   token() async {
+    if (DefaultApi.environment == "sendbox") {
+      otp.value = TextEditingValue(text: widget.otp.toString());
+    }
     await FirebaseMessaging.instance.getToken().then((token) {
-      print(token);
       Googletoken = token!;
     });
   }
 
+  Timer? countdownTimer;
+  Duration myDuration = Duration(minutes: 2);
   void startTimer() {
-    const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (_start == 0) {
-          setState(() {
-            isresend = true;
-            timer.cancel();
-          });
-        } else {
-          setState(() {
-            _start--;
-          });
-        }
-      },
-    );
+    countdownTimer =
+        Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  void setCountDown() {
+    const reduceSecondsBy = 1;
+    setState(() {
+      final seconds = myDuration.inSeconds - reduceSecondsBy;
+
+      if (seconds < 0) {
+        isresend = true;
+
+        countdownTimer!.cancel();
+      } else {
+        myDuration = Duration(seconds: seconds);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    String strDigits(int n) => n.toString().padLeft(2, '0');
+    final minutes = strDigits(myDuration.inMinutes.remainder(2));
+    final seconds = strDigits(myDuration.inSeconds.remainder(60));
     return SafeArea(
       child: Scaffold(
           resizeToAvoidBottomInset: false,
@@ -156,21 +170,27 @@ class _OtpState extends State<Otp> {
           body: Form(
             key: _formkey,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                     padding: EdgeInsets.only(
                   top: 1.5.h,
                 )),
                 Container(
-                    alignment: Alignment.topLeft,
-                    margin: EdgeInsets.only(left: 4.w, top: 3.h, bottom: 1.h),
+                    // alignment: Alignment.topLeft,
+                    margin: EdgeInsets.only(
+                      left: 4.w,
+                      right: 4.w,
+                      top: 3.h,
+                      bottom: 1.h,
+                    ),
                     child: Text(LocaleKeys.OTP_Verification.tr(),
                         style: TextStyle(
                           fontSize: 30,
                           fontFamily: 'Poppins_Bold',
                         ))),
                 Container(
-                    alignment: Alignment.topLeft,
+                    // alignment: Alignment.topLeft,
                     margin: EdgeInsets.only(
                       left: 4.w,
                       right: 4.w,
@@ -187,31 +207,63 @@ class _OtpState extends State<Otp> {
                   ),
                   child: Center(
                     child: TextFormField(
+                      readOnly:
+                          DefaultApi.environment == "sendbox" ? true : false,
                       validator: (value) => Validators.validateOtp(value!),
-                      cursorColor: Colors.black38,
+                      cursorColor: color.grey,
                       keyboardType: TextInputType.number,
                       controller: otp,
+                      obscureText: _obscureText,
                       decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: LocaleKeys.Enter_OTP_here.tr(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: color.blackgrey),
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.grey,
+                            )),
+                        border: OutlineInputBorder(),
+                        hintText: LocaleKeys.Enter_OTP_here.tr(),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: color.grey,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: color.blackgrey),
-                          )),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: color.grey,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 if (isresend == false) ...[
-                  Container(
-                      margin: EdgeInsets.only(
-                        top: 1.h,
-                        left: 4.w,
-                        right: 4.w,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 1.h,
+                          left: 4.w,
+                          right: 4.w,
+                        ),
+                        // alignment: Alignment.centerRight,
+                        child: Text(
+                          '$minutes:$seconds',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 11.sp,
+                          ),
+                        ),
                       ),
-                      alignment: Alignment.centerRight,
-                      child: Text(_start.toString())),
+                    ],
+                  ),
                 ],
                 Container(
                   margin: EdgeInsets.only(
@@ -227,8 +279,9 @@ class _OtpState extends State<Otp> {
                         _Otpverify();
                       }
                     },
-                    style:
-                        TextButton.styleFrom(backgroundColor: color.redbutton),
+                    style: TextButton.styleFrom(
+                      backgroundColor: color.primarycolor,
+                    ),
                     child: Text(
                       LocaleKeys.Verify_Proceed.tr(),
                       style: TextStyle(
@@ -256,16 +309,11 @@ class _OtpState extends State<Otp> {
                       child: InkWell(
                           onTap: () {
                             resendOTP();
-                            // Navigator.pop(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => Signup()),
-                            // );
                           },
                           child: Text(
                             LocaleKeys.Resend_OTP.tr(),
                             style: TextStyle(
                                 fontFamily: 'Poppins_semiBold',
-                                fontWeight: FontWeight.w600,
                                 color: Colors.black,
                                 fontSize: 12.sp),
                           ))),

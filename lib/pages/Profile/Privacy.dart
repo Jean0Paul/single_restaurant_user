@@ -60,7 +60,7 @@ class _PrivacypolicyState extends State<Privacypolicy> {
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(
-                color: color.redbutton,
+                color: color.primarycolor,
               ),
             );
           }

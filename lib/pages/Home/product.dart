@@ -207,7 +207,7 @@ class _ProductState extends State<Product> {
           return Scaffold(
             body: Center(
               child: CircularProgressIndicator(
-                color: color.redbutton,
+                color: color.red,
               ),
             ),
           );
@@ -274,7 +274,7 @@ class _ProductState extends State<Product> {
                             style: TextStyle(
                                 fontSize: 10.sp,
                                 fontFamily: 'Poppins',
-                                color: color.greenbutton),
+                                color: color.green),
                           ),
                           Text(
                             itemdata!.data!.preparationTime,
@@ -328,7 +328,7 @@ class _ProductState extends State<Product> {
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 8.sp,
-                                color: color.greenbutton,
+                                color: color.green,
                               ),
                             ),
                           ] else ...[
@@ -337,7 +337,7 @@ class _ProductState extends State<Product> {
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 8.sp,
-                                color: color.redbutton,
+                                color: color.red,
                               ),
                             ),
                           ]
@@ -425,12 +425,12 @@ class _ProductState extends State<Product> {
                                             color:
                                                 select._variationselecationindex ==
                                                         index
-                                                    ? color.greenbutton
+                                                    ? color.green
                                                     : Colors.transparent,
                                             borderRadius:
                                                 BorderRadius.circular(50),
                                             border: Border.all(
-                                                color: color.greenbutton)),
+                                                color: color.green)),
                                         child: Icon(Icons.done,
                                             color:
                                                 select._variationselecationindex ==
@@ -521,11 +521,11 @@ class _ProductState extends State<Product> {
                                                       .isselected ==
                                                   false
                                               ? Colors.transparent
-                                              : color.greenbutton,
+                                              : color.green,
                                           borderRadius:
                                               BorderRadius.circular(7),
                                           border: Border.all(
-                                              color: color.greenbutton)),
+                                              color: color.green)),
                                       child: Icon(Icons.done,
                                           color: itemdata!.data!.addons![index]
                                                       .isselected ==
@@ -700,7 +700,7 @@ class _ProductState extends State<Product> {
                                               style: TextStyle(
                                                   fontSize: 8.5.sp,
                                                   fontFamily: 'Poppins',
-                                                  color: color.greenbutton,
+                                                  color: color.green,
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             Spacer(),
@@ -871,7 +871,7 @@ class _ProductState extends State<Product> {
                                                                 'Poppins',
                                                             fontSize: 9.5.sp,
                                                             color: color
-                                                                .greenbutton),
+                                                                .green),
                                                       ),
                                                     )),
                                               ),
@@ -904,7 +904,7 @@ class _ProductState extends State<Product> {
                                                         child: Icon(
                                                           Icons.remove,
                                                           color:
-                                                              color.greenbutton,
+                                                              color.green,
                                                           size: 16,
                                                         )),
                                                     Container(
@@ -988,7 +988,7 @@ class _ProductState extends State<Product> {
                                                         child: Icon(
                                                           Icons.add,
                                                           color:
-                                                              color.greenbutton,
+                                                              color.green,
                                                           size: 16,
                                                         )),
                                                   ],
@@ -1022,7 +1022,7 @@ class _ProductState extends State<Product> {
                       width: 5.5.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
-                        color: color.blackbutton,
+                        color: color.black,
                       ),
                       child: InkWell(
                         onTap: () {
@@ -1044,7 +1044,7 @@ class _ProductState extends State<Product> {
                           MediaQuery.of(context).size.height / 80),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
-                        color: color.blackbutton,
+                        color: color.black,
                       ),
                       child: InkWell(
                           onTap: () {
@@ -1079,7 +1079,7 @@ class _ProductState extends State<Product> {
                       Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: color.greenbutton)),
+                            border: Border.all(color: color.green)),
                         height: 6.5.h,
                         width: 47.w,
                         child: TextButton(
@@ -1091,14 +1091,14 @@ class _ProductState extends State<Product> {
                                   LocaleKeys.Viewcart.tr(),
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
-                                      color: color.greenbutton,
+                                      color: color.green,
                                       fontSize: 13.sp),
                                 )
                               : Text(
                                   "${LocaleKeys.Viewcart.tr()}(${count.cartcountnumber.value.toString()})",
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
-                                      color: color.greenbutton,
+                                      color: color.green,
                                       fontSize: 13.sp),
                                 )),
                           onPressed: () {
@@ -1119,7 +1119,7 @@ class _ProductState extends State<Product> {
                       Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: color.redbutton)),
+                            border: Border.all(color: color.red)),
                         height: 6.5.h,
                         width: 47.w,
                         child: TextButton(
@@ -1146,7 +1146,7 @@ class _ProductState extends State<Product> {
                             add_to_cartAPI();
                           },
                           style: TextButton.styleFrom(
-                            backgroundColor: color.redbutton,
+                            backgroundColor: color.red,
                           ),
                           child: Text(
                             LocaleKeys.Add_to_cart.tr(),

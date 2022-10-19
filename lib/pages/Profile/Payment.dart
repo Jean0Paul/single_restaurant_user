@@ -155,7 +155,7 @@ class _PaymentState extends State<Payment> {
                                 width: 3.3.h,
                                 decoration: BoxDecoration(
                                   color: selectedindex == index
-                                      ? color.greenbutton
+                                      ? color.green
                                       : Colors.transparent,
                                   borderRadius: BorderRadius.circular(50),
                                 ),
@@ -180,7 +180,7 @@ class _PaymentState extends State<Payment> {
             }
             return Center(
               child: CircularProgressIndicator(
-                color: color.redbutton,
+                color: color.primarycolor,
               ),
             );
           },
@@ -229,7 +229,7 @@ class _PaymentState extends State<Payment> {
             margin: EdgeInsets.only(bottom: 1.h, left: 4.w, right: 4.w),
             height: 6.5.h,
             width: double.infinity,
-            decoration: BoxDecoration(color: color.greenbutton),
+            decoration: BoxDecoration(color: color.green),
             child: Center(
               child: Text(
                 LocaleKeys.Process_to_pay.tr(),

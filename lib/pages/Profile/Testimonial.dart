@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:singlerestaurant/Model/settings%20model/addratingmodel.dart';
 import 'package:singlerestaurant/Widgets/loader.dart';
+import 'package:singlerestaurant/common%20class/Allformater.dart';
 import 'package:singlerestaurant/common%20class/height.dart';
 import 'package:singlerestaurant/common%20class/prefs_name.dart';
 import 'package:singlerestaurant/config/API/API.dart';
@@ -60,23 +61,20 @@ class _RatingreviewState extends State<Ratingreview> {
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios_outlined,
-                    color: Colors.black,
                     size: 20,
                   )),
               title: Text(
-                LocaleKeys.Ratingreview.tr(),
+                LocaleKeys.Testimonials.tr(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontFamily: 'Poppins_semibold',
-                    color: Colors.black,
-                    fontSize: 12.sp),
+                style:
+                    TextStyle(fontFamily: 'Poppins_semibold', fontSize: 12.sp),
               ),
               leadingWidth: 40,
               centerTitle: true,
             ),
             floatingActionButton: FloatingActionButton(
                 elevation: 0.0,
-                backgroundColor: color.blackbutton,
+                backgroundColor: color.black,
                 onPressed: () {
                   userid == "null"
                       ? Navigator.of(context).pushAndRemoveUntil(
@@ -107,10 +105,6 @@ class _RatingreviewState extends State<Ratingreview> {
                                   Row(
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.only(
-                                          right: 10,
-                                          left: 10,
-                                        ),
                                         child: CircleAvatar(
                                           backgroundImage: NetworkImage(
                                               finaldata!
@@ -119,74 +113,86 @@ class _RatingreviewState extends State<Ratingreview> {
                                           backgroundColor: Colors.black12,
                                         ),
                                       ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(finaldata!.data![index].name
-                                              .toString()),
-                                          SizedBox(
-                                            height: 4.sp,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              if (finaldata!
-                                                      .data![index].ratting ==
-                                                  "1") ...[
-                                                Image.asset(
-                                                  "Assets/Image/ratting1.png",
-                                                  width: 25.w,
-                                                )
-                                              ] else if (finaldata!
-                                                      .data![index].ratting ==
-                                                  "2") ...[
-                                                Image.asset(
-                                                  "Assets/Image/ratting2.png",
-                                                  width: 25.w,
-                                                )
-                                              ] else if (finaldata!
-                                                      .data![index].ratting ==
-                                                  "3") ...[
-                                                Image.asset(
-                                                  "Assets/Image/ratting3.png",
-                                                  width: 25.w,
-                                                )
-                                              ] else if (finaldata!
-                                                      .data![index].ratting ==
-                                                  "4") ...[
-                                                Image.asset(
-                                                  "Assets/Image/ratting4.png",
-                                                  // color: Colors.white,
-                                                  width: 25.w,
-                                                )
-                                              ] else if (finaldata!
-                                                      .data![index].ratting ==
-                                                  "5") ...[
-                                                Image.asset(
-                                                  "Assets/Image/ratting5.png",
-                                                  width: 25.w,
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(finaldata!.data![index].name
+                                                .toString()),
+                                            SizedBox(
+                                              height: 4.sp,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                if (finaldata!
+                                                        .data![index].ratting ==
+                                                    "1") ...[
+                                                  Image.asset(
+                                                    "Assets/Image/ratting1.png",
+                                                    color: color.yellow,
+                                                    width: 25.w,
+                                                  )
+                                                ] else if (finaldata!
+                                                        .data![index].ratting ==
+                                                    "2") ...[
+                                                  Image.asset(
+                                                    "Assets/Image/ratting2.png",
+                                                    color: color.yellow,
+                                                    width: 25.w,
+                                                  )
+                                                ] else if (finaldata!
+                                                        .data![index].ratting ==
+                                                    "3") ...[
+                                                  Image.asset(
+                                                    "Assets/Image/ratting3.png",
+                                                    color: color.yellow,
+                                                    width: 25.w,
+                                                  )
+                                                ] else if (finaldata!
+                                                        .data![index].ratting ==
+                                                    "4") ...[
+                                                  Image.asset(
+                                                    "Assets/Image/ratting4.png",
+                                                    color: color.yellow,
+                                                    // color: Colors.white,
+                                                    width: 25.w,
+                                                  )
+                                                ] else if (finaldata!
+                                                        .data![index].ratting ==
+                                                    "5") ...[
+                                                  Image.asset(
+                                                    "Assets/Image/ratting5.png",
+                                                    color: color.yellow,
+                                                    width: 25.w,
+                                                  )
+                                                ],
+                                                SizedBox(
+                                                  width: 32.w,
+                                                ),
+                                                Container(
+                                                  child: Text(
+                                                    FormatedDate(finaldata!
+                                                        .data![index].date
+                                                        .toString()),
+                                                    style: TextStyle(
+                                                      fontSize: 9.sp,
+                                                      fontFamily: 'Poppins',
+                                                    ),
+                                                  ),
                                                 )
                                               ],
-                                              SizedBox(
-                                                width: 32.w,
-                                              ),
-                                              Container(
-                                                child: Text(
-                                                  finaldata!.data![index].date
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                    fontSize: 9.sp,
-                                                    fontFamily: 'Poppins',
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
@@ -216,7 +222,7 @@ class _RatingreviewState extends State<Ratingreview> {
                   }
                   return Center(
                     child: CircularProgressIndicator(
-                      color: color.redbutton,
+                      color: color.primarycolor,
                     ),
                   );
                 })));
@@ -298,7 +304,7 @@ class _TestimonioalState extends State<Testimonioal> {
             itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
             itemBuilder: (context, _) => Icon(
               Icons.star,
-              color: color.redbutton,
+              color: color.yellow,
             ),
             onRatingUpdate: (Value) {
               setState(() {
@@ -325,19 +331,19 @@ class _TestimonioalState extends State<Testimonioal> {
               child: TextFormField(
                 controller: Comment,
                 maxLines: 10,
-                cursorColor: Colors.black,
+                cursorColor: Colors.grey,
                 textAlignVertical: TextAlignVertical.top,
                 decoration: InputDecoration(
                     hintText: LocaleKeys.Enteryoureview.tr(),
                     hintStyle: TextStyle(
-                        color: Colors.black,
+                        color: Colors.grey,
                         fontSize: 11.sp,
                         fontFamily: "Poppins"),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black26),
+                      borderSide: const BorderSide(color: Colors.grey),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black26),
+                      borderSide: const BorderSide(color: Colors.grey),
                     )),
               ),
             ),
@@ -348,60 +354,64 @@ class _TestimonioalState extends State<Testimonioal> {
           )
         ],
       ),
-      bottomSheet: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            decoration: BoxDecoration(
+      bottomSheet: Container(
+        margin: EdgeInsets.symmetric(vertical: 1.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: Colors.black26)),
-            height: 6.5.h,
-            width: 47.w,
-            child: TextButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.grey,
+                border: Border.all(
+                  color: color.red,
+                ),
               ),
-              child: Text(
-                LocaleKeys.Cancel.tr(),
-                style: TextStyle(
+              height: 6.5.h,
+              width: 47.w,
+              child: TextButton(
+                child: Text(
+                  LocaleKeys.Cancel.tr(),
+                  style: TextStyle(
                     fontFamily: 'Poppins_semibold',
-                    color: color.redbutton,
-                    fontSize: fontsize.Buttonfontsize),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-            ),
-            height: 6.5.h,
-            width: 47.w,
-            child: TextButton(
-              onPressed: () {
-                if (Comment.text.isEmpty) {
-                  loader.showErroDialog(
-                    description: LocaleKeys.Please_enter_all_details.tr(),
-                  );
-                } else {
-                  addraring();
-                }
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: color.blackbutton,
-              ),
-              child: Text(
-                LocaleKeys.Submit.tr(),
-                style: TextStyle(
-                    fontFamily: 'Poppins_semiBold',
-                    color: Colors.white,
-                    fontSize: fontsize.Buttonfontsize),
+                    color: color.red,
+                    fontSize: fontsize.Buttonfontsize,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
             ),
-          ),
-        ],
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+              ),
+              height: 6.5.h,
+              width: 47.w,
+              child: TextButton(
+                onPressed: () {
+                  if (Comment.text.isEmpty) {
+                    loader.showErroDialog(
+                      description: LocaleKeys.Please_enter_all_details.tr(),
+                    );
+                  } else {
+                    addraring();
+                  }
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: color.black,
+                ),
+                child: Text(
+                  LocaleKeys.Submit.tr(),
+                  style: TextStyle(
+                      fontFamily: 'Poppins_semiBold',
+                      color: Colors.white,
+                      fontSize: fontsize.Buttonfontsize),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     ));
   }

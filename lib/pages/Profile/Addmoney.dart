@@ -53,9 +53,8 @@ class _AddmoneyState extends State<Addmoney> {
                 right: 4.w,
               ),
               child: Image.asset(
-                'Assets/Icons/whitelogo.png',
+                'Assets/Icons/ic_logo.png',
                 height: 8.h,
-                color: color.redbutton,
               ),
             ),
             Column(
@@ -159,7 +158,7 @@ class _AddmoneyState extends State<Addmoney> {
                 );
               }
             },
-            style: TextButton.styleFrom(backgroundColor: color.blackbutton),
+            style: TextButton.styleFrom(backgroundColor: color.black),
             child: Text(
               LocaleKeys.Procaddmoney.tr(),
               style: TextStyle(

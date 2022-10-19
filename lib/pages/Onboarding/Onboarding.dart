@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:singlerestaurant/Model/tutorialmodel.dart';
+import 'package:singlerestaurant/Model/home/tutorialmodel.dart';
 import 'package:singlerestaurant/common%20class/color.dart';
 import 'package:singlerestaurant/common%20class/prefs_name.dart';
 import 'package:singlerestaurant/config/API/API.dart';
@@ -65,7 +65,7 @@ class _OnBoardingState extends State<OnBoarding> {
         if (!snapshot.hasData) {
           return Scaffold(
             body: Center(
-              child: CircularProgressIndicator(color: color.redbutton),
+              child: CircularProgressIndicator(color: color.primarycolor),
             ),
           );
         }
@@ -107,20 +107,20 @@ class _OnBoardingState extends State<OnBoarding> {
                         const SizedBox(
                           height: 25,
                         ),
-                       /* Text(
+                        Text(
                           _data!.data![index].title.toString(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 22, fontFamily: 'Poppins_bold'),
-                        ),*/
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
-                        /*Text(
+                        Text(
                           _data!.data![index].description.toString(),
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 14, fontFamily: 'Poppins'),
-                        )*/
+                        )
                       ],
                     ),
                   );

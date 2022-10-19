@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_import, camel_case_types, unused_element, non_constant_identifier_names, avoid_print, must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unused_field
+// ignore_for_file: prefer_const_constructors, unused_import, camel_case_types, unused_element, non_constant_identifier_names,   must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unused_field
 import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -67,16 +67,12 @@ class _Add_addressState extends State<Add_address> {
       _latitude = Engstring.latitude;
       _longitude = Engstring.longitude;
     }
-    print(_latitude);
-    print(_longitude);
     getaddress(_latitude, _longitude);
   }
 
   Future<void> getaddress(double latitude, double longitude) async {
     List<Placemark> placemark =
         await placemarkFromCoordinates(latitude, longitude);
-
-    print(placemark);
 
     Placemark place = placemark[0];
 
@@ -151,8 +147,6 @@ class _Add_addressState extends State<Add_address> {
                       Engstring.latitude = position.target.latitude;
                       Engstring.longitude = position.target.longitude;
                       getaddress(Engstring.latitude, Engstring.longitude);
-                      print(' lat${Engstring.latitude}');
-                      print(' lang ${Engstring.longitude}');
                     });
                   },
                 ),
@@ -223,11 +217,6 @@ class _Add_addressState extends State<Add_address> {
                                                       ))));
                                         });
 
-                                        print(e.address?.state);
-
-                                        print(e.point?.latitude);
-                                        print(e.point?.longitude);
-
                                         Get.back();
                                       }),
                                 ],
@@ -255,7 +244,7 @@ class _Add_addressState extends State<Add_address> {
                     LocaleKeys.Change.tr(),
                     style: TextStyle(
                       fontFamily: 'Poppins',
-                      color: color.redbutton,
+                      color: color.primarycolor,
                       fontSize: 8.8.sp,
                     ),
                   ),
@@ -309,15 +298,6 @@ class _Add_addressState extends State<Add_address> {
             width: double.infinity,
             child: TextButton(
               onPressed: () {
-                print(Engstring.longitude);
-                print(Engstring.latitude);
-                print(
-                  Area.toString(),
-                );
-                print(
-                  Address.toString(),
-                );
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -334,13 +314,10 @@ class _Add_addressState extends State<Add_address> {
                             widget.isedit,
                           )),
                 );
-                print(
-                  widget.houseno,
-                );
-                print(widget.area);
-                print(widget.address);
               },
-              style: TextButton.styleFrom(backgroundColor: color.redbutton),
+              style: TextButton.styleFrom(
+                backgroundColor: color.black,
+              ),
               child: widget.isedit == "1"
                   ? Text(
                       LocaleKeys.Edit_Address.tr(),

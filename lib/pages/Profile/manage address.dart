@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison, file_names, must_be_immutable, camel_case_types, use_key_in_widget_constructors, avoid_print, non_constant_identifier_names, avoid_unnecessary_containers, use_build_context_synchronously, unused_local_variable, prefer_const_constructors
+// ignore_for_file: unnecessary_null_comparison, file_names, must_be_immutable, camel_case_types, use_key_in_widget_constructors,   non_constant_identifier_names, avoid_unnecessary_containers, use_build_context_synchronously, unused_local_variable, prefer_const_constructors
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ class _Manage_AddressesState extends State<Manage_Addresses> {
       addressdata = getaddressmodel.fromJson(finallist);
       return addressdata!.data.toString();
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -66,19 +66,15 @@ class _Manage_AddressesState extends State<Manage_Addresses> {
     try {
       loader.showLoading();
       var map = {"address_id": id};
-      print(map);
       var response = await Dio()
           .post(DefaultApi.appUrl + PostAPI.Deleteaddress, data: map);
       var finalist = await response.data;
       deleteaddressdata = deleteaddressmodel.fromJson(finalist);
-      print(index);
       setState(() {
         addressdata!.data!.remove(index);
       });
 
       loader.hideLoading();
-
-      print(deleteaddressdata);
     } catch (e) {
       rethrow;
     }
@@ -91,7 +87,6 @@ class _Manage_AddressesState extends State<Manage_Addresses> {
         "lat": addressdata!.data![index].lat,
         "lang": addressdata!.data![index].lang,
       };
-      print(map);
       var response = await Dio()
           .post(DefaultApi.appUrl + PostAPI.checkdeliveryzone, data: map);
       checkzone = QTYupdatemodel.fromJson(response.data);
@@ -102,7 +97,7 @@ class _Manage_AddressesState extends State<Manage_Addresses> {
         loader.showErroDialog(description: checkzone!.message);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -155,7 +150,12 @@ class _Manage_AddressesState extends State<Manage_Addresses> {
                           return InkWell(
                             onTap: () {
                               if (widget.isorder == 1) {
-                                checkdeliveryzoneAPI(index);
+                                if (DefaultApi.environment == "sendbox") {
+                                  Navigator.pop(
+                                      context, addressdata!.data![index]);
+                                } else {
+                                  checkdeliveryzoneAPI(index);
+                                }
                               }
                             },
                             child: Container(
@@ -299,8 +299,6 @@ class _Manage_AddressesState extends State<Manage_Addresses> {
                                                           ],
                                                         );
                                                       });
-
-                                                  print("close");
                                                 },
                                                 icon: SvgPicture.asset(
                                                   'Assets/svgicon/delete.svg',
@@ -370,7 +368,7 @@ class _Manage_AddressesState extends State<Manage_Addresses> {
                   }
                 }
                 return Center(
-                  child: CircularProgressIndicator(color: color.redbutton),
+                  child: CircularProgressIndicator(color: color.primarycolor),
                 );
               },
             ),
@@ -394,7 +392,9 @@ class _Manage_AddressesState extends State<Manage_Addresses> {
                     setState(() {});
                   }
                 },
-                style: TextButton.styleFrom(backgroundColor: color.greenbutton),
+                style: TextButton.styleFrom(
+                  backgroundColor: color.black,
+                ),
                 child: Text(
                   LocaleKeys.Add_New_Address.tr(),
                   style: TextStyle(

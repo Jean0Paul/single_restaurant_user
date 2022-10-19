@@ -1,14 +1,14 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:easy_localization/easy_localization.dart';
 import 'package:singlerestaurant/common%20class/color.dart';
+import 'package:singlerestaurant/translation/locale_keys.g.dart';
 
 class loader {
   // show error; Dialog
-  static void showErroDialog(
-      {String title = 'Single Resturant',
-      String? description = 'Something went wrong'}) {
+  static void showErroDialog({String? description = 'Something went wrong'}) {
     Get.dialog(
       Dialog(
         child: Padding(
@@ -17,20 +17,27 @@ class loader {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                title,
+                LocaleKeys.Single_Restaurant.tr(),
                 style: TextStyle(fontSize: 18, fontFamily: "Poppins"),
               ),
               Text(
                 description ?? '',
                 style: TextStyle(fontSize: 16, fontFamily: "Poppins"),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   if (Get.isDialogOpen!) Get.back();
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: color.primarycolor,
+                ),
                 child: Text(
-                  'Ok',
-                  style: TextStyle(color: color.redbutton, fontSize: 14),
+                  LocaleKeys.ok.tr(),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: "Poppins",
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -46,7 +53,7 @@ class loader {
       barrierColor: Colors.transparent,
       Center(
           child: CircularProgressIndicator(
-        color: color.redbutton,
+        color: color.primarycolor,
       )),
     );
   }
@@ -81,7 +88,7 @@ class dialogbox {
                 },
                 child: Text(
                   'Ok',
-                  style: TextStyle(color: color.redbutton, fontSize: 14),
+                  style: TextStyle(color: color.primarycolor, fontSize: 14),
                 ),
               ),
             ],

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, camel_case_types, non_constant_identifier_names, avoid_print, use_build_context_synchronously, prefer_const_constructors
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, camel_case_types, non_constant_identifier_names,   use_build_context_synchronously, prefer_const_constructors
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +42,6 @@ class _showvariationState extends State<showvariation> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     userid = prefs.getString(UD_user_id) ?? "";
     currency = (prefs.getString(APPcurrency) ?? "");
-    print("$currency as");
     currency_position = (prefs.getString(APPcurrency_position) ?? "");
     double addonstotalprice = 0;
     for (int i = 0; i < arr_addonsprice.length; i++) {
@@ -85,10 +84,8 @@ class _showvariationState extends State<showvariation> {
 
         Navigator.pop(context, 1);
       }
-
-      print(map);
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -105,8 +102,6 @@ class _showvariationState extends State<showvariation> {
       currency = (prefs.getString(APPcurrency) ?? "");
       currency_position = (prefs.getString(APPcurrency_position) ?? "");
     });
-    print(currency);
-    print(currency_position);
   }
 
   @override
@@ -182,11 +177,10 @@ class _showvariationState extends State<showvariation> {
                                 width: 3.3.h,
                                 decoration: BoxDecoration(
                                     color: _variationselecationindex == index
-                                        ? color.greenbutton
+                                        ? color.green
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(50),
-                                    border:
-                                        Border.all(color: color.greenbutton)),
+                                    border: Border.all(color: color.green)),
                                 child: Icon(Icons.done,
                                     color: _variationselecationindex == index
                                         ? Colors.white
@@ -269,10 +263,9 @@ class _showvariationState extends State<showvariation> {
                                                 .addons![index].isselected ==
                                             false
                                         ? Colors.transparent
-                                        : color.greenbutton,
+                                        : color.green,
                                     borderRadius: BorderRadius.circular(7),
-                                    border:
-                                        Border.all(color: color.greenbutton)),
+                                    border: Border.all(color: color.green)),
                                 child: Icon(Icons.done,
                                     color: widget.favaritelistdata
                                                 .addons![index].isselected ==
@@ -326,7 +319,7 @@ class _showvariationState extends State<showvariation> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: color.greenbutton)),
+                      border: Border.all(color: color.red)),
                   height: 6.8.h,
                   width: 45.w,
                   child: TextButton(
@@ -337,7 +330,7 @@ class _showvariationState extends State<showvariation> {
                       LocaleKeys.Cancel.tr(),
                       style: TextStyle(
                           fontFamily: 'Poppins',
-                          color: color.redbutton,
+                          color: color.red,
                           fontSize: 12.sp),
                     ),
                     onPressed: () {
@@ -348,7 +341,7 @@ class _showvariationState extends State<showvariation> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: color.greenbutton)),
+                      border: Border.all(color: color.green)),
                   height: 6.8.h,
                   width: 45.w,
                   child: TextButton(
@@ -383,7 +376,7 @@ class _showvariationState extends State<showvariation> {
                       }
                     },
                     style: TextButton.styleFrom(
-                      backgroundColor: color.greenbutton,
+                      backgroundColor: color.green,
                     ),
                     child: Text(
                       LocaleKeys.Continue.tr(),

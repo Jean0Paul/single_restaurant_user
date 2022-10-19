@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, camel_case_types, non_constant_identifier_names, unused_field, prefer_final_fields, library_private_types_in_public_api, use_key_in_widget_constructors, prefer_const_constructors, avoid_print, unused_local_variable, use_build_context_synchronously
+// ignore_for_file: must_be_immutable, camel_case_types, non_constant_identifier_names, unused_field, prefer_final_fields, library_private_types_in_public_api, use_key_in_widget_constructors, prefer_const_constructors,   unused_local_variable, use_build_context_synchronously
 
 import 'dart:io';
 import 'package:dio/dio.dart';
@@ -159,7 +159,6 @@ class _order_paystackState extends State<order_paystack> {
       ..amount = (double.parse(widget.ordertotal!) * 100).toInt()
       ..email = 'customer@email.com'
       ..card = _getCardFromUI();
-    print("sdscsc${widget.publickey!}");
     if (!_isLocal) {
       var accessCode = await _fetchAccessCodeFrmServer(_getReference());
       charge.accessCode = accessCode;
@@ -174,10 +173,6 @@ class _order_paystackState extends State<order_paystack> {
         fullscreen: false,
         logo: MyLogo(),
       );
-      print('Response = $response');
-      print('Response = ${response.message}');
-      print('Response = ${response.status}');
-      print('Response = ${response.message}');
       if (response.status == true) {
         paykey = response.reference;
         paymasg = response.message;
@@ -210,11 +205,8 @@ class _order_paystackState extends State<order_paystack> {
             "card_exp_year": "",
             "card_cvc": "",
           };
-          print(map);
           var finalAPI =
               await Dio().post(DefaultApi.appUrl + PostAPI.Order, data: map);
-          print(finalAPI.data);
-          print("aqwers /****** $map");
           var finallist = await finalAPI.data;
           add_money = addwalletMODEL.fromJson(finallist);
 
@@ -244,7 +236,6 @@ class _order_paystackState extends State<order_paystack> {
         } catch (e) {
           loader.hideLoading();
           loader.showErroDialog(description: "No Data Found");
-          print("error");
         }
       } else {
         loader.showErroDialog(description: response.message);
@@ -308,10 +299,8 @@ class _order_paystackState extends State<order_paystack> {
     String url = '$backendUrl/new-access-code';
     String? accessCode;
     try {
-      print("Access code url = $url");
       http.Response response = await http.get(Uri.parse(url));
       accessCode = response.body;
-      print('Response for access code = $accessCode');
     } catch (e) {
       setState(() => _inProgress = false);
     }

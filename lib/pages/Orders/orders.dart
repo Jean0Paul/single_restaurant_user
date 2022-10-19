@@ -70,7 +70,7 @@ class _OrderhistoryState extends State<Orderhistory> {
             centerTitle: true,
             backgroundColor: Colors.transparent,
             title: Text(
-              'My orders',
+              LocaleKeys.My_Orders.tr(),
               style: TextStyle(
                 fontSize: 12.sp,
                 fontFamily: 'Poppins_semibold',
@@ -123,7 +123,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                             child: Text(
                               LocaleKeys.Completed.tr(),
                               style: TextStyle(
-                                  color: color.greenbutton,
+                                  color: color.green,
                                   fontFamily: 'Poppins',
                                   fontSize: 10.5.sp),
                             ),
@@ -146,7 +146,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                             child: Text(
                               LocaleKeys.Cancelled.tr(),
                               style: TextStyle(
-                                  color: color.redbutton,
+                                  color: color.primarycolor,
                                   fontFamily: 'Poppins',
                                   fontSize: 10.5.sp),
                             ),
@@ -166,15 +166,13 @@ class _OrderhistoryState extends State<Orderhistory> {
                       Container(
                         height: 0.3.h,
                         width: 9.w,
-                        color: tabvalue == 2
-                            ? color.greenbutton
-                            : Colors.transparent,
+                        color: tabvalue == 2 ? color.green : Colors.transparent,
                       ),
                       Container(
                         height: 0.3.h,
                         width: 9.w,
                         color: tabvalue == 3
-                            ? color.redbutton
+                            ? color.primarycolor
                             : Colors.transparent,
                       )
                     ],
@@ -241,7 +239,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                       "1") ...[
                                     Container(
                                       decoration: BoxDecoration(
-                                          color: color.blackgrey,
+                                          color: color.status1,
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       padding: EdgeInsets.all(7),
@@ -258,7 +256,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                       "2") ...[
                                     Container(
                                       decoration: BoxDecoration(
-                                          color: color.orange,
+                                          color: color.status2,
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       padding: EdgeInsets.all(7),
@@ -275,7 +273,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                       "3") ...[
                                     Container(
                                       decoration: BoxDecoration(
-                                          color: color.skyblue,
+                                          color: color.status3,
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       padding: EdgeInsets.all(7),
@@ -294,7 +292,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                         "1") ...[
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: color.blue,
+                                            color: color.status4,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         padding: EdgeInsets.all(7),
@@ -313,7 +311,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                         "2") ...[
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: color.blue,
+                                            color: color.status4,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         padding: EdgeInsets.all(7),
@@ -333,7 +331,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                       "5") ...[
                                     Container(
                                       decoration: BoxDecoration(
-                                          color: color.greenbutton,
+                                          color: color.status5,
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       padding: EdgeInsets.all(7),
@@ -350,7 +348,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                       "6") ...[
                                     Container(
                                       decoration: BoxDecoration(
-                                          color: color.darkred,
+                                          color: color.status67,
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       padding: EdgeInsets.all(7),
@@ -367,7 +365,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                       "7") ...[
                                     Container(
                                       decoration: BoxDecoration(
-                                          color: color.darkred,
+                                          color: color.status67,
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       padding: EdgeInsets.all(7),

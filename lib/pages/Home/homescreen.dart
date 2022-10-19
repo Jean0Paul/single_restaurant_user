@@ -728,7 +728,7 @@ class _HomescreenState extends State<Homescreen> {
                                                     style: TextStyle(
                                                       fontSize: 8.sp,
                                                       fontFamily: 'Poppins',
-                                                      color: color.greenbutton,
+                                                      color: color.green,
                                                     ),
                                                   ),
                                                   const Spacer(),
@@ -916,7 +916,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                   fontSize:
                                                                       9.5.sp,
                                                                   color: color
-                                                                      .greenbutton),
+                                                                      .green),
                                                             ),
                                                           )),
                                                     ),
@@ -952,7 +952,7 @@ class _HomescreenState extends State<Homescreen> {
                                                               child: Icon(
                                                                 Icons.remove,
                                                                 color: color
-                                                                    .greenbutton,
+                                                                    .green,
                                                                 size: 16,
                                                               )),
                                                           Container(
@@ -1045,7 +1045,7 @@ class _HomescreenState extends State<Homescreen> {
                                                               child: Icon(
                                                                 Icons.add,
                                                                 color: color
-                                                                    .greenbutton,
+                                                                    .green,
                                                                 size: 16,
                                                               )),
                                                         ],
@@ -1306,7 +1306,7 @@ class _HomescreenState extends State<Homescreen> {
                                                     style: TextStyle(
                                                       fontSize: 8.sp,
                                                       fontFamily: 'Poppins',
-                                                      color: color.greenbutton,
+                                                      color: color.green,
                                                     ),
                                                   ),
                                                   const Spacer(),
@@ -1492,7 +1492,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                   fontSize:
                                                                       9.5.sp,
                                                                   color: color
-                                                                      .greenbutton),
+                                                                      .green),
                                                             ),
                                                           )),
                                                     ),
@@ -1528,7 +1528,7 @@ class _HomescreenState extends State<Homescreen> {
                                                               child: Icon(
                                                                 Icons.remove,
                                                                 color: color
-                                                                    .greenbutton,
+                                                                    .green,
                                                                 size: 16,
                                                               )),
                                                           Container(
@@ -1616,7 +1616,7 @@ class _HomescreenState extends State<Homescreen> {
                                                               child: Icon(
                                                                 Icons.add,
                                                                 color: color
-                                                                    .greenbutton,
+                                                                    .green,
                                                                 size: 16,
                                                               )),
                                                         ],
@@ -1887,7 +1887,7 @@ class _HomescreenState extends State<Homescreen> {
                                                         fontSize: 8.sp,
                                                         fontFamily: 'Poppins',
                                                         color:
-                                                            color.greenbutton,
+                                                            color.green,
                                                       ),
                                                     ),
                                                   ),
@@ -2077,7 +2077,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                   fontSize:
                                                                       9.5.sp,
                                                                   color: color
-                                                                      .greenbutton),
+                                                                      .green),
                                                             ),
                                                           )),
                                                     ),
@@ -2114,7 +2114,7 @@ class _HomescreenState extends State<Homescreen> {
                                                               child: Icon(
                                                                 Icons.remove,
                                                                 color: color
-                                                                    .greenbutton,
+                                                                    .green,
                                                                 size: 16,
                                                               )),
                                                           Container(
@@ -2199,7 +2199,7 @@ class _HomescreenState extends State<Homescreen> {
                                                               child: Icon(
                                                                 Icons.add,
                                                                 color: color
-                                                                    .greenbutton,
+                                                                    .green,
                                                                 size: 16,
                                                               )),
                                                         ],
@@ -2309,7 +2309,7 @@ class _HomescreenState extends State<Homescreen> {
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: color.blackbutton,
+                                  color: color.black,
                                 ),
                                 child: CarouselSlider.builder(
                                     itemCount: homedata!.testimonials!.length,
@@ -2432,7 +2432,7 @@ class _HomescreenState extends State<Homescreen> {
                 }
                 return Center(
                   child: CircularProgressIndicator(
-                    color: color.redbutton,
+                    color: color.red,
                   ),
                 );
               },
