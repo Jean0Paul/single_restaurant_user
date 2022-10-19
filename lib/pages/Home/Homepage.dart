@@ -336,7 +336,7 @@ class _HomepageState extends State<Homepage> {
   List pages = [
     Homescreen(),
     Favorite(),
-    Viewcart(),
+    /*Viewcart(),*/
     Orderhistory(),
     Profilepage()
   ];
@@ -419,7 +419,7 @@ class _HomepageState extends State<Homepage> {
             children: const [
               Homescreen(),
               Favorite(),
-              Viewcart(),
+              /*Viewcart(),*/
               Orderhistory(),
               Profilepage(),
             ], 
@@ -454,7 +454,7 @@ class _HomepageState extends State<Homepage> {
                   color: themenofier.isdark ? Colors.white : Colors.black,
                 ),
               ),
-              BottomNavigationBarItem(
+             /* BottomNavigationBarItem(
                   icon: Obx(
                     () => count.cartcountnumber.value == 0
                         ? SvgPicture.asset(
@@ -516,7 +516,7 @@ class _HomepageState extends State<Homepage> {
                                   : Colors.black,
                             ),
                           ),
-                  )),
+                  )),*/
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   'Assets/Icons/Order.svg',
