@@ -39,6 +39,11 @@ class Homescreen extends StatefulWidget {
   State<Homescreen> createState() => _HomescreenState();
 }
 
+    class cartcount extends GetxController {
+    RxInt cartcountnumber = 0.obs;
+    }
+
+
 class _HomescreenState extends State<Homescreen> {
   @override
   void initState() {
@@ -195,6 +200,9 @@ class _HomescreenState extends State<Homescreen> {
     }
   }
 
+PageController pageController = PageController();
+
+
   @override
   Widget build(BuildContext context) {
     return Consumer(
@@ -228,7 +236,8 @@ class _HomescreenState extends State<Homescreen> {
                                       fontFamily: "Poppins_bold",
                                       fontSize: 14.sp),
                                 ),
-                              ] else ...[
+                              ]
+                               else ...[
                                 Text(
                                   username,
                                   style: TextStyle(
@@ -240,15 +249,31 @@ class _HomescreenState extends State<Homescreen> {
                           ),
                           if (username != "") ...[
                             SizedBox(
-                                height: 50,
+                                 height: 50,
                                 width: 50,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(50),
                                     child: Image.network(
                                       profileimage.toString(),
                                       fit: BoxFit.fill,
-                                    )))
-                          ]
+                                    )
+                                )
+                            ),SizedBox(
+                                child: ClipRRect(
+                                    
+                                )
+                            )
+                          ],
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(
+                                Icons.shopping_cart,
+                                size: 30,
+                                color: color.black
+                              )
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -905,7 +930,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                   color: Colors
                                                                       .grey)),
                                                           height: 3.5.h,
-                                                          width: 17.w,
+                                                          width: 15.w,
                                                           child: Center(
                                                             child: Text(
                                                               LocaleKeys.ADD
@@ -926,7 +951,7 @@ class _HomescreenState extends State<Homescreen> {
                                                       "1") ...[
                                                     Container(
                                                       height: 3.6.h,
-                                                      width: 22.w,
+                                                      width: 18.w,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.grey),
@@ -1065,8 +1090,7 @@ class _HomescreenState extends State<Homescreen> {
                               ),
                             ),
                           ],
-                          if (homedata!
-                              .banners!.bannersection1!.isNotEmpty) ...[
+                          if (homedata!.banners!.bannersection1!.isNotEmpty) ...[
                             Container(
                               margin: EdgeInsets.only(top: 2.h),
                               height: 13.h,
@@ -1481,7 +1505,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                   color: Colors
                                                                       .grey)),
                                                           height: 3.5.h,
-                                                          width: 17.w,
+                                                          width: 15.w,
                                                           child: Center(
                                                             child: Text(
                                                               LocaleKeys.ADD
@@ -1502,7 +1526,7 @@ class _HomescreenState extends State<Homescreen> {
                                                       "1") ...[
                                                     Container(
                                                       height: 3.6.h,
-                                                      width: 22.w,
+                                                      width: 18.w,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.grey),
@@ -1639,8 +1663,7 @@ class _HomescreenState extends State<Homescreen> {
                               height: 2.5.h,
                             ),
                           ],
-                          if (homedata!
-                              .banners!.bannersection2!.isNotEmpty) ...[
+                          if (homedata!.banners!.bannersection2!.isNotEmpty) ...[
                             SizedBox(
                               height: 25.h,
                               child: ListView.builder(
@@ -2066,7 +2089,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                   color: Colors
                                                                       .grey)),
                                                           height: 3.5.h,
-                                                          width: 17.w,
+                                                          width: 15.w,
                                                           child: Center(
                                                             child: Text(
                                                               LocaleKeys.ADD
@@ -2088,7 +2111,7 @@ class _HomescreenState extends State<Homescreen> {
                                                       "1") ...[
                                                     Container(
                                                       height: 3.6.h,
-                                                      width: 22.w,
+                                                      width: 18.w,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.grey),
@@ -2222,8 +2245,7 @@ class _HomescreenState extends State<Homescreen> {
                               height: 2.5.h,
                             ),
                           ],
-                          if (homedata!
-                              .banners!.bannersection3!.isNotEmpty) ...[
+                          if (homedata!.banners!.bannersection3!.isNotEmpty) ...[
                             Container(
                               margin: EdgeInsets.only(bottom: 2.h),
                               height: 13.h,
@@ -2421,8 +2443,7 @@ class _HomescreenState extends State<Homescreen> {
                                     ))),
                             SizedBox(height: 3.h),
                           ],
-                          if (homedata!.appdata!.isAppBottomImage.toString() ==
-                              "1") ...[
+                          if (homedata!.appdata!.isAppBottomImage.toString() =="1") ...[
                       //Banner image
                           ],
                         ],

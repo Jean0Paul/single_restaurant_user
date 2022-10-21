@@ -361,13 +361,13 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),*/
+                        ),
                         Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
                               themenofier.isdark ? Colors.white : Colors.grey,
-                        ),
+                        ),*/
                         InkWell(
                           onTap: () {
                             userid == ""

@@ -32,7 +32,7 @@ import '../Favorite/favoritepage.dart';
 import '../Orders/orders.dart';
 import '../Profile/profilepage.dart';
 import 'homescreen.dart';
-import 'Chat.dart';
+import '../chat/chat.dart';
 
 void showNotification() {
   flutterLocalNotificationsPlugin.show(
@@ -336,7 +336,8 @@ class _HomepageState extends State<Homepage> {
   List pages = [
     Homescreen(),
     Favorite(),
-    /*Viewcart(),*/
+    Chat(),
+    //Viewcart(),
     Orderhistory(),
     Profilepage()
   ];
@@ -420,12 +421,12 @@ class _HomepageState extends State<Homepage> {
               Homescreen(),
               Favorite(),
               /*Viewcart(),*/
+              Chat(),
               Orderhistory(),
               Profilepage(),
             ], 
            
           ),
-          
           bottomNavigationBar: BottomNavigationBar(
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
@@ -454,69 +455,82 @@ class _HomepageState extends State<Homepage> {
                   color: themenofier.isdark ? Colors.white : Colors.black,
                 ),
               ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'Assets/Icons/chats.svg',
+                  height: height.bottombaricon,
+                  color: themenofier.isdark ? Colors.white : Colors.black,
+                ),
+                label: "",
+                activeIcon: SvgPicture.asset(
+                  'Assets/Icons/chatBlacks.svg',
+                  height: height.bottombaricon,
+                  color: themenofier.isdark ? Colors.white : Colors.black,
+                ),
+              ),
              /* BottomNavigationBarItem(
-                  icon: Obx(
-                    () => count.cartcountnumber.value == 0
-                        ? SvgPicture.asset(
-                            'Assets/Icons/Cart.svg',
-                            height: height.bottombaricon,
-                            color: themenofier.isdark
-                                ? Colors.white
-                                : Colors.black,
-                          )
-                        : Badge(
-                            // alignment: Alignment.topCenter,
-                            padding: EdgeInsets.all(5),
-                            toAnimate: false,
-                            elevation: 0,
-                            badgeColor: color.red,
-                            badgeContent: Text(
-                              count.cartcountnumber.value.toString(),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            ),
-                            child: SvgPicture.asset(
-                              'Assets/Icons/Cart.svg',
-                              height: height.bottombaricon,
-                              color: themenofier.isdark
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                          ),
-                  ),
-                  label: "",
-                  activeIcon: Obx(
-                    () => count.cartcountnumber.value == 0
-                        ? SvgPicture.asset(
-                            'Assets/Icons/Cartdark.svg',
-                            height: height.bottombaricon,
-                            color: themenofier.isdark
-                                ? Colors.white
-                                : Colors.black,
-                          )
-                        : Badge(
-                            padding: const EdgeInsets.all(5),
-                            toAnimate: false,
-                            elevation: 0,
-                            badgeColor: color.red,
-                            badgeContent: Text(
-                              count.cartcountnumber.value.toString(),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            ),
-                            child: SvgPicture.asset(
-                              'Assets/Icons/Cartdark.svg',
-                              height: height.bottombaricon,
-                              color: themenofier.isdark
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                          ),
-                  )),*/
+                   icon: Obx(
+                     () => count.cartcountnumber.value == 0
+                         ? SvgPicture.asset(
+                             'Assets/Icons/chats.svg',
+                             height: height.bottombaricon,
+                             color: themenofier.isdark
+                                 ? Colors.white
+                                 : Colors.black,
+                           )
+                         : Badge(
+                             padding: EdgeInsets.all(5),
+                             toAnimate: false,
+                             elevation: 0,
+                             badgeColor: color.red,
+                             badgeContent: Text(
+                               count.cartcountnumber.value.toString(),
+                               style: TextStyle(
+                                 color: Colors.white,
+                                 fontSize: 12,
+                               ),
+                             ),
+                             child: SvgPicture.asset(
+                               'Assets/Icons/chats.svg',
+                               height: height.bottombaricon,
+                               color: themenofier.isdark
+                                   ? Colors.white
+                                   : Colors.black,
+                             ),
+                           ),
+                   ),
+                   label: "",
+                   activeIcon: Obx(
+                     () => count.cartcountnumber.value == 0
+                         ? SvgPicture.asset(
+                             'Assets/Icons/chatBlacks.svg',
+                             height: height.bottombaricon,
+                             color: themenofier.isdark
+                                 ? Colors.white
+                                 : Colors.black,
+                           )
+                         : Badge(
+                             padding: const EdgeInsets.all(5),
+                             toAnimate: false,
+                             elevation: 0,
+                             badgeColor: color.red,
+                             badgeContent: Text(
+                               count.cartcountnumber.value.toString(),
+                               style: TextStyle(
+                                 color: Colors.white,
+                                 fontSize: 12,
+                               ),
+                             ),
+                             child: SvgPicture.asset(
+                               'Assets/Icons/chatBlacks.svg',
+                               height: height.bottombaricon,
+                               color: themenofier.isdark
+                                   ? Colors.white
+                                   : Colors.black,
+                             ),
+                           ),
+                      )
+                   ),*/
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   'Assets/Icons/Order.svg',
