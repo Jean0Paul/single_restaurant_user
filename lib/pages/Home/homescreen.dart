@@ -39,10 +39,6 @@ class Homescreen extends StatefulWidget {
   State<Homescreen> createState() => _HomescreenState();
 }
 
-    class cartcount extends GetxController {
-    RxInt cartcountnumber = 0.obs;
-    }
-
 
 class _HomescreenState extends State<Homescreen> {
   @override

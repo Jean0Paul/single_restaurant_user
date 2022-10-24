@@ -468,69 +468,69 @@ class _HomepageState extends State<Homepage> {
                   color: themenofier.isdark ? Colors.white : Colors.black,
                 ),
               ),
-             /* BottomNavigationBarItem(
-                   icon: Obx(
-                     () => count.cartcountnumber.value == 0
-                         ? SvgPicture.asset(
-                             'Assets/Icons/chats.svg',
-                             height: height.bottombaricon,
-                             color: themenofier.isdark
-                                 ? Colors.white
-                                 : Colors.black,
-                           )
-                         : Badge(
-                             padding: EdgeInsets.all(5),
-                             toAnimate: false,
-                             elevation: 0,
-                             badgeColor: color.red,
-                             badgeContent: Text(
-                               count.cartcountnumber.value.toString(),
-                               style: TextStyle(
-                                 color: Colors.white,
-                                 fontSize: 12,
-                               ),
-                             ),
-                             child: SvgPicture.asset(
-                               'Assets/Icons/chats.svg',
-                               height: height.bottombaricon,
-                               color: themenofier.isdark
-                                   ? Colors.white
-                                   : Colors.black,
-                             ),
-                           ),
-                   ),
-                   label: "",
-                   activeIcon: Obx(
-                     () => count.cartcountnumber.value == 0
-                         ? SvgPicture.asset(
-                             'Assets/Icons/chatBlacks.svg',
-                             height: height.bottombaricon,
-                             color: themenofier.isdark
-                                 ? Colors.white
-                                 : Colors.black,
-                           )
-                         : Badge(
-                             padding: const EdgeInsets.all(5),
-                             toAnimate: false,
-                             elevation: 0,
-                             badgeColor: color.red,
-                             badgeContent: Text(
-                               count.cartcountnumber.value.toString(),
-                               style: TextStyle(
-                                 color: Colors.white,
-                                 fontSize: 12,
-                               ),
-                             ),
-                             child: SvgPicture.asset(
-                               'Assets/Icons/chatBlacks.svg',
-                               height: height.bottombaricon,
-                               color: themenofier.isdark
-                                   ? Colors.white
-                                   : Colors.black,
-                             ),
-                           ),
-                      )
-                   ),*/
+              // BottomNavigationBarItem(
+              //     icon: Obx(
+              //       () => count.cartcountnumber.value == 0
+              //           ? SvgPicture.asset(
+              //               'Assets/Icons/chats.svg',
+              //               height: height.bottombaricon,
+              //               color: themenofier.isdark
+              //                   ? Colors.white
+              //                   : Colors.black,
+              //             )
+              //           : Badge(
+              //               // alignment: Alignment.topCenter,
+              //               padding: EdgeInsets.all(5),
+              //               toAnimate: false,
+              //               elevation: 0,
+              //               badgeColor: color.red,
+              //               badgeContent: Text(
+              //                 count.cartcountnumber.value.toString(),
+              //                 style: TextStyle(
+              //                   color: Colors.white,
+              //                   fontSize: 12,
+              //                 ),
+              //               ),
+              //               child: SvgPicture.asset(
+              //                 'Assets/Icons/chats.svg',
+              //                 height: height.bottombaricon,
+              //                 color: themenofier.isdark
+              //                     ? Colors.white
+              //                     : Colors.black,
+              //               ),
+              //             ),
+              //     ),
+              //     label: "",
+              //     activeIcon: Obx(
+              //       () => count.cartcountnumber.value == 0
+              //           ? SvgPicture.asset(
+              //               'Assets/Icons/chatBlacks.svg',
+              //               height: height.bottombaricon,
+              //               color: themenofier.isdark
+              //                   ? Colors.white
+              //                   : Colors.black,
+              //             )
+              //           : Badge(
+              //               padding: const EdgeInsets.all(5),
+              //               toAnimate: false,
+              //               elevation: 0,
+              //               badgeColor: color.red,
+              //               badgeContent: Text(
+              //                 count.cartcountnumber.value.toString(),
+              //                 style: TextStyle(
+              //                   color: Colors.white,
+              //                   fontSize: 12,
+              //                 ),
+              //               ),
+              //               child: SvgPicture.asset(
+              //                 'Assets/Icons/chatBlacks.svg',
+              //                 height: height.bottombaricon,
+              //                 color: themenofier.isdark
+              //                     ? Colors.white
+              //                     : Colors.black,
+              //               ),
+              //             ),
+              //     )),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   'Assets/Icons/Order.svg',
