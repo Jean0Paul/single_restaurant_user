@@ -55,7 +55,7 @@ class Chat extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: const <Widget>[
                                 Text(
-                                  'Iron Man',
+                                  'Carole',
                                   style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold

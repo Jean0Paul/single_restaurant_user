@@ -1,4 +1,3 @@
-// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, avoid_print, unrelated_type_equality_checks, use_key_in_widget_constructors, must_be_immutable, non_constant_identifier_names, prefer_collection_literals
 
 import 'dart:async';
 import 'dart:convert';
@@ -337,7 +336,7 @@ class _HomepageState extends State<Homepage> {
     Homescreen(),
     Favorite(),
     Chat(),
-    //Viewcart(),
+    Viewcart(),
     Orderhistory(),
     Profilepage()
   ];
@@ -420,8 +419,8 @@ class _HomepageState extends State<Homepage> {
             children: const [
               Homescreen(),
               Favorite(),
-              /*Viewcart(),*/
               Chat(),
+              Viewcart(),
               Orderhistory(),
               Profilepage(),
             ], 
@@ -468,69 +467,68 @@ class _HomepageState extends State<Homepage> {
                   color: themenofier.isdark ? Colors.white : Colors.black,
                 ),
               ),
-              // BottomNavigationBarItem(
-              //     icon: Obx(
-              //       () => count.cartcountnumber.value == 0
-              //           ? SvgPicture.asset(
-              //               'Assets/Icons/chats.svg',
-              //               height: height.bottombaricon,
-              //               color: themenofier.isdark
-              //                   ? Colors.white
-              //                   : Colors.black,
-              //             )
-              //           : Badge(
-              //               // alignment: Alignment.topCenter,
-              //               padding: EdgeInsets.all(5),
-              //               toAnimate: false,
-              //               elevation: 0,
-              //               badgeColor: color.red,
-              //               badgeContent: Text(
-              //                 count.cartcountnumber.value.toString(),
-              //                 style: TextStyle(
-              //                   color: Colors.white,
-              //                   fontSize: 12,
-              //                 ),
-              //               ),
-              //               child: SvgPicture.asset(
-              //                 'Assets/Icons/chats.svg',
-              //                 height: height.bottombaricon,
-              //                 color: themenofier.isdark
-              //                     ? Colors.white
-              //                     : Colors.black,
-              //               ),
-              //             ),
-              //     ),
-              //     label: "",
-              //     activeIcon: Obx(
-              //       () => count.cartcountnumber.value == 0
-              //           ? SvgPicture.asset(
-              //               'Assets/Icons/chatBlacks.svg',
-              //               height: height.bottombaricon,
-              //               color: themenofier.isdark
-              //                   ? Colors.white
-              //                   : Colors.black,
-              //             )
-              //           : Badge(
-              //               padding: const EdgeInsets.all(5),
-              //               toAnimate: false,
-              //               elevation: 0,
-              //               badgeColor: color.red,
-              //               badgeContent: Text(
-              //                 count.cartcountnumber.value.toString(),
-              //                 style: TextStyle(
-              //                   color: Colors.white,
-              //                   fontSize: 12,
-              //                 ),
-              //               ),
-              //               child: SvgPicture.asset(
-              //                 'Assets/Icons/chatBlacks.svg',
-              //                 height: height.bottombaricon,
-              //                 color: themenofier.isdark
-              //                     ? Colors.white
-              //                     : Colors.black,
-              //               ),
-              //             ),
-              //     )),
+              BottomNavigationBarItem(
+                   icon: Obx(
+                     () => count.cartcountnumber.value == 0
+                         ? SvgPicture.asset(
+                             'Assets/Icons/Cart.svg',
+                             height: height.bottombaricon,
+                             color: themenofier.isdark
+                                 ? Colors.white
+                                 : Colors.black,
+                           )
+                         : Badge(
+                             padding: EdgeInsets.all(5),
+                             toAnimate: false,
+                             elevation: 0,
+                             badgeColor: color.red,
+                             badgeContent: Text(
+                               count.cartcountnumber.value.toString(),
+                               style: TextStyle(
+                                 color: Colors.white,
+                                 fontSize: 12,
+                               ),
+                             ),
+                             child: SvgPicture.asset(
+                               'Assets/Icons/Cart.svg',
+                               height: height.bottombaricon,
+                               color: themenofier.isdark
+                                   ? Colors.white
+                                   : Colors.black,
+                             ),
+                           ),
+                   ),
+                   label: "",
+                   activeIcon: Obx(
+                     () => count.cartcountnumber.value == 0
+                         ? SvgPicture.asset(
+                             'Assets/Icons/Cartdark.svg',
+                             height: height.bottombaricon,
+                             color: themenofier.isdark
+                                 ? Colors.white
+                                 : Colors.black,
+                           )
+                         : Badge(
+                             padding: const EdgeInsets.all(5),
+                             toAnimate: false,
+                             elevation: 0,
+                             badgeColor: color.red,
+                             badgeContent: Text(
+                               count.cartcountnumber.value.toString(),
+                               style: const TextStyle(
+                                 color: Colors.white,
+                                 fontSize: 12,
+                               ),
+                             ),
+                             child: SvgPicture.asset(
+                               'Assets/Icons/Cartdark.svg',
+                               height: height.bottombaricon,
+                               color: themenofier.isdark
+                                   ? Colors.white
+                                   : Colors.black,
+                             ),
+                           ),
+                   )),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   'Assets/Icons/Order.svg',

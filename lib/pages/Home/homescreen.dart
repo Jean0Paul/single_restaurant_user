@@ -254,13 +254,9 @@ PageController pageController = PageController();
                                       fit: BoxFit.fill,
                                     )
                                 )
-                            ),SizedBox(
-                                child: ClipRRect(
-                                    
-                                )
                             )
                           ],
-                          Column(
+                          /*Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Icon(
@@ -269,7 +265,7 @@ PageController pageController = PageController();
                                 color: color.black
                               )
                             ],
-                          )
+                          )*/
                         ],
                       ),
                     ),
