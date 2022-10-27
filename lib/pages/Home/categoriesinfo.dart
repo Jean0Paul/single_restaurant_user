@@ -76,13 +76,13 @@ class categories_itemsState extends State<categories_items> {
         "item_image": itemimage,
         "item_type": itemtype,
         "tax": itemtax,
-        "item_price": numberFormat.format(double.parse(itemprice)),
+        "item_price": itemprice,
         "variation_id": "",
         "variation": "",
         "addons_id": "",
         "addons_name": "",
         "addons_price": "",
-        "addons_total_price": numberFormat.format(double.parse("0")),
+        "addons_total_price": "0",
       };
 
       var response =
@@ -436,8 +436,8 @@ class categories_itemsState extends State<categories_items> {
                                                 "1") ...[
                                               Text(
                                                 currency_position == "1"
-                                                    ? "$currency${numberFormat.format(double.parse(categoriesdata!.items![_index].subcategoryItems![index].variation![0].productPrice.toString()))}"
-                                                    : "${numberFormat.format(double.parse(categoriesdata!.items![_index].subcategoryItems![index].variation![0].productPrice.toString()))}$currency",
+                                                    ? "$currency${categoriesdata!.items![_index].subcategoryItems![index].variation![0].productPrice.toString()}"
+                                                    : "${categoriesdata!.items![_index].subcategoryItems![index].variation![0].productPrice.toString()}$currency",
                                                 style: TextStyle(
                                                   fontSize: 10.sp,
                                                   fontFamily: 'Poppins_bold',
@@ -446,8 +446,8 @@ class categories_itemsState extends State<categories_items> {
                                             ] else ...[
                                               Text(
                                                 currency_position == "1"
-                                                    ? "$currency${numberFormat.format(double.parse(categoriesdata!.items![_index].subcategoryItems![index].price.toString()))}"
-                                                    : "${numberFormat.format(double.parse(categoriesdata!.items![_index].subcategoryItems![index].price.toString()))}$currency",
+                                                    ? "$currency${categoriesdata!.items![_index].subcategoryItems![index].price.toString()}"
+                                                    : "${categoriesdata!.items![_index].subcategoryItems![index].price.toString()}$currency",
                                                 style: TextStyle(
                                                   fontSize: 10.sp,
                                                   fontFamily: 'Poppins_bold',

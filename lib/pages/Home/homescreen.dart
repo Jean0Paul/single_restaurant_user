@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, camel_case_types, non_constant_identifier_names, avoid_print, unused_element, prefer_is_empty
+// ignore_for_file: prefer_const_constructors, camel_case_types, non_constant_identifier_names,   unused_element, prefer_is_empty
 
 import 'dart:async';
 
@@ -39,7 +39,6 @@ class Homescreen extends StatefulWidget {
   State<Homescreen> createState() => _HomescreenState();
 }
 
-
 class _HomescreenState extends State<Homescreen> {
   @override
   void initState() {
@@ -65,19 +64,15 @@ class _HomescreenState extends State<Homescreen> {
     try {
       var map = {"user_id": userid};
 
-      print("$map sd");
-
       var response = await Dio().post(
         DefaultApi.appUrl + PostAPI.Home,
         data: map,
       );
+      print(response);
 
       var finalist = await response.data;
-      print(finalist);
 
       homedata = homescreenmodel.fromJson(finalist);
-
-      print("appdata");
 
       prefs.setString(UD_user_id, homedata!.getprofile!.id.toString());
       prefs.setString(UD_user_name, homedata!.getprofile!.name.toString());
@@ -97,22 +92,29 @@ class _HomescreenState extends State<Homescreen> {
       prefs.setString(
           APPcurrency_position, homedata!.appdata!.currencyPosition.toString());
       prefs.setString(APPcart_count, homedata!.cartdata!.totalCount.toString());
+      prefs.setString(
+          min_order_amount, homedata!.appdata!.minOrderAmount.toString());
+      prefs.setString(
+          max_order_amount, homedata!.appdata!.maxOrderAmount.toString());
       prefs.setString(restaurantlat, homedata!.appdata!.lat.toString());
       prefs.setString(restaurantlang, homedata!.appdata!.lang.toString());
       prefs.setString(
           deliverycharges, homedata!.appdata!.deliveryCharge.toString());
       prefs.setString(about_us, homedata!.appdata!.aboutContent.toString());
       prefs.setString(
+          referral_amount, homedata!.appdata!.referralAmount.toString());
+      prefs.setString(
           UD_user_logintype, homedata!.getprofile!.loginType.toString());
       prefs.setString(APPCheck_addons, homedata!.checkaddons.toString());
+      prefs.setString(Androidlink, homedata!.appdata!.android.toString());
+      prefs.setString(Ioslink, homedata!.appdata!.ios.toString());
       currency = (prefs.getString(APPcurrency) ?? "");
       currency_position = (prefs.getString(APPcurrency_position) ?? "");
       count.cartcountnumber(int.parse(prefs.getString(APPcart_count)!));
       return homedata;
-    } on DioError catch (e) {
+    } on DioError {
       loader.hideLoading();
       loader.showErroDialog(description: "Somthing went wrong!");
-      print(e.type);
     }
   }
 
@@ -126,20 +128,17 @@ class _HomescreenState extends State<Homescreen> {
         "item_image": itemimage,
         "item_type": itemtype,
         "tax": itemtax,
-        "item_price": itemprice,
+        "item_price": numberFormat.format(double.parse(itemprice)),
         "variation_id": "",
         "variation": "",
         "addons_id": "",
         "addons_name": "",
         "addons_price": "",
-        "addons_total_price": "",
+        "addons_total_price": numberFormat.format(double.parse("0")),
       };
-
-      print(map);
 
       var response =
           await Dio().post(DefaultApi.appUrl + PostAPI.Addtocart, data: map);
-      print(response);
       addtocartdata = addtocartmodel.fromJson(response.data);
       if (addtocartdata!.status == 1) {
         loader.hideLoading();
@@ -152,7 +151,7 @@ class _HomescreenState extends State<Homescreen> {
         });
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 
@@ -160,11 +159,9 @@ class _HomescreenState extends State<Homescreen> {
     try {
       loader.showLoading();
       var map = {"user_id": userid, "item_id": itemid, "type": isfavorite};
-      print(map);
 
       var favoriteresponse = await Dio()
           .post(DefaultApi.appUrl + PostAPI.Managefavorite, data: map);
-      print(favoriteresponse);
       var finaldata = QTYupdatemodel.fromJson(favoriteresponse.data);
 
       if (finaldata.status == 1) {
@@ -192,12 +189,9 @@ class _HomescreenState extends State<Homescreen> {
         loader.showErroDialog(description: finaldata.message);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
-
-PageController pageController = PageController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -219,21 +213,24 @@ PageController pageController = PageController();
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                LocaleKeys.welcome.tr(),
-                                style: TextStyle(
-
-                                    fontFamily: "Poppins", fontSize: 11.sp),
-                              ),
                               if (username == "") ...[
                                 Text(
-                                  LocaleKeys.Gravityinfotech.tr(),
+                                  LocaleKeys.Welcome.tr(),
+                                  style: TextStyle(
+                                      fontFamily: "Poppins", fontSize: 11.sp),
+                                ),
+                                Text(
+                                  LocaleKeys.Restaurant_User.tr(),
                                   style: TextStyle(
                                       fontFamily: "Poppins_bold",
                                       fontSize: 14.sp),
                                 ),
-                              ]
-                               else ...[
+                              ] else ...[
+                                Text(
+                                  LocaleKeys.hello.tr(),
+                                  style: TextStyle(
+                                      fontFamily: "Poppins", fontSize: 11.sp),
+                                ),
                                 Text(
                                   username,
                                   style: TextStyle(
@@ -245,27 +242,15 @@ PageController pageController = PageController();
                           ),
                           if (username != "") ...[
                             SizedBox(
-                                 height: 50,
+                                height: 50,
                                 width: 50,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(50),
                                     child: Image.network(
                                       profileimage.toString(),
-                                      fit: BoxFit.fill,
-                                    )
-                                )
-                            )
-                          ],
-                          /*Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(
-                                Icons.shopping_cart,
-                                size: 30,
-                                color: color.black
-                              )
-                            ],
-                          )*/
+                                      fit: BoxFit.cover,
+                                    )))
+                          ]
                         ],
                       ),
                     ),
@@ -283,7 +268,7 @@ PageController pageController = PageController();
                                   border: Border.all(
                                       color: Colors.grey, width: 0.8.sp)),
                               height: 6.h,
-                              child: GestureDetector(
+                              child: InkWell(
                                   onTap: () {
                                     Navigator.push(
                                       context,
@@ -316,60 +301,56 @@ PageController pageController = PageController();
                               height: 2.h,
                             ),
                             SizedBox(
-                                height: 23.h,
-                                width: double.infinity,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount:
-                                      homedata!.banners!.topbanners!.length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      margin: EdgeInsets.only(
-                                        left: 2.w,
-                                        right: 2.w,
-                                      ),
-                                      // height: 20.h,
-                                      width: 80.w,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          if (homedata!.banners!
-                                                  .topbanners![index].type ==
-                                              "2") {
-                                            print(homedata!.banners!
-                                                .topbanners![index].itemId);
-                                            Get.to(() => Product(int.parse(
+                              height: 23.h,
+                              width: double.infinity,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount:
+                                    homedata!.banners!.topbanners!.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    margin: EdgeInsets.only(
+                                      left: 2.w,
+                                      right: 2.w,
+                                    ),
+                                    // height: 20.h,
+                                    width: 80.w,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        if (homedata!.banners!
+                                                .topbanners![index].type ==
+                                            "2") {
+                                          Get.to(() => Product(int.parse(
+                                              homedata!.banners!
+                                                  .topbanners![index].itemId)));
+                                        } else if (homedata!.banners!
+                                                .topbanners![index].type ==
+                                            "1") {
+                                          Get.to(() => categories_items(
+                                                homedata!.banners!
+                                                    .topbanners![index].catId,
                                                 homedata!
                                                     .banners!
                                                     .topbanners![index]
-                                                    .itemId)));
-                                          } else if (homedata!.banners!
-                                                  .topbanners![index].type ==
-                                              "1") {
-                                            Get.to(() => categories_items(
-                                                  homedata!.banners!
-                                                      .topbanners![index].catId,
-                                                  homedata!
-                                                      .banners!
-                                                      .topbanners![index]
-                                                      .categoryInfo!
-                                                      .categoryName,
-                                                ));
-                                          }
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(7),
-                                          child: Image.network(
-                                            homedata!.banners!
-                                                .topbanners![index].image
-                                                .toString(),
-                                            fit: BoxFit.fill,
-                                          ),
+                                                    .categoryInfo!
+                                                    .categoryName,
+                                              ));
+                                        }
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(7),
+                                        child: Image.network(
+                                          homedata!
+                                              .banners!.topbanners![index].image
+                                              .toString(),
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
-                                    );
-                                  },
-                                )),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                             SizedBox(
                               height: 2.5.h,
                             ),
@@ -418,23 +399,25 @@ PageController pageController = PageController();
                                   margin: EdgeInsets.only(left: 2.5.w),
                                   child: GestureDetector(
                                       onTap: () {
-                                        Get.to(() => categories_items(
-                                              homedata!.categories![index].id
-                                                  .toString(),
-                                              homedata!.categories![index]
-                                                  .categoryName
-                                                  .toString(),
-                                            ));
+                                        Get.to(
+                                          () => categories_items(
+                                            homedata!.categories![index].id
+                                                .toString(),
+                                            homedata!
+                                                .categories![index].categoryName
+                                                .toString(),
+                                          ),
+                                        );
                                       },
                                       child: SizedBox(
-                                        width: 22.5.w,
+                                        width: 23.w,
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          // mainAxisAlignment:
+                                          //     MainAxisAlignment.spaceBetween,
                                           children: [
                                             Container(
                                                 margin: EdgeInsets.only(
-                                                  bottom: 0.5.h,
+                                                  bottom: 1.h,
                                                 ),
                                                 height: 10.5.h,
                                                 child: ClipRRect(
@@ -449,14 +432,15 @@ PageController pageController = PageController();
                                                 )),
                                             Expanded(
                                               child: Text(
-                                                  homedata!.categories![index]
-                                                      .categoryName
-                                                      .toString(),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 9.5.sp)),
+                                                homedata!.categories![index]
+                                                    .categoryName
+                                                    .toString(),
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontFamily: "Poppins_medium",
+                                                  fontSize: 10.sp,
+                                                ),
+                                              ),
                                             )
                                           ],
                                         ),
@@ -512,23 +496,25 @@ PageController pageController = PageController();
                                   margin: EdgeInsets.only(left: 2.5.w),
                                   child: GestureDetector(
                                       onTap: () {
-                                        Get.to(() => categories_items(
-                                              homedata!.categories![index].id
-                                                  .toString(),
-                                              homedata!.categories![index]
-                                                  .categoryName
-                                                  .toString(),
-                                            ));
+                                        Get.to(
+                                          () => categories_items(
+                                            homedata!.categories![index].id
+                                                .toString(),
+                                            homedata!
+                                                .categories![index].categoryName
+                                                .toString(),
+                                          ),
+                                        );
                                       },
                                       child: SizedBox(
-                                        width: 22.5.w,
+                                        width: 23.w,
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          // mainAxisAlignment:
+                                          //     MainAxisAlignment.spaceBetween,
                                           children: [
                                             Container(
                                                 margin: EdgeInsets.only(
-                                                  bottom: 0.5.h,
+                                                  bottom: 1.h,
                                                 ),
                                                 height: 10.5.h,
                                                 child: ClipRRect(
@@ -543,14 +529,15 @@ PageController pageController = PageController();
                                                 )),
                                             Expanded(
                                               child: Text(
-                                                  homedata!.categories![index]
-                                                      .categoryName
-                                                      .toString(),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 9.5.sp)),
+                                                homedata!.categories![index]
+                                                    .categoryName
+                                                    .toString(),
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontFamily: "Poppins_medium",
+                                                  fontSize: 10.sp,
+                                                ),
+                                              ),
                                             )
                                           ],
                                         ),
@@ -583,8 +570,11 @@ PageController pageController = PageController();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Trendingfood(
-                                              "trendingitems", "Tendance")),
+                                        builder: (context) => Trendingfood(
+                                          "2",
+                                          LocaleKeys.Trending.tr(),
+                                        ),
+                                      ),
                                     );
                                   },
                                   icon: Icon(
@@ -644,10 +634,9 @@ PageController pageController = PageController();
                                               child: ClipRRect(
                                                 borderRadius:
                                                     const BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(5),
-                                                        topRight:
-                                                            Radius.circular(5)),
+                                                  topLeft: Radius.circular(5),
+                                                  topRight: Radius.circular(5),
+                                                ),
                                                 child: Image.network(
                                                   homedata!
                                                       .trendingitems![index]
@@ -808,26 +797,33 @@ PageController pageController = PageController();
                                                           .trendingitems![index]
                                                           .hasVariation ==
                                                       "1") ...[
-                                
-                                                    Text(
-                                                      currency_position == "1"
-                                                          ? "$currency${homedata!.trendingitems![index].variation![0].productPrice.toString()}"
-                                                          : "${homedata!.trendingitems![index].variation![0].productPrice.toString()}$currency",
-                                                      style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        fontFamily:
-                                                            'Poppins_semibold',
+                                                    Expanded(
+                                                      child: Text(
+                                                        currency_position == "1"
+                                                            ? "$currency${numberFormat.format(double.parse(homedata!.trendingitems![index].variation![0].productPrice.toString()))}"
+                                                            : "${numberFormat.format(double.parse(homedata!.trendingitems![index].variation![0].productPrice.toString()))}$currency",
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontFamily:
+                                                              'Poppins_bold',
+                                                        ),
                                                       ),
                                                     ),
                                                   ] else ...[
-                                                    Text(
-                                                      currency_position == "1"
-                                                          ? "$currency${homedata!.trendingitems![index].price.toString()}"
-                                                          : "${homedata!.trendingitems![index].price.toString()}$currency",
-                                                      style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        fontFamily:
-                                                            'Poppins_semibold',
+                                                    Expanded(
+                                                      child: Text(
+                                                        currency_position == "1"
+                                                            ? "$currency${numberFormat.format(double.parse(homedata!.trendingitems![index].price.toString()))}"
+                                                            : "${numberFormat.format(double.parse(homedata!.trendingitems![index].price.toString()))}$currency",
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontFamily:
+                                                              'Poppins_bold',
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
@@ -907,8 +903,6 @@ PageController pageController = PageController();
                                                                     .trendingitems![
                                                                         index]
                                                                     .price);
-                                                            print(
-                                                                "add to cart api");
                                                           }
                                                         }
                                                       },
@@ -922,14 +916,14 @@ PageController pageController = PageController();
                                                                   color: Colors
                                                                       .grey)),
                                                           height: 3.5.h,
-                                                          width: 15.w,
+                                                          width: 17.w,
                                                           child: Center(
                                                             child: Text(
                                                               LocaleKeys.ADD
                                                                   .tr(),
                                                               style: TextStyle(
                                                                   fontFamily:
-                                                                      'Poppins',
+                                                                      'Poppins_medium',
                                                                   fontSize:
                                                                       9.5.sp,
                                                                   color: color
@@ -943,7 +937,7 @@ PageController pageController = PageController();
                                                       "1") ...[
                                                     Container(
                                                       height: 3.6.h,
-                                                      width: 18.w,
+                                                      width: 22.w,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.grey),
@@ -968,8 +962,8 @@ PageController pageController = PageController();
                                                               },
                                                               child: Icon(
                                                                 Icons.remove,
-                                                                color: color
-                                                                    .green,
+                                                                color:
+                                                                    color.green,
                                                                 size: 16,
                                                               )),
                                                           Container(
@@ -993,8 +987,6 @@ PageController pageController = PageController();
                                                           ),
                                                           InkWell(
                                                               onTap: () async {
-                                                                print(
-                                                                    "objectasdfsg");
                                                                 if (homedata!
                                                                             .trendingitems![
                                                                                 index]
@@ -1005,8 +997,6 @@ PageController pageController = PageController();
                                                                             .addons!
                                                                             .length >
                                                                         0) {
-                                                                  print(
-                                                                      "object");
                                                                   cart = await Navigator.of(
                                                                           context)
                                                                       .push(
@@ -1055,14 +1045,12 @@ PageController pageController = PageController();
                                                                           .trendingitems![
                                                                               index]
                                                                           .price);
-                                                                  print(
-                                                                      "addtocartAPI");
                                                                 }
                                                               },
                                                               child: Icon(
                                                                 Icons.add,
-                                                                color: color
-                                                                    .green,
+                                                                color:
+                                                                    color.green,
                                                                 size: 16,
                                                               )),
                                                         ],
@@ -1096,8 +1084,6 @@ PageController pageController = PageController();
                                       if (homedata!.banners!
                                               .bannersection1![index].type ==
                                           "2") {
-                                        print(homedata!.banners!
-                                            .bannersection1![index].itemId);
                                         Get.to(() => Product(int.parse(homedata!
                                             .banners!
                                             .bannersection1![index]
@@ -1129,7 +1115,7 @@ PageController pageController = PageController();
                                             homedata!.banners!
                                                 .bannersection1![index].image
                                                 .toString(),
-                                            fit: BoxFit.fill,
+                                            fit: BoxFit.cover,
                                           ),
                                         )),
                                   );
@@ -1158,9 +1144,11 @@ PageController pageController = PageController();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Trendingfood(
-                                              "todayspecial",
-                                              "Todays special")),
+                                        builder: (context) => Trendingfood(
+                                          "1",
+                                          LocaleKeys.Todays_special.tr(),
+                                        ),
+                                      ),
                                     );
                                   },
                                   icon: Icon(
@@ -1385,25 +1373,33 @@ PageController pageController = PageController();
                                                           .todayspecial![index]
                                                           .hasVariation ==
                                                       "1") ...[
-                                                    Text(
-                                                      currency_position == "1"
-                                                          ? "$currency${homedata!.todayspecial![index].variation![0].productPrice.toString()}"
-                                                          : "${homedata!.todayspecial![index].variation![0].productPrice.toString()}$currency",
-                                                      style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        fontFamily:
-                                                            'Poppins_semibold',
+                                                    Expanded(
+                                                      child: Text(
+                                                        currency_position == "1"
+                                                            ? "$currency${numberFormat.format(double.parse(homedata!.todayspecial![index].variation![0].productPrice.toString()))}"
+                                                            : "${numberFormat.format(double.parse(homedata!.todayspecial![index].variation![0].productPrice.toString()))}$currency",
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontFamily:
+                                                              'Poppins_bold',
+                                                        ),
                                                       ),
                                                     ),
                                                   ] else ...[
-                                                    Text(
-                                                      currency_position == "1"
-                                                          ? "$currency${homedata!.todayspecial![index].price.toString()}"
-                                                          : "${homedata!.todayspecial![index].price.toString()}$currency",
-                                                      style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        fontFamily:
-                                                            'Poppins_semibold',
+                                                    Expanded(
+                                                      child: Text(
+                                                        currency_position == "1"
+                                                            ? "$currency${numberFormat.format(double.parse(homedata!.todayspecial![index].price.toString()))}"
+                                                            : "${numberFormat.format(double.parse(homedata!.todayspecial![index].price.toString()))}$currency",
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontFamily:
+                                                              'Poppins_bold',
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
@@ -1482,8 +1478,6 @@ PageController pageController = PageController();
                                                                     .todayspecial![
                                                                         index]
                                                                     .price);
-                                                            print(
-                                                                "add to cart api");
                                                           }
                                                         }
                                                       },
@@ -1497,7 +1491,7 @@ PageController pageController = PageController();
                                                                   color: Colors
                                                                       .grey)),
                                                           height: 3.5.h,
-                                                          width: 15.w,
+                                                          width: 17.w,
                                                           child: Center(
                                                             child: Text(
                                                               LocaleKeys.ADD
@@ -1518,7 +1512,7 @@ PageController pageController = PageController();
                                                       "1") ...[
                                                     Container(
                                                       height: 3.6.h,
-                                                      width: 18.w,
+                                                      width: 22.w,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.grey),
@@ -1543,8 +1537,8 @@ PageController pageController = PageController();
                                                               },
                                                               child: Icon(
                                                                 Icons.remove,
-                                                                color: color
-                                                                    .green,
+                                                                color:
+                                                                    color.green,
                                                                 size: 16,
                                                               )),
                                                           Container(
@@ -1622,8 +1616,6 @@ PageController pageController = PageController();
                                                                           .todayspecial![
                                                                               index]
                                                                           .price);
-                                                                  print(
-                                                                      "addtocartAPI");
                                                                   // addtocart(
                                                                   //     index,
                                                                   //     "trending");
@@ -1631,8 +1623,8 @@ PageController pageController = PageController();
                                                               },
                                                               child: Icon(
                                                                 Icons.add,
-                                                                color: color
-                                                                    .green,
+                                                                color:
+                                                                    color.green,
                                                                 size: 16,
                                                               )),
                                                         ],
@@ -1668,8 +1660,6 @@ PageController pageController = PageController();
                                       if (homedata!.banners!
                                               .bannersection2![index].type ==
                                           "2") {
-                                        print(homedata!.banners!
-                                            .bannersection2![index].itemId);
                                         Get.to(() => Product(int.parse(homedata!
                                             .banners!
                                             .bannersection2![index]
@@ -1731,10 +1721,11 @@ PageController pageController = PageController();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Trendingfood(
-                                                "recommendeditems",
-                                                "Conseillé",
-                                              )),
+                                        builder: (context) => Trendingfood(
+                                          "3",
+                                          LocaleKeys.Recommended.tr(),
+                                        ),
+                                      ),
                                     );
                                   },
                                   icon: Icon(
@@ -1901,8 +1892,7 @@ PageController pageController = PageController();
                                                       style: TextStyle(
                                                         fontSize: 8.sp,
                                                         fontFamily: 'Poppins',
-                                                        color:
-                                                            color.green,
+                                                        color: color.green,
                                                       ),
                                                     ),
                                                   ),
@@ -1968,25 +1958,33 @@ PageController pageController = PageController();
                                                               index]
                                                           .hasVariation ==
                                                       "1") ...[
-                                                    Text(
-                                                      currency_position == "1"
-                                                          ? "$currency${homedata!.recommendeditems![index].variation![0].productPrice.toString()}"
-                                                          : "${homedata!.recommendeditems![index].variation![0].productPrice.toString()}$currency",
-                                                      style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        fontFamily:
-                                                            'Poppins_semibold',
+                                                    Expanded(
+                                                      child: Text(
+                                                        currency_position == "1"
+                                                            ? "$currency${numberFormat.format(double.parse(homedata!.recommendeditems![index].variation![0].productPrice.toString()))}"
+                                                            : "${numberFormat.format(double.parse(homedata!.recommendeditems![index].variation![0].productPrice.toString()))}$currency",
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontFamily:
+                                                              'Poppins_bold',
+                                                        ),
                                                       ),
                                                     ),
                                                   ] else ...[
-                                                    Text(
-                                                      currency_position == "1"
-                                                          ? "$currency${homedata!.recommendeditems![index].price.toString()}"
-                                                          : "${homedata!.recommendeditems![index].price.toString()}$currency",
-                                                      style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        fontFamily:
-                                                            'Poppins_semibold',
+                                                    Expanded(
+                                                      child: Text(
+                                                        currency_position == "1"
+                                                            ? "$currency${numberFormat.format(double.parse(homedata!.recommendeditems![index].price.toString()))}"
+                                                            : "${numberFormat.format(double.parse(homedata!.recommendeditems![index].price.toString()))}$currency",
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontFamily:
+                                                              'Poppins_bold',
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
@@ -2066,8 +2064,6 @@ PageController pageController = PageController();
                                                                     .recommendeditems![
                                                                         index]
                                                                     .price);
-                                                            print(
-                                                                "add to cart api");
                                                           }
                                                         }
                                                       },
@@ -2081,7 +2077,7 @@ PageController pageController = PageController();
                                                                   color: Colors
                                                                       .grey)),
                                                           height: 3.5.h,
-                                                          width: 15.w,
+                                                          width: 17.w,
                                                           child: Center(
                                                             child: Text(
                                                               LocaleKeys.ADD
@@ -2103,7 +2099,7 @@ PageController pageController = PageController();
                                                       "1") ...[
                                                     Container(
                                                       height: 3.6.h,
-                                                      width: 18.w,
+                                                      width: 22.w,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: Colors.grey),
@@ -2128,8 +2124,8 @@ PageController pageController = PageController();
                                                               },
                                                               child: Icon(
                                                                 Icons.remove,
-                                                                color: color
-                                                                    .green,
+                                                                color:
+                                                                    color.green,
                                                                 size: 16,
                                                               )),
                                                           Container(
@@ -2207,14 +2203,12 @@ PageController pageController = PageController();
                                                                           .recommendeditems![
                                                                               index]
                                                                           .price);
-                                                                  print(
-                                                                      "addtocartAPI");
                                                                 }
                                                               },
                                                               child: Icon(
                                                                 Icons.add,
-                                                                color: color
-                                                                    .green,
+                                                                color:
+                                                                    color.green,
                                                                 size: 16,
                                                               )),
                                                         ],
@@ -2251,8 +2245,6 @@ PageController pageController = PageController();
                                       if (homedata!.banners!
                                               .bannersection3![index].type ==
                                           "2") {
-                                        print(homedata!.banners!
-                                            .bannersection3![index].itemId);
                                         Get.to(() => Product(int.parse(homedata!
                                             .banners!
                                             .bannersection3![index]
@@ -2333,7 +2325,7 @@ PageController pageController = PageController();
                                             CrossAxisAlignment.center,
                                         children: [
                                           CircleAvatar(
-                                            backgroundColor: Color.fromARGB(255, 168, 59, 59),
+                                            backgroundColor: Colors.white,
                                             backgroundImage: NetworkImage(
                                                 homedata!.testimonials![index]
                                                     .profileImage
@@ -2435,9 +2427,7 @@ PageController pageController = PageController();
                                     ))),
                             SizedBox(height: 3.h),
                           ],
-                          if (homedata!.appdata!.isAppBottomImage.toString() =="1") ...[
-                      //Banner image
-                          ],
+
                         ],
                       ),
                     ),
@@ -2445,7 +2435,7 @@ PageController pageController = PageController();
                 }
                 return Center(
                   child: CircularProgressIndicator(
-                    color: color.red,
+                    color: color.primarycolor,
                   ),
                 );
               },

@@ -65,13 +65,13 @@ class _ProductState extends State<Product> {
         "item_image": itemimage,
         "item_type": itemtype,
         "tax": itemtax,
-        "item_price": itemprice,
+        "item_price": numberFormat.format(double.parse(itemprice)),
         "variation_id": "",
         "variation": "",
         "addons_id": "",
         "addons_name": "",
         "addons_price": "",
-        "addons_total_price":"",
+        "addons_total_price": numberFormat.format(double.parse("0")),
       };
 
       var response =
@@ -150,13 +150,16 @@ class _ProductState extends State<Product> {
         "item_name": itemdata!.data!.itemName,
         "item_image": itemdata!.data!.itemImages![0].imageName,
         "item_type": itemdata!.data!.itemType,
-        "tax":itemdata!.data!.tax,
-          
+        "tax": numberFormat.format(double.parse(
+          itemdata!.data!.tax,
+        )),
         "item_price": itemdata!.data!.hasVariation == "1"
-            ? itemdata!.data!.variation![
+            ? numberFormat.format(double.parse(itemdata!
+                .data!
+                .variation![
                     int.parse(select._variationselecationindex.toString())]
-                .productPrice!
-            : itemdata!.data!.price!,
+                .productPrice!))
+            : numberFormat.format(double.parse(itemdata!.data!.price!)),
         "variation_id": itemdata!.data!.hasVariation == "1"
             ? itemdata!
                 .data!
@@ -207,7 +210,7 @@ class _ProductState extends State<Product> {
           return Scaffold(
             body: Center(
               child: CircularProgressIndicator(
-                color: color.red,
+                color: color.primarycolor,
               ),
             ),
           );
@@ -279,9 +282,10 @@ class _ProductState extends State<Product> {
                           Text(
                             itemdata!.data!.preparationTime,
                             style: TextStyle(
-                                fontSize: 10.sp,
-                                fontFamily: 'Poppins',
-                                color: Colors.black38),
+                              fontSize: 10.sp,
+                              fontFamily: 'Poppins',
+                              color: color.grey,
+                            ),
                           ),
                         ],
                       ),
@@ -294,8 +298,8 @@ class _ProductState extends State<Product> {
                       if (itemdata!.data!.hasVariation == "1") ...[
                         Text(
                           currency_position == "1"
-                              ? "$currency${itemdata!.data!.variation![0].productPrice.toString()}"
-                              : "${itemdata!.data!.variation![0].productPrice.toString()}$currency",
+                              ? "$currency${numberFormat.format(double.parse(itemdata!.data!.variation![0].productPrice.toString()))}"
+                              : "${numberFormat.format(double.parse(itemdata!.data!.variation![0].productPrice.toString()))}$currency",
                           style: TextStyle(
                             fontSize: 21.sp,
                             fontFamily: 'Poppins_bold',
@@ -304,8 +308,8 @@ class _ProductState extends State<Product> {
                       ] else ...[
                         Text(
                           currency_position == "1"
-                              ? "$currency${itemdata!.data!.price.toString()}"
-                              : "${itemdata!.data!.price.toString()}$currency",
+                              ? "$currency${numberFormat.format(double.parse(itemdata!.data!.price.toString()))}"
+                              : "${numberFormat.format(double.parse(itemdata!.data!.price.toString()))}$currency",
                           style: TextStyle(
                             fontSize: 21.sp,
                             fontFamily: 'Poppins_bold',
@@ -337,7 +341,7 @@ class _ProductState extends State<Product> {
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 8.sp,
-                                color: color.red,
+                                color: color.primarycolor,
                               ),
                             ),
                           ]
@@ -429,8 +433,8 @@ class _ProductState extends State<Product> {
                                                     : Colors.transparent,
                                             borderRadius:
                                                 BorderRadius.circular(50),
-                                            border: Border.all(
-                                                color: color.green)),
+                                            border:
+                                                Border.all(color: color.green)),
                                         child: Icon(Icons.done,
                                             color:
                                                 select._variationselecationindex ==
@@ -459,8 +463,8 @@ class _ProductState extends State<Product> {
                                         ),
                                         Text(
                                           currency_position == "1"
-                                              ? "$currency${itemdata!.data!.variation![index].productPrice!}"
-                                              : "${itemdata!.data!.variation![index].productPrice!}$currency",
+                                              ? "$currency${numberFormat.format(double.parse(itemdata!.data!.variation![index].productPrice!))}"
+                                              : "${numberFormat.format(double.parse(itemdata!.data!.variation![index].productPrice!))}$currency",
                                           style: TextStyle(
                                               fontSize: 8.sp,
                                               fontFamily: 'Poppins'),
@@ -524,8 +528,8 @@ class _ProductState extends State<Product> {
                                               : color.green,
                                           borderRadius:
                                               BorderRadius.circular(7),
-                                          border: Border.all(
-                                              color: color.green)),
+                                          border:
+                                              Border.all(color: color.green)),
                                       child: Icon(Icons.done,
                                           color: itemdata!.data!.addons![index]
                                                       .isselected ==
@@ -552,8 +556,8 @@ class _ProductState extends State<Product> {
                                         ),
                                         Text(
                                           currency_position == "1"
-                                              ? "$currency${itemdata!.data!.addons![index].price.toString()}"
-                                              : "${itemdata!.data!.addons![index].price.toString()}$currency",
+                                              ? "$currency${numberFormat.format(double.parse(itemdata!.data!.addons![index].price.toString()))}"
+                                              : "${numberFormat.format(double.parse(itemdata!.data!.addons![index].price.toString()))}$currency",
                                           style: TextStyle(
                                               fontSize: 8.sp,
                                               fontFamily: 'Poppins'),
@@ -758,8 +762,8 @@ class _ProductState extends State<Product> {
                                                 "1") ...[
                                               Text(
                                                 currency_position == "1"
-                                                    ? "$currency${itemdata!.relateditems![index].variation![0].productPrice.toString()}"
-                                                    : "${itemdata!.relateditems![index].variation![0].productPrice.toString()}$currency",
+                                                    ? "$currency${numberFormat.format(double.parse(itemdata!.relateditems![index].variation![0].productPrice.toString()))}"
+                                                    : "${numberFormat.format(double.parse(itemdata!.relateditems![index].variation![0].productPrice.toString()))}$currency",
                                                 style: TextStyle(
                                                     fontSize: 13,
                                                     fontFamily: 'Poppins_bold',
@@ -769,8 +773,8 @@ class _ProductState extends State<Product> {
                                             ] else ...[
                                               Text(
                                                 currency_position == "1"
-                                                    ? "$currency$itemdata!.relateditems![index].price.toString()}"
-                                                    : "${itemdata!.relateditems![index].price.toString()}$currency",
+                                                    ? "$currency${numberFormat.format(double.parse(itemdata!.relateditems![index].price.toString()))}"
+                                                    : "${numberFormat.format(double.parse(itemdata!.relateditems![index].price.toString()))}$currency",
                                                 style: TextStyle(
                                                     fontSize: 13,
                                                     fontFamily: 'Poppins_bold',
@@ -870,8 +874,7 @@ class _ProductState extends State<Product> {
                                                             fontFamily:
                                                                 'Poppins',
                                                             fontSize: 9.5.sp,
-                                                            color: color
-                                                                .green),
+                                                            color: color.green),
                                                       ),
                                                     )),
                                               ),
@@ -903,8 +906,7 @@ class _ProductState extends State<Product> {
                                                         },
                                                         child: Icon(
                                                           Icons.remove,
-                                                          color:
-                                                              color.green,
+                                                          color: color.green,
                                                           size: 16,
                                                         )),
                                                     Container(
@@ -987,8 +989,7 @@ class _ProductState extends State<Product> {
                                                         },
                                                         child: Icon(
                                                           Icons.add,
-                                                          color:
-                                                              color.green,
+                                                          color: color.green,
                                                           size: 16,
                                                         )),
                                                   ],
@@ -1078,28 +1079,28 @@ class _ProductState extends State<Product> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: color.green)),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: color.black,
+                          ),
+                        ),
                         height: 6.5.h,
                         width: 47.w,
                         child: TextButton(
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.grey,
-                          ),
                           child: Obx(() => count.cartcountnumber == 0
                               ? Text(
                                   LocaleKeys.Viewcart.tr(),
                                   style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: color.green,
-                                      fontSize: 13.sp),
+                                      fontFamily: 'Poppins_medium',
+                                      // color: color.green,
+                                      fontSize: 14.sp),
                                 )
                               : Text(
                                   "${LocaleKeys.Viewcart.tr()}(${count.cartcountnumber.value.toString()})",
                                   style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: color.green,
-                                      fontSize: 13.sp),
+                                      fontFamily: 'Poppins_medium',
+                                      color: color.black,
+                                      fontSize: 14.sp),
                                 )),
                           onPressed: () {
                             if (userid == "") {
@@ -1118,8 +1119,8 @@ class _ProductState extends State<Product> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: color.red)),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         height: 6.5.h,
                         width: 47.w,
                         child: TextButton(
@@ -1146,12 +1147,12 @@ class _ProductState extends State<Product> {
                             add_to_cartAPI();
                           },
                           style: TextButton.styleFrom(
-                            backgroundColor: color.red,
+                            backgroundColor: color.green,
                           ),
                           child: Text(
                             LocaleKeys.Add_to_cart.tr(),
                             style: TextStyle(
-                                fontFamily: 'Poppins_Bold',
+                                fontFamily: 'Poppins_medium',
                                 color: Colors.white,
                                 fontSize: 13.sp),
                           ),

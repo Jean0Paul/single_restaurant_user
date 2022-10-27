@@ -43,40 +43,49 @@ class _CategoriespageState extends State<Categoriespage> {
               itemCount: widget.categoriesdata!.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                mainAxisSpacing: 10,
+                childAspectRatio: 0.87,
+                // mainAxisSpacing: 10,
               ),
               itemBuilder: (BuildContext, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                        height: 13.h,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            Get.to(() => categories_items(
-                                  widget.categoriesdata![index].id.toString(),
-                                  widget.categoriesdata![index].categoryName,
-                                ));
-                          },
-                          child: ClipOval(
-                            // borderRadius: BorderRadius.circular(50),
-                            child: Image.network(
-                              widget.categoriesdata![index].image.toString(),
-                              fit: BoxFit.fill,
-                            ),
+                return SizedBox(
+                  height: 14.h,
+                  child: Column(
+                    children: [
+                      Container(
+                          height: 13.h,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
                           ),
-                        )),
-                    Text(
-                      widget.categoriesdata![index].categoryName.toString(),
-                      style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp),
-                    )
-                  ],
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(() => categories_items(
+                                    widget.categoriesdata![index].id.toString(),
+                                    widget.categoriesdata![index].categoryName,
+                                  ));
+                            },
+                            child: ClipOval(
+                              // borderRadius: BorderRadius.circular(50),
+                              child: Image.network(
+                                widget.categoriesdata![index].image.toString(),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          )),
+                      SizedBox(
+                        height: 0.8.h,
+                      ),
+                      Expanded(
+                        child: Text(
+                          widget.categoriesdata![index].categoryName.toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style:
+                              TextStyle(fontFamily: 'Poppins', fontSize: 11.sp),
+                        ),
+                      )
+                    ],
+                  ),
                 );
               })),
     );
-    
   }
 }

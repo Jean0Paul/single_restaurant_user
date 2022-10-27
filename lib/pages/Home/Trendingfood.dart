@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, file_names, use_key_in_widget_constructors, non_constant_identifier_names, must_be_immutable, avoid_print, prefer_is_empty
+// ignore_for_file: prefer_const_constructors, file_names, use_key_in_widget_constructors, non_constant_identifier_names, must_be_immutable,   prefer_is_empty
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -59,20 +59,16 @@ class _TrendingfoodState extends State<Trendingfood> {
         "filter": filter,
         "search": widget.type,
       };
-      print(map);
       var response =
           await Dio().post(DefaultApi.appUrl + PostAPI.Searchitem, data: map);
-      print(response);
       isfirstcome = false;
       loader.hideLoading();
       itemdata = searchmodel.fromJson(response.data);
-      print("object ${itemdata!.data!.length}");
       setState(() {
         _scaffoldKey.currentWidget.reactive();
       });
       return itemdata;
-    } catch (e) {
-      print(e);
+    } catch (e) {rethrow;
     }
   }
 
@@ -87,20 +83,18 @@ class _TrendingfoodState extends State<Trendingfood> {
         "item_image": itemimage,
         "item_type": itemtype,
         "tax": itemtax,
-        "item_price": itemprice,
+        "item_price": numberFormat.format(double.parse(itemprice)),
         "variation_id": "",
         "variation": "",
         "addons_id": "",
         "addons_name": "",
         "addons_price": "",
-        "addons_total_price": "0",
+        "addons_total_price": numberFormat.format(double.parse("0")),
       };
 
-      print(map);
 
       var response =
           await Dio().post(DefaultApi.appUrl + PostAPI.Addtocart, data: map);
-      print(response);
       addtocartdata = addtocartmodel.fromJson(response.data);
       if (addtocartdata!.status == 1) {
         loader.hideLoading();
@@ -110,8 +104,7 @@ class _TrendingfoodState extends State<Trendingfood> {
         count.cartcountnumber(int.parse(prefs.getString(APPcart_count)!));
         setState(() {});
       }
-    } catch (e) {
-      print(e);
+    } catch (e) {rethrow;
     }
   }
 
@@ -123,11 +116,9 @@ class _TrendingfoodState extends State<Trendingfood> {
     try {
       loader.showLoading();
       var map = {"user_id": userid, "item_id": itemid, "type": isfavorite};
-      print(map);
 
       var favoriteresponse = await Dio()
           .post(DefaultApi.appUrl + PostAPI.Managefavorite, data: map);
-      print(favoriteresponse);
       var finaldata = QTYupdatemodel.fromJson(favoriteresponse.data);
 
       if (finaldata.status == 1) {
@@ -141,8 +132,7 @@ class _TrendingfoodState extends State<Trendingfood> {
         loader.hideLoading();
         loader.showErroDialog(description: finaldata.message);
       }
-    } catch (e) {
-      print(e);
+    } catch (e) {rethrow;
     }
   }
 
@@ -198,7 +188,7 @@ class _TrendingfoodState extends State<Trendingfood> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            LocaleKeys.Select_Option.tr(),
+                                            LocaleKeys.Filter_Options.tr(),
                                             style: TextStyle(
                                                 fontFamily: 'Poppins_bold',
                                                 fontSize: 20),
@@ -496,8 +486,8 @@ class _TrendingfoodState extends State<Trendingfood> {
                                           "1") ...[
                                         Text(
                                           currency_position == "1"
-                                              ? "$currency${itemdata!.data![index].variation![0].productPrice.toString()}"
-                                              : "${itemdata!.data![index].variation![0].productPrice.toString()}$currency",
+                                              ? "$currency${numberFormat.format(double.parse(itemdata!.data![index].variation![0].productPrice.toString()))}"
+                                              : "${numberFormat.format(double.parse(itemdata!.data![index].variation![0].productPrice.toString()))}$currency",
                                           style: TextStyle(
                                             fontSize: 10.sp,
                                             fontFamily: 'Poppins_bold',
@@ -506,8 +496,8 @@ class _TrendingfoodState extends State<Trendingfood> {
                                       ] else ...[
                                         Text(
                                           currency_position == "1"
-                                              ? "$currency${itemdata!.data![index].price.toString()}"
-                                              : "${itemdata!.data![index].price.toString()}$currency",
+                                              ? "$currency${numberFormat.format(double.parse(itemdata!.data![index].price.toString()))}"
+                                              : "${numberFormat.format(double.parse(itemdata!.data![index].price.toString()))}$currency",
                                           style: TextStyle(
                                             fontSize: 10.sp,
                                             fontFamily: 'Poppins_bold',
@@ -560,7 +550,6 @@ class _TrendingfoodState extends State<Trendingfood> {
                                                     itemdata!.data![index].tax,
                                                     itemdata!
                                                         .data![index].price);
-                                                print("add to cart api");
                                               }
                                             }
                                           },
@@ -666,7 +655,6 @@ class _TrendingfoodState extends State<Trendingfood> {
                                                               .data![index].tax,
                                                           itemdata!.data![index]
                                                               .price);
-                                                      print("addtocartAPI");
                                                     }
                                                   },
                                                   child: Icon(

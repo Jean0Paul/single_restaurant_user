@@ -335,7 +335,7 @@ class _HomepageState extends State<Homepage> {
   List pages = [
     Homescreen(),
     Favorite(),
-    Chat(),
+    //Chat(),
     Viewcart(),
     Orderhistory(),
     Profilepage()
@@ -419,7 +419,7 @@ class _HomepageState extends State<Homepage> {
             children: const [
               Homescreen(),
               Favorite(),
-              Chat(),
+              //Chat(),
               Viewcart(),
               Orderhistory(),
               Profilepage(),
@@ -454,7 +454,7 @@ class _HomepageState extends State<Homepage> {
                   color: themenofier.isdark ? Colors.white : Colors.black,
                 ),
               ),
-              BottomNavigationBarItem(
+              /*BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   'Assets/Icons/chats.svg',
                   height: height.bottombaricon,
@@ -466,7 +466,7 @@ class _HomepageState extends State<Homepage> {
                   height: height.bottombaricon,
                   color: themenofier.isdark ? Colors.white : Colors.black,
                 ),
-              ),
+              ),*/
               BottomNavigationBarItem(
                    icon: Obx(
                      () => count.cartcountnumber.value == 0

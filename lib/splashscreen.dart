@@ -33,7 +33,7 @@ class _SplashscreenState extends State<Splashscreen> {
   initdata() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     initScreen = prefs.getInt(init_Screen);
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (_) =>
              Homepage(0),

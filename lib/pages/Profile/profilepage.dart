@@ -16,6 +16,7 @@ import 'package:singlerestaurant/pages/Profile/Ourteam.dart';
 import 'package:singlerestaurant/pages/Profile/wallet.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:singlerestaurant/pages/chat/chat.dart';
 import 'package:singlerestaurant/translation/locale_keys.g.dart';
 import 'Aboutus.dart';
 import 'Bookatable.dart';
@@ -782,7 +783,7 @@ class _ProfilepageState extends State<Profilepage> {
                             ),
                           ),
                         ),*/
-                        /*Container(
+                        Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
                           color:
@@ -793,7 +794,7 @@ class _ProfilepageState extends State<Profilepage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Gallary()),
+                                  builder: (context) => Chat()),
                             );
                           },
                           child: Container(
@@ -801,7 +802,7 @@ class _ProfilepageState extends State<Profilepage> {
                             child: Row(
                               children: [
                                 SvgPicture.asset(
-                                  'Assets/svgicon/Gallary.svg',
+                                  'Assets/Icons/chat.svg',
                                   height: height.settingiconheight,
                                   color: themenofier.isdark
                                       ? Colors.white
@@ -813,7 +814,7 @@ class _ProfilepageState extends State<Profilepage> {
                                     right: 3.3.w,
                                   ),
                                   child: Text(
-                                    LocaleKeys.Gallery.tr(),
+                                    LocaleKeys.Chat.tr(),
                                     style: TextStyle(
                                         fontSize: 10.sp, fontFamily: 'Poppins'),
                                   ),
@@ -827,7 +828,7 @@ class _ProfilepageState extends State<Profilepage> {
                               ],
                             ),
                           ),
-                        ),*/
+                        ),
                         Container(
                           height: 0.8.sp,
                           width: MediaQuery.of(context).size.width,
