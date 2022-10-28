@@ -241,9 +241,8 @@ class _OrdersummaryState extends State<Ordersummary> {
                                           Expanded(
                                             child: Row(
                                               children: [
-                                                if (summarydata!.data![index]
-                                                        .itemType ==
-                                                    "1") ...[
+                                                if (summarydata!.data![index].itemType =="1") 
+                                                ...[
                                                   SizedBox(
                                                     height: 2.h,
                                                     // color: Colors.black,
@@ -251,10 +250,8 @@ class _OrdersummaryState extends State<Ordersummary> {
                                                       Defaulticon.vegicon,
                                                     ),
                                                   ),
-                                                ] else if (summarydata!
-                                                        .data![index]
-                                                        .itemType ==
-                                                    "2") ...[
+                                                ] else 
+                                                if (summarydata!.data![index].itemType =="2") ...[
                                                   SizedBox(
                                                     height: 2.h,
                                                     // color: Colors.black,
@@ -269,8 +266,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                                 SizedBox(
                                                   width: 42.w,
                                                   child: Text(
-                                                    summarydata!
-                                                        .data![index].itemName
+                                                    summarydata!.data![index].itemName
                                                         .toString(),
                                                     maxLines: 1,
                                                     softWrap: true,
@@ -286,9 +282,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                               ],
                                             ),
                                           ),
-                                          if (summarydata!
-                                                  .data![index].variation ==
-                                              "") ...[
+                                          if (summarydata!.data![index].variation =="") ...[
                                             Expanded(
                                               child: Text(
                                                 "-",
@@ -303,8 +297,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                           ] else ...[
                                             Expanded(
                                               child: Text(
-                                                summarydata!
-                                                    .data![index].variation
+                                                summarydata!.data![index].variation
                                                     .toString(),
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
@@ -315,9 +308,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                               ),
                                             ),
                                           ],
-                                          if (summarydata!
-                                                  .data![index].addonsName ==
-                                              "") ...[
+                                          if (summarydata!.data![index].addonsName =="") ...[
                                             Expanded(
                                               child: Text(
                                                 "-",

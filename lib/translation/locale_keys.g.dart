@@ -81,8 +81,8 @@ abstract class  LocaleKeys {
   static const Continue = 'Continue';
   static const Select_Option = 'Select_Option';
   static const DELIVERY = 'DELIVERY';
-  static const Checkout = 'Vérifier';
-  static const Takeaway = 'Emporter';
+  static const Checkout = 'Continuer';
+  static const Takeaway = 'Payer';
   static const Cancel = 'Annuler';
   static const Please_select_option = 'Veuillez_select_option';
   static const Youve_reached_the_maximum_units_allowedfor_the_purchase_of_this_item = 'Vous avez atteint le maximum d unités autorisé pour l achat de cet article';
@@ -289,7 +289,7 @@ abstract class  LocaleKeys {
   static const No91_70164 = 'No91_70164';
   static const Company_address = 'Company_address';
   static const Ordersummary = 'Ordersummary';
-  static const Productsummary = 'Productsummary';
+  static const Productsummary = 'Détails du produit';
   static const Select = 'Select';
   static const Onlyforyou = 'Onlyforyou';
   static const Ratingreview = 'Ratingreview';

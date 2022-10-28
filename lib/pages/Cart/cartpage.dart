@@ -543,7 +543,7 @@ class _ViewcartState extends State<Viewcart> {
                                 children: [
                                   ClipRRect(
                                     child: Image.asset(
-                                      'Assets/product/Takeaway.png',
+                                      'Assets/product/Payement.png',
                                       height: 9.h,
                                       width: 13.w,
                                     ),

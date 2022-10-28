@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:singlerestaurant/pages/Cart/orderpayment/orderpaystack.dart';
 
 class Chat_screen extends StatefulWidget {
   const Chat_screen({Key? key}) : super(key: key);
@@ -12,23 +13,23 @@ class _Chat_screenState extends State<Chat_screen> {
  
  _sendMessageArea(){
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         height: 70,
-        color: Colors.white,
+        color: Colors.grey,
         child: Row(
             children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.photo),
+                    icon: const Icon(Icons.photo),
                     iconSize: 25,
                     color: Theme.of(context).primaryColor,
                     onPressed: () {},
                     ),
-                    TextField(
+                    const TextField(
                       decoration: InputDecoration.collapsed(hintText: 'envoyer message'),
                       textCapitalization: TextCapitalization.sentences,
                     ),
                   IconButton(
-                    icon: Icon(Icons.send),
+                    icon: const Icon(Icons.send),
                     iconSize: 25,
                     color: Theme.of(context).primaryColor,
                     onPressed: () {},
@@ -52,16 +53,16 @@ class _Chat_screenState extends State<Chat_screen> {
       ),
       body: Column(
         children: <Widget>[
-          Column(
-            children: [
+         Expanded(
+          child:  Column(
+            children: <Widget>[
               Container(
                 
               ),
             ],
+           ),
           ),
-          _sendMessageArea(
-            
-          ),
+            _sendMessageArea(),
         ],
       ),
     );
