@@ -227,12 +227,13 @@ class _OrdersummaryState extends State<Ordersummary> {
                                   ),
                                   Expanded(
                                     child: Padding(
+                                      
                                       padding: EdgeInsets.only(
                                         right: 2.w,
                                         left: 2.w,
                                         bottom: 0.8.h,
                                       ),
-                                      child: Column(
+                                      child: Column(  
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         mainAxisAlignment:
@@ -366,8 +367,8 @@ class _OrdersummaryState extends State<Ordersummary> {
                                                 ),
                                               ),
                                             ),
-                                          ])
-                                        ],
+                                          ]),
+                                        ],  
                                       ),
                                     ),
                                   )
@@ -380,6 +381,30 @@ class _OrdersummaryState extends State<Ordersummary> {
                               );
                             },
                             itemCount: summarydata!.data!.length)),
+                     Container(
+                        margin: EdgeInsets.only(
+                          top: 2.h,
+                        ),
+                        child: Column(
+                          children: [
+                           TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                    labelText:"Numero de la table", 
+                                    hintText: "Veuillez saisir le numero de la table",
+                                )
+                            ),
+                            /*Text(
+                              currency_position == "1"
+                                    ? "$currency${numberFormat.format(double.parse(summarydata!.summery!.orderTotal.toString()))}"
+                                    : "${numberFormat.format(double.parse(summarydata!.summery!.orderTotal.toString()))}$currency",
+                                style: TextStyle(
+                                    fontFamily: 'Poppins_semiBold',
+                                    fontSize: 11.sp),
+                            ),*/
+                          ],
+                        ),
+                     ),
                     Container(
                         margin: EdgeInsets.only(top: 1.2.h),
                         padding: EdgeInsets.only(
@@ -535,6 +560,30 @@ class _OrdersummaryState extends State<Ordersummary> {
                             style: TextStyle(
                                 fontFamily: 'Poppins_semibold',
                                 fontSize: 13.sp),
+                          ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                LocaleKeys.Numrero_Tablee.tr(),
+                                style: TextStyle(
+                                    fontFamily: 'Poppins', fontSize: 10.sp),
+                              ),
+                              Text(
+                                /*currency_position == "1"
+                                    ? "$currency${numberFormat.format(double.parse(summarydata!.summery!.orderTotal.toString()))}"
+                                    : "${numberFormat.format(double.parse(summarydata!.summery!.orderTotal.toString()))}$currency",
+                                style: TextStyle(
+                                    fontFamily: 'Poppins_semiBold',
+                                    fontSize: 11.sp),*/
+                                     LocaleKeys.Numrero_Tablee.tr(),
+                                style: TextStyle(
+                                    fontFamily: 'Poppins', fontSize: 10.sp),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: 1.h,
