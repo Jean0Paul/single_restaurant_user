@@ -25,7 +25,7 @@ abstract class  LocaleKeys {
   static const comment2 = 'comment2';
   static const Create_an_account_so_you_can_order_your_favourite_product_faster = 'Create_an_account_so_you_can_order_your_favourite_product_faster';
   static const Full_name = 'Nom et prénom';
-  static const Mobile = 'Mobile';
+  static const Mobile = 'Numero Telephone';
   static const Referral_code_Optional = 'Referral_code_Facultatif';
   static const I_accept_the_terms_conditions = 'J accepte lestermes conditions';
   static const Already_have_an_account = 'Already_have_an_account';
@@ -97,7 +97,7 @@ abstract class  LocaleKeys {
   static const Apply = 'Apply';
   static const Remove = 'Remove';
   static const Bill_Details = 'Détails de la facture';
-  static const Numrero_Tablee = 'N° Table';
+  static const Numrero_Table = 'N° Table';
   static const SubTotal = 'Total';
   static const Tax = 'Tax';
   static const Delivery_Fee = 'Frais de livraison';
@@ -253,9 +253,9 @@ abstract class  LocaleKeys {
   static const Last_name = 'Last_name';
   static const Message = 'Message';
   static const comment30 = 'comment30';
-  static const No_of_guest = 'No_of_guest';
+  static const No_of_guest = 'Nombre d\'invités';
   static const Date = 'Date';
-  static const Time = 'Time';
+  static const Time = 'Heure';
   static const Reservation_Type = 'Reservation_Type';
   static const Special_Request_Optional = 'Special_Request_Optional';
   static const Your_booking_request_is_registered_successfully = 'Your_booking_request_is_registered_successfully';
@@ -296,7 +296,7 @@ abstract class  LocaleKeys {
   static const Ratingreview = 'Ratingreview';
   static const Faqs = 'Faqs';
   static const Reservationtype = 'Reservationtype';
-  static const Specialrequest = 'Specialrequest';
+  static const Specialrequest = 'Demande spéciale';
   static const ok = 'ok';
 
 }

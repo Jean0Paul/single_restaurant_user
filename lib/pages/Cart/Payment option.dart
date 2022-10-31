@@ -305,50 +305,7 @@ class _PaymentoptionState extends State<Paymentoption> {
                       } else {
                         placeorderAPI("2");
                       }
-                    } else if (namepay == "RazorPay") {
-                      Get.to(() => orderrazorpay(
-                            // order
-                            widget.ordertotal,
-                            widget.ordertype,
-                            widget.offer_code,
-                            widget.discount_amount,
-                            widget.tax_amount,
-                            widget.delivery_charge,
-                            //address
-                            widget.addresstype,
-                            widget.address,
-                            widget.area,
-                            widget.houseno,
-                            widget.lang,
-                            widget.lat,
-                            // extra
-                            widget.ordernote,
-                            //key
-                            public_key,
-                            secret_key,
-                            currency,
-                          ));
-                    } else if (namepay == "Stripe") {
-                      print("object");
-                      Get.to(() => orderstripe(
-                            //order
-                            widget.ordertotal,
-                            widget.ordertype,
-                            widget.offer_code,
-                            widget.discount_amount,
-                            widget.tax_amount,
-                            widget.delivery_charge,
-                            // address
-                            widget.addresstype,
-                            widget.address,
-                            widget.area,
-                            widget.houseno,
-                            widget.lang,
-                            widget.lat,
-                            //extra
-                            widget.ordernote,
-                          ));
-                    } else if (namepay == "Flutterwave") {
+                    }   else if (namepay == "Flutterwave") {
                       print(currency);
                       Get.to(() => orderflutterwave(
                             widget.ordertotal,

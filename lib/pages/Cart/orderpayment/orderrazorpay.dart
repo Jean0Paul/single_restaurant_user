@@ -3,7 +3,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:singlerestaurant/Model/cartpage/orderplaceMODEL.dart';
 import 'package:singlerestaurant/Widgets/loader.dart';
@@ -64,39 +63,20 @@ class orderrazorpay extends StatefulWidget {
 class _orderrazorpayState extends State<orderrazorpay> {
   String? payment_id;
   String? pay_message;
-  late Razorpay razorpay;
   String? userid;
   @override
   void initState() {
     super.initState();
-    razorpay = Razorpay();
-    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+
     openchekout();
   }
 
   @override
   void dispose() {
     super.dispose();
-    razorpay.clear();
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    payment_id = response.paymentId;
-    pay_message = "sucscess"; // Do
 
-    placeorderAPI(); // something when payment succeeds
-  }
-
-  void _handlePaymentError(PaymentFailureResponse response) {
-    Get.back();
-    loader.showErroDialog(description: "payment failed");
-  }
-
-  void _handleExternalWallet(ExternalWalletResponse response) {
-    loader.showErroDialog(description: response.toString());
-  }
 
   openchekout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -112,11 +92,6 @@ class _orderrazorpayState extends State<orderrazorpay> {
         'email': prefs.getString(UD_user_email),
       }
     };
-    try {
-      razorpay.open(options);
-    } catch (e) {
-      rethrow;
-    }
   }
 
   placeorderAPI() async {

@@ -352,10 +352,11 @@ class _BookatableState extends State<Bookatable> {
                       value!,
                       LocaleKeys.Reservation_Type.tr(),
                     ),
+                    keyboardType: TextInputType.number,
                     controller: Reservation,
                     cursorColor: Colors.grey,
                     decoration: InputDecoration(
-                        hintText: LocaleKeys.Reservationtype.tr(),
+                        hintText: LocaleKeys.Numrero_Table.tr(),
                         hintStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 11.sp,

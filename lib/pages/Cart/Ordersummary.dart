@@ -568,7 +568,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                LocaleKeys.Numrero_Tablee.tr(),
+                                LocaleKeys.Numrero_Table.tr(),
                                 style: TextStyle(
                                     fontFamily: 'Poppins', fontSize: 10.sp),
                               ),
@@ -579,7 +579,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                 style: TextStyle(
                                     fontFamily: 'Poppins_semiBold',
                                     fontSize: 11.sp),*/
-                                     LocaleKeys.Numrero_Tablee.tr(),
+                                     LocaleKeys.Numrero_Table.tr(),
                                 style: TextStyle(
                                     fontFamily: 'Poppins', fontSize: 10.sp),
                               ),
@@ -723,161 +723,161 @@ class _OrdersummaryState extends State<Ordersummary> {
                           SizedBox(
                             height: 2.h,
                           ),
-                          if (widget.ordertype == "1") ...[
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: 0.5.h,
-                                bottom: 1.h,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    LocaleKeys.Deliveryaddress.tr(),
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins_semibold',
-                                        fontSize: 13.sp),
-                                  ),
-                                  InkWell(
-                                      onTap: () async {
-                                        Addressdata = await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Manage_Addresses(1)),
-                                        );
-
-                                        if (Addressdata != null) {
-                                          double distance = Geolocator
-                                                  .distanceBetween(
-                                                double.parse(reslat!),
-                                                double.parse(reslang!),
-                                                double.parse(Addressdata!.lat),
-                                                double.parse(Addressdata!.lang),
-                                              ) /
-                                              1000;
-                                          if (DefaultApi.environment ==
-                                              "sendbox") {
-                                            deliveryfees =
-                                                double.parse(deliverycharge!)
-                                                    .toString();
-                                          } else {
-                                            deliveryfees = (distance *
-                                                    double.parse(
-                                                        deliverycharge!))
-                                                .toString();
-                                          }
-
-                                          ordertotal = (double.parse(
-                                                      ordertotal) +
-                                                  double.parse(deliveryfees))
-                                              .toString();
-
-                                          setState(() {
-                                            Addressdata;
-                                          });
-                                        }
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 3.5.h,
-                                        width: 18.w,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(3),
-                                            border: Border.all(
-                                                width: 1, color: Colors.grey)),
-                                        child: Text(
-                                          LocaleKeys.Select.tr(),
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: color.green,
-                                              fontSize: 10.5.sp),
-                                        ),
-                                      ))
-                                ],
-                              ),
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 0.5.h,
-                                  ),
-                                  child: SvgPicture.asset(
-                                    'Assets/svgicon/Address.svg',
-                                    color: color.primarycolor,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                if (Addressdata == null) ...[
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      top: 0.5.h,
-                                    ),
-                                    child: Text(
-                                      LocaleKeys.Set_your_delivery_address.tr(),
-                                      style: TextStyle(
-                                          fontSize: 10.5.sp,
-                                          fontFamily: "Poppins_semibold"),
-                                    ),
-                                  ),
-                                ] else ...[
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      if (Addressdata!.addressType == "1") ...[
-                                        Text(
-                                          LocaleKeys.Home.tr(),
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins_semibold',
-                                              // color: color.green,
-                                              fontSize: 9.sp),
-                                        ),
-                                      ] else if (Addressdata!.addressType ==
-                                          "2") ...[
-                                        Text(
-                                          LocaleKeys.Office.tr(),
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins_semibold',
-                                              // color: color.green,
-                                              fontSize: 9.sp),
-                                        ),
-                                      ] else if (Addressdata!.addressType ==
-                                          "3") ...[
-                                        Text(
-                                          LocaleKeys.Other.tr(),
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins_semibold',
-                                              // color: color.green,
-                                              fontSize: 9.sp),
-                                        ),
-                                      ],
-                                      SizedBox(
-                                        width: 75.w,
-                                        child: Text(
-                                          "${Addressdata!.address} ${Addressdata!.area}",
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 9.sp),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ],
-                            ),
-                            SizedBox(
-                              height: 2.5.h,
-                            ),
-                          ],
-                          Text(
+                          // if (widget.ordertype == "1") ...[
+                          //   Padding(
+                          //     padding: EdgeInsets.only(
+                          //       top: 0.5.h,
+                          //       bottom: 1.h,
+                          //     ),
+                          //     child: Row(
+                          //       mainAxisAlignment:
+                          //           MainAxisAlignment.spaceBetween,
+                          //       children: [
+                          //         Text(
+                          //           LocaleKeys.Deliveryaddress.tr(),
+                          //           style: TextStyle(
+                          //               fontFamily: 'Poppins_semibold',
+                          //               fontSize: 13.sp),
+                          //         ),
+                          //         InkWell(
+                          //             onTap: () async {
+                          //               Addressdata = await Navigator.push(
+                          //                 context,
+                          //                 MaterialPageRoute(
+                          //                     builder: (context) =>
+                          //                         Manage_Addresses(1)),
+                          //               );
+                          //
+                          //               if (Addressdata != null) {
+                          //                 double distance = Geolocator
+                          //                         .distanceBetween(
+                          //                       double.parse(reslat!),
+                          //                       double.parse(reslang!),
+                          //                       double.parse(Addressdata!.lat),
+                          //                       double.parse(Addressdata!.lang),
+                          //                     ) /
+                          //                     1000;
+                          //                 if (DefaultApi.environment ==
+                          //                     "sendbox") {
+                          //                   deliveryfees =
+                          //                       double.parse(deliverycharge!)
+                          //                           .toString();
+                          //                 } else {
+                          //                   deliveryfees = (distance *
+                          //                           double.parse(
+                          //                               deliverycharge!))
+                          //                       .toString();
+                          //                 }
+                          //
+                          //                 ordertotal = (double.parse(
+                          //                             ordertotal) +
+                          //                         double.parse(deliveryfees))
+                          //                     .toString();
+                          //
+                          //                 setState(() {
+                          //                   Addressdata;
+                          //                 });
+                          //               }
+                          //             },
+                          //             child: Container(
+                          //               alignment: Alignment.center,
+                          //               height: 3.5.h,
+                          //               width: 18.w,
+                          //               decoration: BoxDecoration(
+                          //                   borderRadius:
+                          //                       BorderRadius.circular(3),
+                          //                   border: Border.all(
+                          //                       width: 1, color: Colors.grey)),
+                          //               child: Text(
+                          //                 LocaleKeys.Select.tr(),
+                          //                 style: TextStyle(
+                          //                     fontFamily: 'Poppins',
+                          //                     color: color.green,
+                          //                     fontSize: 10.5.sp),
+                          //               ),
+                          //             ))
+                          //       ],
+                          //     ),
+                          //   ),
+                          //   Row(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     children: [
+                          //       Padding(
+                          //         padding: EdgeInsets.only(
+                          //           top: 0.5.h,
+                          //         ),
+                          //         child: SvgPicture.asset(
+                          //           'Assets/svgicon/Address.svg',
+                          //           color: color.primarycolor,
+                          //         ),
+                          //       ),
+                          //       SizedBox(
+                          //         width: 2.w,
+                          //       ),
+                          //       if (Addressdata == null) ...[
+                          //         Padding(
+                          //           padding: EdgeInsets.only(
+                          //             top: 0.5.h,
+                          //           ),
+                          //           child: Text(
+                          //             LocaleKeys.Set_your_delivery_address.tr(),
+                          //             style: TextStyle(
+                          //                 fontSize: 10.5.sp,
+                          //                 fontFamily: "Poppins_semibold"),
+                          //           ),
+                          //         ),
+                          //       ] else ...[
+                          //         Column(
+                          //           crossAxisAlignment:
+                          //               CrossAxisAlignment.start,
+                          //           mainAxisAlignment: MainAxisAlignment.start,
+                          //           children: [
+                          //             if (Addressdata!.addressType == "1") ...[
+                          //               Text(
+                          //                 LocaleKeys.Home.tr(),
+                          //                 style: TextStyle(
+                          //                     fontFamily: 'Poppins_semibold',
+                          //                     // color: color.green,
+                          //                     fontSize: 9.sp),
+                          //               ),
+                          //             ] else if (Addressdata!.addressType ==
+                          //                 "2") ...[
+                          //               Text(
+                          //                 LocaleKeys.Office.tr(),
+                          //                 style: TextStyle(
+                          //                     fontFamily: 'Poppins_semibold',
+                          //                     // color: color.green,
+                          //                     fontSize: 9.sp),
+                          //               ),
+                          //             ] else if (Addressdata!.addressType ==
+                          //                 "3") ...[
+                          //               Text(
+                          //                 LocaleKeys.Other.tr(),
+                          //                 style: TextStyle(
+                          //                     fontFamily: 'Poppins_semibold',
+                          //                     // color: color.green,
+                          //                     fontSize: 9.sp),
+                          //               ),
+                          //             ],
+                          //             SizedBox(
+                          //               width: 75.w,
+                          //               child: Text(
+                          //                 "${Addressdata!.address} ${Addressdata!.area}",
+                          //                 style: TextStyle(
+                          //                     fontFamily: 'Poppins',
+                          //                     fontSize: 9.sp),
+                          //               ),
+                          //             )
+                          //           ],
+                          //         )
+                          //       ],
+                          //     ],
+                          //   ),
+                          //   SizedBox(
+                          //     height: 2.5.h,
+                          //   ),
+                          // ],
+                          /*Text(
                             LocaleKeys.Special_instructions.tr(),
                             style: TextStyle(
                                 fontFamily: 'Poppins_semibold',
@@ -911,7 +911,7 @@ class _OrdersummaryState extends State<Ordersummary> {
                                         const BorderSide(color: Colors.grey),
                                   )),
                             ),
-                          ),
+                          ),*/
                         ],
                       ),
                     ),
