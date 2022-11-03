@@ -92,7 +92,7 @@ abstract class  LocaleKeys {
   static const Product_Summary = 'détails du produit';
   static const Qty = 'Qty';
   static const Promocode = 'Code promo';
-  static const Selectpromo = 'Selectpromo';
+  static const Selectpromo = 'Sélectionnez la promotion';
   static const haveapromocode = 'haveapromocode';
   static const Apply = 'Apply';
   static const Remove = 'Remove';
@@ -289,7 +289,7 @@ abstract class  LocaleKeys {
   static const Contectus = 'Contectus';
   static const No91_70164 = 'No91_70164';
   static const Company_address = 'Company_address';
-  static const Ordersummary = 'Ordersummary';
+  static const Ordersummary = 'Récapitulatif de la commande';
   static const Productsummary = 'Détails du produit';
   static const Select = 'Select';
   static const Onlyforyou = 'Onlyforyou';
