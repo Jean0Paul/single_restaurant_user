@@ -385,25 +385,6 @@ class _OrdersummaryState extends State<Ordersummary> {
                         margin: EdgeInsets.only(
                           top: 2.h,
                         ),
-                        child: Column(
-                          children: [
-                           TextFormField(
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                    labelText:"Numero de la table", 
-                                    hintText: "Veuillez saisir le numero de la table",
-                                )
-                            ),
-                            /*Text(
-                              currency_position == "1"
-                                    ? "$currency${numberFormat.format(double.parse(summarydata!.summery!.orderTotal.toString()))}"
-                                    : "${numberFormat.format(double.parse(summarydata!.summery!.orderTotal.toString()))}$currency",
-                                style: TextStyle(
-                                    fontFamily: 'Poppins_semiBold',
-                                    fontSize: 11.sp),
-                            ),*/
-                          ],
-                        ),
                      ),
                     Container(
                         margin: EdgeInsets.only(top: 1.2.h),

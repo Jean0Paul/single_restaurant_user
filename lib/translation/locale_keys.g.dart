@@ -35,7 +35,7 @@ abstract class  LocaleKeys {
   static const comment4 = 'comment4';
   static const Forgot_Password_ = 'Mot de passe oublié';
   static const Enter_your_registered_email_address_below_We_will_send_new_password_in_your_email = 'Enter_your_registered_email_address_below_We_will_send_new_password_in_your_email';
-  static const Submit = 'Submit';
+  static const Submit = 'Valider';
   static const comment5 = 'comment5';
   static const OTP_Verification = 'OTP_Verification';
   static const Check_your_email_for_OTP_Enter_OTP_below_and_proceed_further = 'Check_your_email_for_OTP_Enter_OTP_below_and_proceed_further';

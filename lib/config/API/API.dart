@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, prefer_interpolation_to_compose_strings, file_names
 
 class DefaultApi {
-  static String baseUrl = "https://services.app-myexcellentia.com/Project/";
+  static String baseUrl = "https://services.app-myexcellentia.com/admin/";
   static String appUrl = baseUrl + "api/";
   static String environment = "live";
 }

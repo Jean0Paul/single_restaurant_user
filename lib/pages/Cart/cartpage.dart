@@ -53,7 +53,7 @@ class _ViewcartState extends State<Viewcart> {
       };
 
       var response =
-          await Dio().post(DefaultApi.appUrl + PostAPI.Summary, data: map);
+      await Dio().post(DefaultApi.appUrl + PostAPI.Summary, data: map);
 
       var finalist = await response.data;
       cartdata = order_summary_model.fromJson(finalist);
@@ -75,7 +75,7 @@ class _ViewcartState extends State<Viewcart> {
       };
       print(map);
       var response =
-          await Dio().post(DefaultApi.appUrl + PostAPI.Qtyupdate, data: map);
+      await Dio().post(DefaultApi.appUrl + PostAPI.Qtyupdate, data: map);
 
       var finallist = await response.data;
       var QTYdata = QTYupdatemodel.fromJson(finallist);
@@ -138,99 +138,98 @@ class _ViewcartState extends State<Viewcart> {
       builder: (context, ThemeModel themenofier, child) {
         return SafeArea(
             child: FutureBuilder(
-          future: cartlistAPI(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(
-                    color: color.primarycolor,
-                  ),
-                ),
-              );
-            } else if (cartdata!.data!.isEmpty) {
-              return Scaffold(
-                body: Center(
-                  child: Text(
-                    LocaleKeys.No_data_found.tr(),
-                    style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 11.sp,
-                        color: Colors.grey),
-                  ),
-                ),
-              );
-            }
-            return Scaffold(
-                backgroundColor: Colors.transparent,
-                appBar: AppBar(
-                  elevation: 0,
-                  centerTitle: true,
-                  title: Text(
-                    LocaleKeys.Mycart.tr(),
-                    style: TextStyle(
-                      fontSize: 12.5.sp,
-                      fontFamily: 'Poppins_semibold',
+              future: cartlistAPI(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(
+                        color: color.primarycolor,
+                      ),
                     ),
-                  ),
-                  automaticallyImplyLeading: false,
-                ),
-                body: Padding(
-                  padding: EdgeInsets.only(bottom: 6.5.h),
-                  child: ListView.builder(
-                    itemCount: cartdata!.data!.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(
-                          top: 1.h,
-                          left: 1.5.h,
-                          right: 1.5.h,
-                          bottom: 1.h,
+                  );
+                } else if (cartdata!.data!.isEmpty) {
+                  return Scaffold(
+                    body: Center(
+                      child: Text(
+                        LocaleKeys.No_data_found.tr(),
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 11.sp,
+                            color: Colors.grey),
+                      ),
+                    ),
+                  );
+                }
+                return Scaffold(
+                    backgroundColor: Colors.transparent,
+                    appBar: AppBar(
+                      elevation: 0,
+                      centerTitle: true,
+                      title: Text(
+                        LocaleKeys.Mycart.tr(),
+                        style: TextStyle(
+                          fontSize: 12.5.sp,
+                          fontFamily: 'Poppins_semibold',
                         ),
-                        height: 15.5.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7),
-                            border: Border.all(
-                              color: Colors.grey,
-                              width: 0.8.sp,
-                            )),
-                        child: Row(children: [
-                          SizedBox(
-                            width: 28.w,
-                            height: 15.5.h,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(7),
-                              child: Image.network(
-                                cartdata!.data![index].itemImage.toString(),
-                                fit: BoxFit.fill,
-                              ),
+                      ),
+                      automaticallyImplyLeading: false,
+                    ),
+                    body: Padding(
+                      padding: EdgeInsets.only(bottom: 6.5.h),
+                      child: ListView.builder(
+                        itemCount: cartdata!.data!.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.only(
+                              top: 1.h,
+                              left: 1.5.h,
+                              right: 1.5.h,
+                              bottom: 1.h,
                             ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                right: 2.w,
-                                left: 2.w,
-                                bottom: 0.8.h,
+                            height: 25.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(7),
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 0.8.sp,
+                                )),
+                            child: Row(children: [
+                              SizedBox(
+                                width: 28.w,
+                                height: 15.5.h,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(7),
+                                  child: Image.network(
+                                    cartdata!.data![index].itemImage.toString(),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    right: 2.w,
+                                    left: 2.w,
+                                    bottom: 0.8.h,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        if (cartdata!.data![index].itemType ==
-                                            "1") ...[
-                                          SizedBox(
-                                            height: 2.h,
-                                            // color: Colors.black,
-                                            child: Image.asset(
-                                              Defaulticon.vegicon,
-                                            ),
-                                          ),
-                                        ] else if (cartdata!
+                                    children: [
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            if (cartdata!.data![index].itemType =="1") ...[
+                                              SizedBox(
+                                                height: 2.h,
+                                                // color: Colors.black,
+                                                child: Image.asset(
+                                                  Defaulticon.vegicon,
+                                                ),
+                                              ),
+                                            ] else if (cartdata!
                                                 .data![index].itemType ==
                                             "2") ...[
                                           SizedBox(
@@ -292,8 +291,7 @@ class _ViewcartState extends State<Viewcart> {
                                   ] else ...[
                                     Expanded(
                                       child: Text(
-                                        cartdata!.data![index].variation
-                                            .toString(),
+                                        cartdata!.data![index].variation.toString(),
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           fontSize: 9.sp,
@@ -303,8 +301,7 @@ class _ViewcartState extends State<Viewcart> {
                                       ),
                                     ),
                                   ],
-                                  if (cartdata!.data![index].addonsName ==
-                                      "") ...[
+                                  if (cartdata!.data![index].addonsName =="") ...[
                                     Expanded(
                                       child: Text(
                                         "-",
@@ -359,107 +356,147 @@ class _ViewcartState extends State<Viewcart> {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 4,
-                                        decoration: BoxDecoration(
-                                          border:
+                                            decoration: BoxDecoration(
+                                              border:
                                               Border.all(color: Colors.grey),
-                                          borderRadius:
+                                              borderRadius:
                                               BorderRadius.circular(5),
-                                          // color: Theme.of(context).accentColor
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
+                                              // color: Theme.of(context).accentColor
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
-                                          children: [
-                                            InkWell(
-                                                onTap: () {
-                                                  if (cartdata!
+                                              children: [
+                                                InkWell(
+                                                    onTap: () {
+                                                      if (cartdata!
                                                           .data![index].qty ==
-                                                      "1") {
-                                                    deleteitem(
-                                                      cartdata!.data![index].id,
-                                                      index,
-                                                    );
-                                                  } else {
-                                                    changeQTYAPI(
-                                                      cartdata!.data![index].id,
-                                                      int.parse(cartdata!
+                                                          "1") {
+                                                        deleteitem(
+                                                          cartdata!.data![index].id,
+                                                          index,
+                                                        );
+                                                      } else {
+                                                        changeQTYAPI(
+                                                          cartdata!.data![index].id,
+                                                          int.parse(cartdata!
                                                               .data![index].qty
                                                               .toString()) -
-                                                          1,
-                                                    );
-                                                  }
-                                                },
-                                                child: Icon(
-                                                  Icons.remove,
-                                                  color: color.green,
-                                                  size: 16,
-                                                )),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
+                                                              1,
+                                                        );
+                                                      }
+                                                    },
+                                                    child: Icon(
+                                                      Icons.remove,
+                                                      color: color.green,
+                                                      size: 16,
+                                                    )),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
                                                     BorderRadius.circular(3),
-                                              ),
-                                              child: Text(
-                                                cartdata!.data![index].qty
-                                                    .toString(),
-                                                style:
+                                                  ),
+                                                  child: Text(
+                                                    cartdata!.data![index].qty
+                                                        .toString(),
+                                                    style:
                                                     TextStyle(fontSize: 10.sp),
-                                              ),
-                                            ),
-                                            InkWell(
-                                                onTap: () {
-                                                  changeQTYAPI(
-                                                    cartdata!.data![index].id,
-                                                    int.parse(cartdata!
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      changeQTYAPI(
+                                                        cartdata!.data![index].id,
+                                                        int.parse(cartdata!
                                                             .data![index].qty
                                                             .toString()) +
-                                                        1,
-                                                  );
-                                                },
-                                                child: Icon(
-                                                  Icons.add,
-                                                  color: color.green,
-                                                  size: 16,
-                                                )),
-                                          ],
-                                        ),
+                                                            1,
+                                                      );
+                                                    },
+                                                    child: Icon(
+                                                      Icons.add,
+                                                      color: color.green,
+                                                      size: 16,
+                                                    )),
+                                              ],
+                                            ),
+                                          ),
+                                        ]),
                                       ),
-                                    ]),
-                                  )
-                                ],
-                              ),
+                                      SizedBox(
+                                        height: 2.h,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 0),
+                                        child: Form(
+                                        child: Container(
+                                        margin: EdgeInsets.only(left: 4.w, right: 4.w),
+                                        child: Column(
+                                        children: [
+                                        SizedBox(
+                                        child: TextFormField(
+                                        /*validator: (value) => Validators.validateRequired(
+                                        value!,
+                                        LocaleKeys.Numrero_Table.tr(),
+                                        ),*/
+                                        keyboardType: TextInputType.number,
+                                       //controller: Table_number,
+                                        cursorColor: Colors.grey,
+                                        decoration: InputDecoration(
+                                        hintText: LocaleKeys.Numrero_Table.tr(),
+                                        hintStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 11.sp,
+                                        fontFamily: "Poppins"),
+                                        border: OutlineInputBorder(),
+                                        enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6.5),
+                                        borderSide: BorderSide(color: Colors.grey),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6.5),
+                                        borderSide: BorderSide(color: Colors.grey),
+                                        )),
+                                        ),
+                                        ),
+                                  ],
+                                ),
+                               ),
                             ),
-                          )
-                        ]),
-                      );
-                    },
-                  ),
-                ),
-                bottomSheet: Container(
-                  margin: EdgeInsets.only(
-                    left: 3.w,
-                    right: 3.w,
-                    top: 1.h,
-                  ),
-                  height: 6.5.h,
-                  width: double.infinity,
-                  child: TextButton(
-                    onPressed: () {
-                      isopenAPI();
-                    },
-                    style: TextButton.styleFrom(
-                        backgroundColor: color.primarycolor),
-                    child: Text(
-                      LocaleKeys.Continue.tr(),
-                      style: TextStyle(
-                          fontFamily: 'Poppins_semibold',
-                          color: Colors.white,
-                          fontSize: fontsize.Buttonfontsize),
+                                      )],
+                                  ),
+                                ),
+                              )
+                            ]),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ));
-          },
-        ));
+                    bottomSheet: Container(
+                      margin: EdgeInsets.only(
+                        left: 3.w,
+                        right: 3.w,
+                        top: 1.h,
+                      ),
+                      height: 6.5.h,
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: () {
+                          isopenAPI();
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: color.primarycolor),
+                        child: Text(
+                          LocaleKeys.Continue.tr(),
+                          style: TextStyle(
+                              fontFamily: 'Poppins_semibold',
+                              color: Colors.white,
+                              fontSize: fontsize.Buttonfontsize),
+                        ),
+                      ),
+                    ));
+              },
+            ));
       },
     );
   }
@@ -472,169 +509,169 @@ class _ViewcartState extends State<Viewcart> {
           return Consumer(builder: (context, ThemeModel themenofier, child) {
             return StatefulBuilder(
                 builder: (BuildContext context, StateSetter setState) {
-              return SizedBox(
-                height: 36.h,
-                child: Column(
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 1.h)),
-                    Center(
-                      child: Text(
-                        LocaleKeys.Select_Option.tr(),
-                        style: TextStyle(
-                            fontFamily: 'Poppins_semibold', fontSize: 14.5.sp),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                  return SizedBox(
+                    height: 36.h,
+                    child: Column(
                       children: [
-                        GestureDetector(
-                            onTap: () {
-                              setState(() => _value = 1);
-                            },
-                            child: Container(
+                        Padding(padding: EdgeInsets.only(top: 1.h)),
+                        Center(
+                          child: Text(
+                            LocaleKeys.Select_Option.tr(),
+                            style: TextStyle(
+                                fontFamily: 'Poppins_semibold', fontSize: 14.5.sp),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  setState(() => _value = 1);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                          color: _value == 1
+                                              ? color.green
+                                              : Colors.transparent)),
+                                  margin: EdgeInsets.only(left: 6.w, top: 3.h),
+                                  height: 17.h,
+                                  width: 37.w,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ClipRRect(
+                                        child: Image.asset(
+                                          'Assets/product/Payement.png',
+                                          height: 9.h,
+                                          width: 13.w,
+                                        ),
+                                      ),
+                                      Text(
+                                        LocaleKeys.DELIVERY.tr(),
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: themenofier.isdark
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: 8.5.sp),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                            SizedBox(width: 4.w),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() => _value = 2);
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                          color: _value == 2
+                                              ? color.green
+                                              : Colors.transparent)),
+                                  margin: EdgeInsets.only(left: 6.w, top: 3.h),
+                                  height: 17.h,
+                                  width: 37.w,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ClipRRect(
+                                        child: Image.asset(
+                                          'Assets/product/Takeaway.png',
+                                          height: 9.h,
+                                          width: 13.w,
+                                        ),
+                                      ),
+                                      Text(
+                                        LocaleKeys.Takeaway.tr(),
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: themenofier.isdark
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: 8.5.sp),
+                                      ),
+                                    ],
+                                  )),
+                            )
+                          ],
+                        ),
+                        Spacer(),
+                        Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 2.w, right: 2.w),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                      color: _value == 1
-                                          ? color.green
-                                          : Colors.transparent)),
-                              margin: EdgeInsets.only(left: 6.w, top: 3.h),
-                              height: 17.h,
-                              width: 37.w,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ClipRRect(
-                                    child: Image.asset(
-                                      'Assets/product/Payement.png',
-                                      height: 9.h,
-                                      width: 13.w,
-                                    ),
-                                  ),
-                                  Text(
-                                    LocaleKeys.DELIVERY.tr(),
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        color: themenofier.isdark
-                                            ? Colors.white
-                                            : Colors.black,
-                                        fontSize: 8.5.sp),
-                                  ),
-                                ],
+                                borderRadius: BorderRadius.circular(5.5),
+                                border: Border.all(
+                                  color: color.primarycolor,
+                                ),
                               ),
-                            )),
-                        SizedBox(width: 4.w),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() => _value = 2);
-                          },
-                          child: Container(
+                              height: 6.5.h,
+                              width: 45.w,
+                              child: TextButton(
+                                // style: ElevatedButton.styleFrom(
+                                //   foregroundColor: color.primarycolor,
+                                // ),
+                                child: Text(
+                                  LocaleKeys.Cancel.tr(),
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins_semibold',
+                                      color: color.primarycolor,
+                                      fontSize: fontsize.Buttonfontsize),
+                                ),
+                                onPressed: () {
+                                  _value = 0;
+                                  Get.back();
+                                },
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                left: 2.w,
+                                right: 2.w,
+                              ),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                      color: _value == 2
-                                          ? color.green
-                                          : Colors.transparent)),
-                              margin: EdgeInsets.only(left: 6.w, top: 3.h),
-                              height: 17.h,
-                              width: 37.w,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ClipRRect(
-                                    child: Image.asset(
-                                      'Assets/product/Takeaway.png',
-                                      height: 9.h,
-                                      width: 13.w,
-                                    ),
-                                  ),
-                                  Text(
-                                    LocaleKeys.Takeaway.tr(),
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        color: themenofier.isdark
-                                            ? Colors.white
-                                            : Colors.black,
-                                        fontSize: 8.5.sp),
-                                  ),
-                                ],
-                              )),
+                                borderRadius: BorderRadius.circular(5.5),
+                              ),
+                              height: 6.5.h,
+                              width: 45.w,
+                              child: TextButton(
+                                onPressed: () {
+                                  if (_value == 0) {
+                                    loader.showErroDialog(
+                                      description:
+                                      LocaleKeys.Please_select_option.tr(),
+                                    );
+                                  } else {
+                                    Get.back();
+                                    Get.to(() => Ordersummary(_value.toString()));
+                                  }
+                                },
+                                style: TextButton.styleFrom(
+                                  backgroundColor: color.green,
+                                ),
+                                child: Text(
+                                  LocaleKeys.Checkout.tr(),
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins_semibold',
+                                      color: Colors.white,
+                                      fontSize: fontsize.Buttonfontsize),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 1.5.h,
                         )
                       ],
                     ),
-                    Spacer(),
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 2.w, right: 2.w),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.5),
-                            border: Border.all(
-                              color: color.primarycolor,
-                            ),
-                          ),
-                          height: 6.5.h,
-                          width: 45.w,
-                          child: TextButton(
-                            // style: ElevatedButton.styleFrom(
-                            //   foregroundColor: color.primarycolor,
-                            // ),
-                            child: Text(
-                              LocaleKeys.Cancel.tr(),
-                              style: TextStyle(
-                                  fontFamily: 'Poppins_semibold',
-                                  color: color.primarycolor,
-                                  fontSize: fontsize.Buttonfontsize),
-                            ),
-                            onPressed: () {
-                              _value = 0;
-                              Get.back();
-                            },
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 2.w,
-                            right: 2.w,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.5),
-                          ),
-                          height: 6.5.h,
-                          width: 45.w,
-                          child: TextButton(
-                            onPressed: () {
-                              if (_value == 0) {
-                                loader.showErroDialog(
-                                  description:
-                                      LocaleKeys.Please_select_option.tr(),
-                                );
-                              } else {
-                                Get.back();
-                                Get.to(() => Ordersummary(_value.toString()));
-                              }
-                            },
-                            style: TextButton.styleFrom(
-                              backgroundColor: color.green,
-                            ),
-                            child: Text(
-                              LocaleKeys.Checkout.tr(),
-                              style: TextStyle(
-                                  fontFamily: 'Poppins_semibold',
-                                  color: Colors.white,
-                                  fontSize: fontsize.Buttonfontsize),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 1.5.h,
-                    )
-                  ],
-                ),
-              );
-            });
+                  );
+                });
           });
         });
   }

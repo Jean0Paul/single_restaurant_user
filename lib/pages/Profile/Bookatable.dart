@@ -28,6 +28,7 @@ class _BookatableState extends State<Bookatable> {
   final Noofguest = TextEditingController();
   final Date = TextEditingController();
   final Time = TextEditingController();
+  //final Table_number = TextEditingController();
   final Reservation = TextEditingController();
   final Specialrequest = TextEditingController();
   DateTime selectedDate = DateTime.now();
@@ -85,6 +86,7 @@ class _BookatableState extends State<Bookatable> {
         "guests": Noofguest.text.toString(),
         "date": Date.text.toString(),
         "time": Time.text.toString(),
+        //"table_number": Email.text.toString(),
         "reservation_type": Reservation.text.toString(),
         "special_request": Specialrequest.text.toString()
       };
@@ -343,6 +345,35 @@ class _BookatableState extends State<Bookatable> {
                     ),
                   ],
                 ),
+                /*SizedBox(
+                  height: 2.h,
+                ),
+                SizedBox(
+                  child: TextFormField(
+                    validator: (value) => Validators.validateRequired(
+                      value!,
+                      LocaleKeys.Numrero_Table.tr(),
+                    ),
+                    keyboardType: TextInputType.number,
+                    controller: Table_number,
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                        hintText: LocaleKeys.Numrero_Table.tr(),
+                        hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 11.sp,
+                            fontFamily: "Poppins"),
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(6.5),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(6.5),
+                          borderSide: BorderSide(color: Colors.grey),
+                        )),
+                  ),
+                ),*/
                 SizedBox(
                   height: 2.h,
                 ),
@@ -352,11 +383,10 @@ class _BookatableState extends State<Bookatable> {
                       value!,
                       LocaleKeys.Reservation_Type.tr(),
                     ),
-                    keyboardType: TextInputType.number,
                     controller: Reservation,
                     cursorColor: Colors.grey,
                     decoration: InputDecoration(
-                        hintText: LocaleKeys.Numrero_Table.tr(),
+                        hintText: LocaleKeys.Reservation_Type.tr(),
                         hintStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 11.sp,

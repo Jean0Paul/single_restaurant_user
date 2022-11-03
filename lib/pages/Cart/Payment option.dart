@@ -49,7 +49,6 @@ class Paymentoption extends StatefulWidget {
     this.discount_amount,
     this.tax_amount,
     this.delivery_charge,
-    // address
     this.addresstype,
     this.address,
     this.area,
@@ -69,7 +68,6 @@ class _PaymentoptionState extends State<Paymentoption> {
   orderplaceMODEL? placedorederdata;
   String? public_key;
   String? secret_key;
-
   String? encryption_key;
   String? currency;
 
